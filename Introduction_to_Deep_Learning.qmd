@@ -1,0 +1,406 @@
+---
+title: "Introduction to Deep Neural Networks"
+authors:
+- Esteban Vegas
+- Ferran Reverter
+- Alex Sanchez
+date: "`r Sys.Date()`"
+format:
+    html: 
+      toc: true
+      toc-depth: 3
+      code-fold: false
+      fig-width: 8
+      fig-height: 6
+    pdf: default
+knit:
+  quarto:
+    chunk_options:
+      echo: true
+      cache: false
+      prompt: false
+      tidy: true
+      comment: NA
+      message: false
+      warning: false
+    knit_options:
+      width: 75
+reference-location: margin
+execute:
+    echo: true
+    message: false
+    warning: false
+    cache: true
+# bibliography: "../StatisticalLearning.bib"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+options(width=100) 
+if(!require("knitr")) install.packages("knitr")
+library("knitr")
+#getOption("width")
+knitr::opts_chunk$set(comment=NA,echo = TRUE, cache=TRUE)
+```
+
+# Introduction to Deep Neural Networks
+
+## Overview of Deep Learning
+
+### Historical Background and Key Milestones
+
+Today, in April 2023, our world is convulsed by the explosion of Artificial Intelligence.
+
+Although it has been growing steadily, it has probably been in the last months (weeks), since ChatGPT has arrived, that everybody has an opinion, or a fear on the topic.
+
+![](https://bernardmarr.com/wp-content/uploads/2022/04/The-Dangers-Of-Not-Aligning-Artificial-Intelligence-With-Human-Values.jpg "The 5 Biggest Artificial Intelligence (AI) Trends In 2023, Bernard Marr"){fig-align="center"}
+
+While we are not going to discuss ethical, technological or sociological aspects, what seems clear to the data scientist's eye is "*this is all about prediction*".
+
+Most AI engines rely on powerful prediction systems that use statistical learning methods.
+
+Deep learning, a successful model in AI, is based on the perceptron, which was the first neural network introduced in the 1940s with the goal of emulating human reasoning.
+
+Essentially, deep learning extends the basic principles of artificial neural networks. While we won't delve into the history of ANN, it's helpful to understand its origins to fully grasp its current capabilities.
+
+### The early history of artificial \[neural networks\]/intelligence
+
+![A Brief History of AI from 1940s till Today](images/AIHistory1.jpg)
+
+[![The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: "A Quick History of AI, ML and DL"](images/AIHistory2.jpg)](https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/)
+
+The origins of AI, and as such of DL can be traced almost one century backwards. While it is an interesting, or even fascinating, history wee don't go into it (see a summary in [A Quick History of AI, ML and DL](https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/){#AIHistory}
+
+We can see there however, several hints worth to account for because we will go through them to understand how a deep neural network works. These are:
+
+-   The **Perceptron** and the first **Artificial Neural Network** where the basic building block was introduced.
+
+-   The **Multilayered perceptron** and **backpropagation** where complex architechtures were suggested to improve the capabilities.
+
+-   **Deep Neural Networks**, with many hidden layers, and auto-tunability capabilities.
+
+In short, there has been an mathematical and a technological evolution that at some point has allowed to meet with
+
+-   The required theoretical background (DNN)
+
+-   The required computational capabilities (GPU, HPC)
+
+-   The required quantity of data (Big Data, Images, Social Networks)
+
+This has resulted in making artificial intelligence widely accessible to businesses, researchers, and the general public.
+
+Success stories such as
+
+-   the development of self-driving cars,
+
+-   the use of AI in medical diagnosis, and
+
+-   the creation of personalized recommendations in online shopping
+
+have also contributed to the widespread adoption of AI.
+
+### Comparison with Traditional Machine Learning
+
+A reasonable question is "*how are ArtificiaI Intelligence, Machine Learning and Deep learning related*"?
+
+A standard answer can be found in the image below that has a myriad variations:
+
+[![](images/AI-ML-DL-1.jpg)](https://www.analyticsvidhya.com/blog/2021/06/machine-learning-vs-artificial-intelligence-vs-deep-learning/)
+
+We can keep three definitions:
+
+-   Artificial intelligence is the ability of a computer to perform tasks commonly associated with intelligent beings.
+
+-   Machine learning is the study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data
+
+-   Deep learning is a subfield of machine learning focusing on learning data representations as successive successive layers of increasingly meaningful representations.
+
+[![](images/Difference-between-ML-and-DL.png)](https://ieeexplore.ieee.org/document/9363896)
+
+We will be coming back to the difference between ML and DL, but two strengths of DL that differentiate it from ML should be clear from the beginning:
+
+-   DNN combine feature extraction and classification in a way that does not require (or dramatically decreases) human intervention.
+-   The power of DNN requires in its ability to improve with data availability, without seemingly reaching plateaus as ML.
+
+![An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance](images/PerformanceVsAmountOfData.png){fig-align="center"}
+
+**Deep learning is having a strong impact**
+
+-   Near-human-level image classification
+
+-   Near-human-level speech transcription
+
+-   Near-human-level handwriting transcription
+
+-   Dramatically improved machine translation
+
+-   Dramatically improved text-to-speech conversion
+
+-   Digital assistants such as Google Assistant and Amazon Alexa
+
+-   Near-human-level autonomous driving
+
+-   Improved ad targeting, as used by Google, Baidu, or Bing
+
+-   Improved search results on the web
+
+-   Ability to answer natural language questions
+
+-   Superhuman Go playing
+
+According to [@chollet2022] ... "*we shouldn't believe the short-term hype, but should believe in the long-term vision. It may take a while for AI to be deployed to its true potential---a potential the full extent of which no one has yet dared to dream---but AI is coming, and it will transform our world in a fantastic way*".
+
+Once the introduction is ready we con move onto the building blocks of neural networks, perceptrons.
+
+## Artificial Neural Networks
+
+### The perceptron, the building block
+
+The perceptron, was introduced by Rosenblatt (one version of the perceptron at least), as a mathematical model that might emulate a neuron.
+
+The idea is: *how can we produce a model that given some inputs, and an appropriate set of examples, learn to produce the desired output*?
+
+The first computational model of a neuron was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.
+
+[![](images/MacCulloghPitts-Neuron.png){fig-align="center"}](https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1)
+
+It may be divided into 2 parts. The first part, $g$,takes an input (ahem dendrite ahem), performs an aggregation and based on the aggregated value the second part, $f$, makes a decision. See [the source of this picture](https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1) for an illustration on how this can be used to emulate logical operations such as AND, OR or NOT, but not XOR.
+
+This first attempt to emulate neurons succeeded but with limitations:
+
+-   What about non-boolean (say, real) inputs?
+
+-   What if all inputs are not equal?
+
+-   What if we want to assign more importance to some inputs?
+
+-   What about functions which are not linearly separable? Say XOR function
+
+To overcome these limitations Frank Rosenblatt, an American psychologist, proposed the classical perception model, the *artificial neuron*, in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.
+
+The perceptron proposed by Rosenblatt this is very similar to an M-P neuron but we take a weighted sum of the inputs and set the output as one only when the sum is more than an arbitrary threshold (***theta***).
+
+[![](images/RosenblattPerceptron1.png)](https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d)
+
+Additionally, instead of hand coding the thresholding parameter $\thetha$, we add it as one of the inputs, with the weight $w_0=-\theta$ like shown below, which makes it learnable.
+
+[![](images/RosenblattPerceptron2.png)](https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d)
+
+[![](images/McCullaughVSRosenblattPerceptron.png)](https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d)
+
+Now, while this is an improvement (because both the weights and the threshold can be learned and the inputs can be real values) there is still a drawback in that a single perceptron can only be used to implement linearly separable functions.
+
+Artificial Neural Networks improve on this by introducing *Activation Functions*
+
+### Neurons and Activation Functions
+
+An activation function is a function that is added into an artificial neurone in order to help it learn complex patterns in the data.
+
+When comparing with a neuron-based model that is in our brains (when neurons are connected), the activation function is at the end deciding *what is to be fired to the next neuron*. 
+
+That is exactly what an activation function does in an ANN as well. It takes in the output signal from the previous cell and converts it into some form that can be taken as input to the next cell. The comparison can be summarized in the figure below.
+
+[![](images/ActivationFunction0)](https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253).
+
+With all these inputs in mind we can now define an Artificial Neuron as a *computational unit* that 
+- takes as input $x=(x_0,x_1,x_2,x_3)$ ($x_0$ = +1, called bias), and 
+- outputs $h_{\theta}(x) = f(\theta^\intercal x) = f(\sum_i \theta_ix_i)$, 
+- where $f:\mathbb{R}\mapsto \mathbb{R}$ is called the
+**activation function**.
+
+The goal of the activation function is to provide the Neuron with *the capability of producing the required outputs*. 
+
+For instance, if the output has to be a probability, the activation function will only produce values between 0 and 1.
+
+With this idea in mind activation functions are chosen from a set of pre-defined functions:
+
+- the sigmoid function:
+
+$$
+f(z)=\frac{1}{1+e^{-z}}
+$$
+
+- the hyperbolic tangent, or `tanh`, function:
+
+$$
+f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
+$$
+
+The `tanh(z)` function is a rescaled version of the sigmoid, and its
+output range is $[-1,1]$ instead of $[0,1]$.
+
+Two useful properties to recall are that:
+- *If $f(z)=1/(1+e^z)$ is the sigmoid function, then its derivative is given by $f'(z)=f(z)(1-f(z))$*. 
+
+- *Similarly, if $f$ is the `tanh` function, then its derivative is given by $f'(z)=1-(f(z))^2$*. 
+
+- In modern neural networks, the default recommendation is to use the *rectified linear unit* or ReLU defined by the activation function
+$f(z)=\max\{0,z\}$. 
+
+This function remains very close to a linear one, in the sense that is a piecewise linear function with two linear pieces. 
+
+Because rectified linear units are nearly linear, they preserve many of the properties that make linear models easy to optimize with gradient based methods. 
+
+They also preserve many of the properties that
+make linear models generalize well.
+
+[![](images/ActivationFunctions)](https://medium.com/@shrutijadon/survey-on-activation-functions-for-deep-learning-9689331ba092).
+
+
+**Putting alltogether** we have the following schematic representation of an artificial neuron where $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$ and $\left\langle w_{j}, x\right\rangle$ represents the dot product between vectors $w$ and $x$.
+
+[![](images/ArtificialNeuron.png)].
+
+
+## Artificial Neural Networks
+
+A multilayer perceptron (or Artificial neural network) is a structure composed by *several hidden layers of neurons* where the output of a neuron of a layer becomes the input of a neuron of the next layer. 
+
+Moreover, the output of a neuron can also be the input of a neuron of the same layer or of neuron of previous layers (this is the case for recurrent neural networks). 
+On last layer, called output layer, we may apply a different activation function as for the hidden layers depending on the type of problems we have at hand : regression or classification. 
+
+The Figure below represents a neural network with three input variables, one output variable, and two hidden layers.
+
+[![](images/MultiLayer1.png)]
+
+Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer. 
+
+The parameters of the architecture are:
+- the number of hidden layers and
+- the number of neurons in each layer. 
+
+The activation functions are also to choose by the user. 
+For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.
+
+- In the case of regression, we apply no activation function on the output layer. 
+- For binary classification, the output gives a prediction of $\mathbb{P}(Y=1 / X)$ since this value is in $[0,1]$ and the sigmoid activation function is generally considered. 
+- For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of $\mathbb{P}(Y=i / X)$. The sum of all these values has to be equal to 1 .  The sum of all these values has to be equal to 1 . The multidimensional function *softmax* is generally used
+
+$$
+\operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
+$$
+
+### Mathematical formulation of the ANN
+
+We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:
+
+- Set $h\^{(0)}(x)=x$ For $k=1, \ldots, L$ (hidden layers),
+
+$$
+\begin{aligned}
+& a^{(k)}(x)=b^{(k)}+W^{(k)} h^{(k-1)}(x) \\
+& h^{(k)}(x)=\phi\left(a^{(k)}(x)\right)
+\end{aligned}
+$$
+
+For $k=L+1$ (output layer)
+
+$$
+\begin{aligned}
+& a^{(L+1)}(x)=b^{(L+1)}+W^{(L+1)} h^{(L)}(x) \\
+& h^{(L+1)}(x)=\psi\left(a^{(L+1)}(x)\right):=f(x, \theta) .
+\end{aligned}
+$$
+
+where $\phi$ is the activation function and $\psi$ is the output layer activation function (for example softmax for multiclass classification). 
+
+At each step, $W\^{(k)}$ is a matrix with number of rows equal to the number of neurons in the layer $k$ and number of columns the number of neurons in the layer $k-1$.
+
+By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network. 
+
+## An example 
+
+We use the `neuralnet` package to build a simple neural network to predict if a type of stock pays dividens or not.
+
+```{r}
+if (!require(neuralnet)) 
+  install.packages("neuralnet", dep=TRUE)
+```
+
+And use the `dividendinfo.csv` dataset  from [https://github.com/MGCodesandStats/datasets](https://github.com/MGCodesandStats/datasets)
+
+```{r}
+mydata <- read.csv("https://raw.githubusercontent.com/MGCodesandStats/datasets/master/dividendinfo.csv")
+str(mydata)
+```
+
+### Data preprocessing
+
+One of the most important procedures when forming a neural network is data normalization. This involves adjusting the data to a common scale so as to accurately compare predicted and actual values. Failure to normalize the data will typically result in the prediction value remaining the same across all observations, regardless of the input values.
+
+We can do this in two ways in R:
+
+- Scale the data frame automatically using the scale function in R
+- Transform the data using a max-min normalization technique
+
+In this example We implement the max-min normalization technique. 
+
+See [this link](https://vitalflux.com/data-science-scale-normalize-numeric-data-using-r/) for further details on how to use the normalization function.
+
+```{r}
+scaleddata<-scale(mydata)
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+maxmindf <- as.data.frame(lapply(mydata, normalize))
+```
+
+Finally we break our data in a test and a training set:
+
+```{r}
+trainset <- maxmindf[1:160, ]
+testset <- maxmindf[161:200, ]
+```
+
+### Training a neural network
+
+Setting the parameters of a neural network reqyuires experience and understanding of their meaning, and even so, cahnges in the parameters can lead to similar results.
+
+```{r}
+#Neural Network
+library(neuralnet)
+nn <- neuralnet(dividend ~ fcfps + earnings_growth + de + mcap + current_ratio, 
+                data=trainset, 
+                hidden=c(2,1), 
+                linear.output=FALSE, 
+                threshold=0.01)
+```
+
+The output of the procedure is a neural network with estimated weights
+
+```{r}
+plot(nn)
+```
+
+The object `nn`contains information on the process:
+
+```{r}
+nn$result.matrix
+```
+
+
+### Testing the accuracy of the model
+
+```{r}
+#Test the resulting output
+temp_test <- subset(testset, select =
+                      c("fcfps","earnings_growth", 
+                        "de", "mcap", "current_ratio"))
+head(temp_test)
+nn.results <- compute(nn, temp_test)
+results <- data.frame(actual = 
+                  testset$dividend, 
+                  prediction = nn.results$net.result)
+head(results)
+```
+
+A confusion matrix can bu built to evaluate the predictive ability of the network:
+
+```{r}
+roundedresults<-sapply(results,round,digits=0)
+roundedresultsdf=data.frame(roundedresults)
+attach(roundedresultsdf)
+table(actual,prediction)
+```
+
