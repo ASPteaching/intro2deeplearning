@@ -1,3 +1,11 @@
+# Materials que no vull penjar
+
+/materials/
+
+# Solucions dels exercicis proposats a classe
+
+/labs/solutions/
+
 # History files
 .Rhistory
 .Rapp.history
