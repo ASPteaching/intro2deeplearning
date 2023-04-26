@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d"><img src="images/RosenblattPerceptron1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<p>Additionally, instead of hand coding the thresholding parameter <span class="math inline">\(\thetha\)</span>, we add it as one of the inputs, with the weight <span class="math inline">\(w_0=-\theta\)</span> like shown below, which makes it learnable.</p>
+<p>Additionally, instead of hand coding the thresholding parameter <span class="math inline">\(\theta\)</span>, we add it as one of the inputs, with the weight <span class="math inline">\(w_0=-\theta\)</span> like shown below, which makes it learnable.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d"><img src="images/RosenblattPerceptron2.png" class="img-fluid figure-img"></a></p>
@@ -350,7 +350,7 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <h3 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h3>
 <p>We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:</p>
 <ul>
-<li>Set <span class="math inline">\(h\^{(0)}(x)=x\)</span> For <span class="math inline">\(k=1, \ldots, L\)</span> (hidden layers),</li>
+<li>Set <span class="math inline">\(h^{(0)}(x)=x\)</span> For <span class="math inline">\(k=1, \ldots, L\)</span> (hidden layers),</li>
 </ul>
 <p><span class="math display">\[
 \begin{aligned}
@@ -366,7 +366,7 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 \end{aligned}
 \]</span></p>
 <p>where <span class="math inline">\(\phi\)</span> is the activation function and <span class="math inline">\(\psi\)</span> is the output layer activation function (for example softmax for multiclass classification).</p>
-<p>At each step, <span class="math inline">\(W\^{(k)}\)</span> is a matrix with number of rows equal to the number of neurons in the layer <span class="math inline">\(k\)</span> and number of columns the number of neurons in the layer <span class="math inline">\(k-1\)</span>.</p>
+<p>At each step, <span class="math inline">\(W^{(k)}\)</span> is a matrix with number of rows equal to the number of neurons in the layer <span class="math inline">\(k\)</span> and number of columns the number of neurons in the layer <span class="math inline">\(k-1\)</span>.</p>
 <p>By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network.</p>
 </section>
 </section>

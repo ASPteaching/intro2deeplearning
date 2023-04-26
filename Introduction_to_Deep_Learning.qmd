@@ -183,7 +183,7 @@ The perceptron proposed by Rosenblatt this is very similar to an M-P neuron but 
 
 [![](images/RosenblattPerceptron1.png)](https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d)
 
-Additionally, instead of hand coding the thresholding parameter $\thetha$, we add it as one of the inputs, with the weight $w_0=-\theta$ like shown below, which makes it learnable.
+Additionally, instead of hand coding the thresholding parameter $\theta$, we add it as one of the inputs, with the weight $w_0=-\theta$ like shown below, which makes it learnable.
 
 [![](images/RosenblattPerceptron2.png)](https://towardsdatascience.com/perceptron-the-artificial-neuron-4d8c70d5cc8d)
 
@@ -201,7 +201,7 @@ When comparing with a neuron-based model that is in our brains (when neurons are
 
 That is exactly what an activation function does in an ANN as well. It takes in the output signal from the previous cell and converts it into some form that can be taken as input to the next cell. The comparison can be summarized in the figure below.
 
-[![](images/ActivationFunction0)](https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253).
+[![](images/ActivationFunction0.png)](https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253).
 
 With all these inputs in mind we can now define an Artificial Neuron as a *computational unit* that 
 - takes as input $x=(x_0,x_1,x_2,x_3)$ ($x_0$ = +1, called bias), and 
@@ -245,7 +245,7 @@ Because rectified linear units are nearly linear, they preserve many of the prop
 They also preserve many of the properties that
 make linear models generalize well.
 
-[![](images/ActivationFunctions)](https://medium.com/@shrutijadon/survey-on-activation-functions-for-deep-learning-9689331ba092).
+[![](images/ActivationFunctions.png)](https://medium.com/@shrutijadon/survey-on-activation-functions-for-deep-learning-9689331ba092).
 
 
 **Putting alltogether** we have the following schematic representation of an artificial neuron where $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$ and $\left\langle w_{j}, x\right\rangle$ represents the dot product between vectors $w$ and $x$.
@@ -285,7 +285,7 @@ $$
 
 We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:
 
-- Set $h\^{(0)}(x)=x$ For $k=1, \ldots, L$ (hidden layers),
+- Set $h^{(0)}(x)=x$ For $k=1, \ldots, L$ (hidden layers),
 
 $$
 \begin{aligned}
@@ -305,7 +305,7 @@ $$
 
 where $\phi$ is the activation function and $\psi$ is the output layer activation function (for example softmax for multiclass classification). 
 
-At each step, $W\^{(k)}$ is a matrix with number of rows equal to the number of neurons in the layer $k$ and number of columns the number of neurons in the layer $k-1$.
+At each step, $W^{(k)}$ is a matrix with number of rows equal to the number of neurons in the layer $k$ and number of columns the number of neurons in the layer $k-1$.
 
 By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network. 
 
