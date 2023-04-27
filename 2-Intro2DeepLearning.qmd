@@ -1,5 +1,5 @@
 ---
-title:  "Introduction to Deep Neural Networks (Slides)"
+title:  "Introduction to Deep Neural Networks"
 author: "A. Sanchez, F. Reverter and E. Vegas"
 format:
   revealjs: 
@@ -47,8 +47,9 @@ editor_options:
 -   Deep learning is a successful AI model which has powered many application such as *self-driving cars, voice assistants, and medical diagnosis systems*.
 
 -   Essentially, deep learning extends the basic principles of artificial neural networks by
-    - Adding complex architectures and algorithms and 
-    - At the same time becoming more automatical
+
+    -   Adding complex architectures and algorithms and
+    -   At the same time becoming more automatical
 
 -   We won't delve into the history of ANN, but a quick look at it may help fully grasp its current capabilities.
 
@@ -75,15 +76,7 @@ We can see several hints worth to account for:
 
 ## From Artificial Neural Networks to Deep learning
 
--   There has been an mathematical and a technological evolution that has allowed to meet with
-
--   The required theoretical background (DNN)
-
--   The required computational capabilities (GPU, HPC)
-
--   The required quantity of data (Big Data, Images, Social Networks)
-
-This has resulted in making artificial intelligence widely accessible to businesses, researchers, and the general public.
+![Why Deep Learning Now?](images/WhyDLNow.png){fig-align="center" width="100%"} Source: Alex Amini's 'MIT Introduction to Deep Learning' course (introtodeeplearning.com)
 
 ## Success stories
 
