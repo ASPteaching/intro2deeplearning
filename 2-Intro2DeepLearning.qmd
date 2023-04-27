@@ -1,5 +1,5 @@
 ---
-title:  "Introduction to Deep Neural Networks"
+title:  "Introduction to Deep Neural Networks (Slides)"
 author: "A. Sanchez, F. Reverter and E. Vegas"
 format:
   revealjs: 
@@ -18,7 +18,7 @@ format:
     css: "css4CU.css"
     theme: sky
 #    self-contained: true
-#    embed-resources: true
+    embed-resources: true
 #    self-contained-math: true
 #    suppress-bibliography: true
 bibliography: "StatisticalLearning.bib"
@@ -38,17 +38,19 @@ editor_options:
 
 ## Historical Background (2)
 
--   We don't discuss ethical, technological or sociological aspects, but is "*this is all about prediction*".
+-   We don't discuss ethical, technological or sociological aspects, but is "*most of this is about prediction*".
 
 -   Most AI engines rely on powerful prediction systems that use statistical learning methods.
 
 ## Deep learning
 
--   Deep learning, a successful model in AI, is behind most successful AI applications.
+-   Deep learning is a successful AI model which has powered many application such as *self-driving cars, voice assistants, and medical diagnosis systems*.
 
--   Essentially, deep learning extends the basic principles of artificial neural networks.
+-   Essentially, deep learning extends the basic principles of artificial neural networks by
+    - Adding complex architectures and algorithms and 
+    - At the same time becoming more automatical
 
--   While we won't delve into the history of ANN, it's helpful to understand its origins to fully grasp its current capabilities.
+-   We won't delve into the history of ANN, but a quick look at it may help fully grasp its current capabilities.
 
 ## The early history of AI (1)
 

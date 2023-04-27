@@ -12,6 +12,7 @@ format:
       code-fold: false
       fig-width: 8
       fig-height: 6
+      embed-resources: true
     pdf: default
 knit:
   quarto:
@@ -56,13 +57,15 @@ Although it has been growing steadily, it has probably been in the last months (
 
 ![](https://bernardmarr.com/wp-content/uploads/2022/04/The-Dangers-Of-Not-Aligning-Artificial-Intelligence-With-Human-Values.jpg "The 5 Biggest Artificial Intelligence (AI) Trends In 2023, Bernard Marr"){fig-align="center"}
 
-While we are not going to discuss ethical, technological or sociological aspects, what seems clear to the data scientist's eye is "*this is all about prediction*".
+While we are not going to discuss ethical, technological or sociological aspects, what seems clear to the data scientist's eye is that  "*most of this is about prediction*".
 
 Most AI engines rely on powerful prediction systems that use statistical learning methods.
 
-Deep learning, a successful model in AI, is based on the perceptron, which was the first neural network introduced in the 1940s with the goal of emulating human reasoning.
+Deep learning is a highly successful model in the field of AI, which has powered numerous applications in various domains. It has shown remarkable performance in tasks such as image recognition, natural language processing, and speech recognition.
 
-Essentially, deep learning extends the basic principles of artificial neural networks. While we won't delve into the history of ANN, it's helpful to understand its origins to fully grasp its current capabilities.
+Deep learning extends the basic principles of artificial neural networks by introducing more complex architectures and algorithms and, at the same time, by enabling machines to learn from large datasets by automatically identifying relevant patterns and features without explicit programming.
+
+One key advantage of deep learning over traditional machine learning algorithms is its ability to handle high-dimensional and unstructured data such as images, videos, and audio.
 
 ### The early history of artificial \[neural networks\]/intelligence
 
