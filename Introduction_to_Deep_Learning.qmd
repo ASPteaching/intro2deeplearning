@@ -302,14 +302,16 @@ By organizing our parameters in matrices and using matrix-vector operations, we 
 
 ## An example
 
-We use the `neuralnet` package to build a simple neural network to predict if a type of stock pays dividens or not.
+In this example we train and use a "shallow neural network", called this way in contrast with "deep neural networks".
+
+We will use the `neuralnet` R package, which is not intended to work with deep neural networks, to build a simple neural network to predict if a type of stock pays dividends or not.
 
 ```{r}
 if (!require(neuralnet)) 
   install.packages("neuralnet", dep=TRUE)
 ```
 
-And use the `dividendinfo.csv` dataset from <https://github.com/MGCodesandStats/datasets>
+The data for the example are the  `dividendinfo.csv` dataset, available from: <https://github.com/MGCodesandStats/datasets>
 
 ```{r}
 mydata <- read.csv("https://raw.githubusercontent.com/MGCodesandStats/datasets/master/dividendinfo.csv")
@@ -330,26 +332,35 @@ In this example We implement the max-min normalization technique.
 See [this link](https://vitalflux.com/data-science-scale-normalize-numeric-data-using-r/) for further details on how to use the normalization function.
 
 ```{r}
-scaleddata<-scale(mydata)
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
 }
-maxmindf <- as.data.frame(lapply(mydata, normalize))
+normData <- as.data.frame(lapply(mydata, normalize))
 ```
 
-Finally we break our data in a test and a training set:
+As usually, the dataset is separated in a training and a test set. The training set contains a random selection with and (arbitrary) 66% of the observations.
 
 ```{r}
-trainset <- maxmindf[1:160, ]
-testset <- maxmindf[161:200, ]
+perc2Train <- 2/3
+ssize <- nrow(normData)
+set.seed(12345)
+data_rows <- floor(perc2Train *ssize)
+train_indices <- sample(c(1:ssize), data_rows)
+trainset <- normData[train_indices,]
+testset <- normData[-train_indices,]
 ```
+
+The `trainset` set will be used to train the network and the `testset` set one will be used to evaluate it.
+
 
 ### Training a neural network
 
-Setting the parameters of a neural network reqyuires experience and understanding of their meaning, and even so, cahnges in the parameters can lead to similar results.
+Setting the parameters of a neural network requires experience and understanding of their meaning, and even so, canges in the parameters can lead to similar results.
+
+We create a simple NN with two hidden layers, with 4 and 2 neurons respectively. This is specified in the `hidden` parameter. For other parameters see [the package help](https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet).
 
 ```{r}
-#Neural Network
+# Neural Network
 library(neuralnet)
 nn <- neuralnet(dividend ~ fcfps + earnings_growth + de + mcap + current_ratio, 
                 data=trainset, 
@@ -358,19 +369,24 @@ nn <- neuralnet(dividend ~ fcfps + earnings_growth + de + mcap + current_ratio,
                 threshold=0.01)
 ```
 
-The output of the procedure is a neural network with estimated weights
+The output of the procedure is a neural network with estimated weights.
+
+This can be seen with a `plot` function (including the `rep` argument).
 
 ```{r}
-plot(nn)
+plot(nn, rep = "best")
 ```
 
-The object `nn`contains information on the process:
+The object `nn`contains information the weights  and the results although it is not particularly clear or useful.
 
 ```{r}
+summary(nn)
 nn$result.matrix
 ```
 
-### Testing the accuracy of the model
+### Model evaluation
+
+A prediction for each value in the `testset` dataset can be built with the `compute` function.
 
 ```{r}
 #Test the resulting output
@@ -385,7 +401,7 @@ results <- data.frame(actual =
 head(results)
 ```
 
-A confusion matrix can bu built to evaluate the predictive ability of the network:
+A confusion matrix can be built to evaluate the predictive ability of the network:
 
 ```{r}
 roundedresults<-sapply(results,round,digits=0)
