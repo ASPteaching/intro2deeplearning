@@ -98,30 +98,42 @@ Success stories such as
 
 have also contributed to the widespread adoption of AI.
 
-## Comparison with Traditional Machine Learning
+## AI, ML, DL ...
 
--   A reasonable question is "*how are ArtificiaI Intelligence, Machine Learning and Deep learning related*"?
 
--   A standard answer can be found in the image below that has a myriad variations:
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/AI-ML-DL-1.jpg")
+```
 
-[![](images/AI-ML-DL-1.jpg){width="100%"}](https://www.analyticsvidhya.com/blog/2021/06/machine-learning-vs-artificial-intelligence-vs-deep-learning/)
+## AI, ML, DL ...
 
-## AI, ML, DL
+- Artificial intelligence: Ability of a computer to perform tasks commonly associated with intelligent beings.
 
-We can keep three definitions:
+- Machine learning: study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data
 
--   Artificial intelligence is the ability of a computer to perform tasks commonly associated with intelligent beings.
+- Deep learning: subfield of ML focusing on learning data representations as successive successive layers of increasingly meaningful representations.
 
--   Machine learning is the study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data
+## Machine vs Deep Learning
+:::: {.columns}
 
--   Deep learning is a subfield of machine learning focusing on learning data representations as successive successive layers of increasingly meaningful representations.
+::: {.column width='40%'}
+- DNN: feature extraction and classification without (or with much les) human intervention.
+- DNN improves with data availability, without seemingly reaching plateaus.
 
-## ML vs DL
+:::
 
-[![](images/Difference-between-ML-and-DL.png){width="100%"}](https://ieeexplore.ieee.org/document/9363896)
+::: {.column width='60%'}
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/ML_vs_DL-2.png")
+```
 
--   DNN combine feature extraction and classification in a way that does not require (or dramatically decreases) human intervention.
--   The power of DNN requires in its ability to improve with data availability, without seemingly reaching plateaus as ML.
+<!-- [![](images/Difference-between-ML-and-DL.png){width="100%"}](https://ieeexplore.ieee.org/document/9363896) -->
+
+:::
+
+::::
+
+
 
 ## Size is important!
 
@@ -231,21 +243,27 @@ This first attempt to emulate neurons succeeded but with limitations:
 
 -   Artificial Neural Networks improve on this by introducing *Activation Functions*
 
-## Neurons and Activation Functions
+## Activation in biological neurons
 
--   An *activation function* is a function that is added into an artificial neurone in order to help it learn complex patterns in the data.
+- Biological neurons are specialized cells in the CNS that transmit electrical and chemical signals to communicate with each other.
+- The neuron's activation is based on the release of neurotransmitters, chemical substances that transmit signals between nerve cells. 
+  - When the signal reaching the neuron exceeds a certain threshold, the neuron releases neurotransmitters to continue the communication process.
 
--   When comparing with a neuron-based model that is in our brains (when neurons are connected), the activation function is at the end deciding *what is to be fired to the next neuron*.
+## Activation functions in AN
 
--   That is exactly what an activation function does in an ANN as well.
+- Analogously, *activation functions* in AN are functions to decide if the AN it is activated or not.
+- In AN, the activation function is a mathematical function applied to the neuron's input to produce an output. 
+  - In practice it extends to complicated functions that can learn complex patterns in the data.
+  - Activation functions can incorporate non-linearity, improving over linear classifiers.
 
-    -   It takes in the output signal from the previous cell
-    -   and converts it into some form that
-    -   can be taken as input to the next cell.
 
 ## Activation function
 
-![](images/ActivationFunction0.png){width="100%"}.
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/ActivationFunction0.png")
+```
+
+
 
 ## Artificial Neuron
 
@@ -303,19 +321,28 @@ $$
 
 ## Putting it all together
 
-\[![](images/ArtificialNeuron.png){width="100%"}\]. $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/ArtificialNeuron.png")
+```
 
-## Artificial Neural Networks
+$\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
 
--   A multilayer perceptron (or Artificial neural network) is a structure composed by *several hidden layers of neurons* where the output of a neuron of a layer becomes the input of a neuron of the next layer.
+## Multilayer perceptrons{smaller}
 
--   Moreover, the output of a neuron can also be the input of a neuron of the same layer or of neuron of previous layers (this is the case for recurrent neural networks).
-
--   One the last layer, called output layer, we may apply a different activation function as for the hidden layers depending on the type of problems we have at hand : regression or classification.
+- A Multilayer Perceptron or Artificial Neural Network (ANN) is a computational model that mimics the structure and function of the human brain. 
+- It is composed of interconnected nodes, called neurons, that are organized into layers. 
+- Neurons in each layer are connected to neurons in the next layer, forming a directed graph-like structure. 
+- The first layer (input layer) receives input data. 
+- Last layer produces the final prediction
+- Intermediate (hidden) layers perform intermediate calculatuions.
 
 ## An ANN
 
-\[![](images/MultiLayer1.png){width="100%"}\]
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/MultiLayer1.png")
+```
+
+
 
 ## The architechture of ANN
 

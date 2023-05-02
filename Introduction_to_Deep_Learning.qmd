@@ -6,14 +6,23 @@ authors:
 - Alex Sanchez
 date: "`r Sys.Date()`"
 format:
+    
     html: 
       toc: true
       toc-depth: 3
       code-fold: false
       fig-width: 8
       fig-height: 6
-      embed-resources: true
-    pdf: default
+#       embed-resources: true
+    pdf:
+      toc: true
+      toc-depth: 3
+      code-fold: false
+      fig-width: 8
+      fig-height: 6
+      geometry: 
+      - top=30mm
+      - left=30mm
 knit:
   quarto:
     chunk_options:
@@ -111,7 +120,9 @@ A reasonable question is "*how are ArtificiaI Intelligence, Machine Learning and
 
 A standard answer can be found in the image below that has a myriad variations:
 
-[![](images/AI-ML-DL-1.jpg)](https://www.analyticsvidhya.com/blog/2021/06/machine-learning-vs-artificial-intelligence-vs-deep-learning/)
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/AI-ML-DL-1.jpg")
+```
 
 We can keep three definitions:
 
@@ -121,7 +132,9 @@ We can keep three definitions:
 
 -   Deep learning is a subfield of machine learning focusing on learning data representations as successive successive layers of increasingly meaningful representations.
 
-[![](images/Difference-between-ML-and-DL.png)](https://ieeexplore.ieee.org/document/9363896)
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/ML_vs_DL-2.png")
+```
 
 We will be coming back to the difference between ML and DL, but two strengths of DL that differentiate it from ML should be clear from the beginning:
 
@@ -246,9 +259,9 @@ They also preserve many of the properties that make linear models generalize wel
 
 **Putting alltogether** we have the following schematic representation of an artificial neuron where $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$ and $\left\langle w_{j}, x\right\rangle$ represents the dot product between vectors $w$ and $x$.
 
-\[![](images/ArtificialNeuron.png)\].
+![](images/ArtificialNeuron.png)
 
-## Artificial Neural Networks
+### Multilayer perceptrons
 
 A multilayer perceptron (or Artificial neural network) is a structure composed by *several hidden layers of neurons* where the output of a neuron of a layer becomes the input of a neuron of the next layer.
 
@@ -256,11 +269,14 @@ Moreover, the output of a neuron can also be the input of a neuron of the same l
 
 The Figure below represents a neural network with three input variables, one output variable, and two hidden layers.
 
-\[![](images/MultiLayer1.png)\]
+![](images/MultiLayer1.png)
 
 Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.
 
-The parameters of the architecture are: - the number of hidden layers and - the number of neurons in each layer.
+The parameters of the architecture are:
+
+- the number of hidden layers and 
+- the number of neurons in each layer.
 
 The activation functions are also to choose by the user. For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.
 
@@ -309,6 +325,8 @@ We will use the `neuralnet` R package, which is not intended to work with deep n
 ```{r}
 if (!require(neuralnet)) 
   install.packages("neuralnet", dep=TRUE)
+if (!require(caret)) 
+  install.packages("caret", dep=TRUE)
 ```
 
 The data for the example are the  `dividendinfo.csv` dataset, available from: <https://github.com/MGCodesandStats/datasets>
@@ -357,14 +375,14 @@ The `trainset` set will be used to train the network and the `testset` set one w
 
 Setting the parameters of a neural network requires experience and understanding of their meaning, and even so, canges in the parameters can lead to similar results.
 
-We create a simple NN with two hidden layers, with 4 and 2 neurons respectively. This is specified in the `hidden` parameter. For other parameters see [the package help](https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet).
+We create a simple NN with two hidden layers, with 3 and 2 neurons respectively. This is specified in the `hidden` parameter. For other parameters see [the package help](https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet).
 
 ```{r}
 # Neural Network
 library(neuralnet)
 nn <- neuralnet(dividend ~ fcfps + earnings_growth + de + mcap + current_ratio, 
                 data=trainset, 
-                hidden=c(2,1), 
+                hidden=c(3,2), 
                 linear.output=FALSE, 
                 threshold=0.01)
 ```
@@ -404,8 +422,10 @@ head(results)
 A confusion matrix can be built to evaluate the predictive ability of the network:
 
 ```{r}
+
 roundedresults<-sapply(results,round,digits=0)
 roundedresultsdf=data.frame(roundedresults)
 attach(roundedresultsdf)
-table(actual,prediction)
+confMat<- caret::confusionMatrix(table(actual, prediction))
+confMat
 ```
