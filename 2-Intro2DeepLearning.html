@@ -699,8 +699,8 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 
 <img data-src="images/ArtificialNeuron.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p><span class="math inline">\(\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}\)</span></p>
 </section>
-<section id="multilayer-perceptronssmaller" class="slide level2">
-<h2>Multilayer perceptrons{smaller}</h2>
+<section id="multilayer-perceptrons" class="slide level2 smaller">
+<h2>Multilayer perceptrons</h2>
 <ul>
 <li>A Multilayer Perceptron or Artificial Neural Network (ANN) is a computational model that mimics the structure and function of the human brain.</li>
 <li>It is composed of interconnected nodes, called neurons, that are organized into layers.</li>
@@ -710,8 +710,8 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <li>Intermediate (hidden) layers perform intermediate calculatuions.</li>
 </ul>
 </section>
-<section id="an-ann" class="slide level2">
-<h2>An ANN</h2>
+<section id="an-artificial-neural-network" class="slide level2">
+<h2>An Artificial Neural network</h2>
 
 <img data-src="images/MultiLayer1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="the-architechture-of-ann" class="slide level2">
@@ -726,23 +726,47 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 </ul></li>
 </ul>
 </section>
-<section id="the-architecture-of-ann" class="slide level2 smaller">
-<h2>The architecture of ANN</h2>
+<section id="activation-functions-for-ann-1" class="slide level2">
+<h2>Activation functions for ANN (1)</h2>
 <ul>
-<li><p>For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.</p>
+<li>For the output layer, the activation function is generally different from the one used on the hidden layers.
 <ul>
-<li>For regression, we apply no activation function on the output layer.</li>
-<li>For binary classification, the output gives a prediction of <span class="math inline">\(\mathbb{P}(Y=1 / X)\)</span> since this value is in <span class="math inline">\([0,1]\)</span> and the sigmoid activation function is generally considered.</li>
-<li>For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of <span class="math inline">\(\mathbb{P}(Y=i / X)\)</span>. The sum of all these values has to be equal to 1 . The sum of all these values has to be equal to 1</li>
+<li>For <strong>regression</strong>, we apply no activation function on the output layer.</li>
+<li>For <strong>binary</strong> classification, where output is a prediction of <span class="math inline">\(\mathbb{P}(Y=1 /X) \in [0,1]\)</span>
+<ul>
+<li>The <em>sigmoid</em> activation function is used.</li>
 </ul></li>
-<li><p>The multidimensional function <em>softmax</em> is generally used</p></li>
+<li>For <strong>multi-class classification</strong>, where ther is one neuron per class giving a prediction of <span class="math inline">\(\mathbb{P}(Y=i / X)\)</span>.
+<ul>
+<li>The <em>softmax</em> activation function is common</li>
+</ul></li>
+</ul></li>
 </ul>
+</section>
+<section id="the-softmax-activation-function" class="slide level2">
+<h2>The softmax activation function</h2>
 <p><span class="math display">\[
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
-\]</span></p>
+\]</span> # Some mathematics behind ANN</p>
+</section></section>
+<section>
+<section id="mathematical-formulation" class="title-slide slide level1 center">
+<h1>Mathematical formulation</h1>
+<ul>
+<li><p>An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties.</p></li>
+<li><p>In practice this means describing</p>
+<ul>
+<li>The ANN as a (non linear) function.</li>
+<li>The (optimization) process for estimating the weights, which requires three elements.
+<ul>
+<li>An estimation procedure: gradient based optimization</li>
+<li>A method for computing the required derivatives: back-propagation.</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
-<section id="mathematical-formulation" class="slide level2 smaller">
-<h2>Mathematical formulation</h2>
+<section id="mathematical-description-od-ann" class="slide level2 smaller">
+<h2>Mathematical description od ANN</h2>
 <p>We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:</p>
 <ul>
 <li>Set <span class="math inline">\(h^{(0)}(x)=x\)</span> For <span class="math inline">\(k=1, \ldots, L\)</span> (hidden layers),</li>

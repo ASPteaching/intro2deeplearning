@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-05-02">
+<meta name="dcterms.date" content="2023-05-03">
 
 <title>Introduction to Deep Neural Networks</title>
 <style>
@@ -95,8 +95,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-perceptron-the-building-block" id="toc-the-perceptron-the-building-block" class="nav-link" data-scroll-target="#the-perceptron-the-building-block">The perceptron, the building block</a></li>
   <li><a href="#neurons-and-activation-functions" id="toc-neurons-and-activation-functions" class="nav-link" data-scroll-target="#neurons-and-activation-functions">Neurons and Activation Functions</a></li>
   <li><a href="#multilayer-perceptrons" id="toc-multilayer-perceptrons" class="nav-link" data-scroll-target="#multilayer-perceptrons">Multilayer perceptrons</a></li>
-  <li><a href="#mathematical-formulation-of-the-ann" id="toc-mathematical-formulation-of-the-ann" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#some-mathematics-behind-ann" id="toc-some-mathematics-behind-ann" class="nav-link" data-scroll-target="#some-mathematics-behind-ann">Some mathematics behind ANN</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-formulation-of-the-ann" id="toc-mathematical-formulation-of-the-ann" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</a></li>
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An example</a>
   <ul class="collapse">
   <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data preprocessing</a></li>
@@ -130,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 2, 2023</p>
+      <p class="date">May 3, 2023</p>
     </div>
   </div>
   
@@ -301,14 +304,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>Now, while this is an improvement (because both the weights and the threshold can be learned and the inputs can be real values) there is still a drawback in that a single perceptron can only be used to implement linearly separable functions.</p>
-<p>Artificial Neural Networks improve on this by introducing <em>Activation Functions</em></p>
+<p>Artificial Neural Networks improve on this by introducing <em>Activation Functions</em> which, eventually, can be non-linear.</p>
 </section>
 <section id="neurons-and-activation-functions" class="level3">
 <h3 class="anchored" data-anchor-id="neurons-and-activation-functions">Neurons and Activation Functions</h3>
 <p>An activation function is a function that is added into an artificial neurone in order to help it learn complex patterns in the data.</p>
-<p>When comparing with a neuron-based model that is in our brains (when neurons are connected), the activation function is at the end deciding <em>what is to be fired to the next neuron</em>.</p>
-<p>That is exactly what an activation function does in an ANN as well. It takes in the output signal from the previous cell and converts it into some form that can be taken as input to the next cell. The comparison can be summarized in the figure below.</p>
-<p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253"><img src="images/ActivationFunction0.png" class="img-fluid"></a>.</p>
+<p>How come biological and artificial neurons come to compare?</p>
+<p>Biological neurons are specialized cells in the central nervous system that transmit electrical and chemical signals to communicate with each other and the rest of the body.</p>
+<p>On the other hand, artificial neurons are mathematical models used in neural networks to process information.</p>
+<p>In both biological and artificial neurons, the <strong>activation function</strong> is what is responsible for <em>deciding whether the neuron activates or not based on the input it receives</em>.</p>
+<ul>
+<li>In the case of a biological neuron, the activation function is based on the release of neurotransmitters, which are chemical substances that transmit signals between nerve cells. When the electrical signal reaching the neuron exceeds a certain threshold, the neuron releases neurotransmitters, which are received by other neurons or cells in the body to continue the communication process.</li>
+<li>On the other hand, in an artificial neuron, the activation function is a mathematical function applied to the neuron’s input to produce an output. Like in the biological neuron, this activation function decides whether the neuron activates or not based on the input it receives.</li>
+</ul>
+<div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-4_800080a34a3df52179bfe21e0239c583">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/ActivationFunction0.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ActivationFunction0.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253">Read more here about activation functions.</a></p>
 <p>With all these inputs in mind we can now define an Artificial Neuron as a <em>computational unit</em> that - takes as input <span class="math inline">\(x=(x_0,x_1,x_2,x_3)\)</span> (<span class="math inline">\(x_0\)</span> = +1, called bias), and - outputs <span class="math inline">\(h_{\theta}(x) = f(\theta^\intercal x) = f(\sum_i \theta_ix_i)\)</span>, - where <span class="math inline">\(f:\mathbb{R}\mapsto \mathbb{R}\)</span> is called the <strong>activation function</strong>.</p>
 <p>The goal of the activation function is to provide the Neuron with <em>the capability of producing the required outputs</em>.</p>
 <p>For instance, if the output has to be a probability, the activation function will only produce values between 0 and 1.</p>
@@ -343,7 +362,16 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <p>A multilayer perceptron (or Artificial neural network) is a structure composed by <em>several hidden layers of neurons</em> where the output of a neuron of a layer becomes the input of a neuron of the next layer.</p>
 <p>Moreover, the output of a neuron can also be the input of a neuron of the same layer or of neuron of previous layers (this is the case for recurrent neural networks). On last layer, called output layer, we may apply a different activation function as for the hidden layers depending on the type of problems we have at hand : regression or classification.</p>
 <p>The Figure below represents a neural network with three input variables, one output variable, and two hidden layers.</p>
-<p><img src="images/MultiLayer1.png" class="img-fluid"></p>
+<div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-5_28206c0d978a94d687d78789a46d5f5b">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/MultiLayer1.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/MultiLayer1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.</p>
 <p>The parameters of the architecture are:</p>
 <ul>
@@ -352,16 +380,34 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 </ul>
 <p>The activation functions are also to choose by the user. For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.</p>
 <ul>
-<li>In the case of regression, we apply no activation function on the output layer.</li>
+<li>For regression, we apply no activation function on the output layer.</li>
 <li>For binary classification, the output gives a prediction of <span class="math inline">\(\mathbb{P}(Y=1 / X)\)</span> since this value is in <span class="math inline">\([0,1]\)</span> and the sigmoid activation function is generally considered.</li>
-<li>For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of <span class="math inline">\(\mathbb{P}(Y=i / X)\)</span>. The sum of all these values has to be equal to 1 . The sum of all these values has to be equal to 1 . The multidimensional function <em>softmax</em> is generally used</li>
-</ul>
-<p><span class="math display">\[
+<li>For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of <span class="math inline">\(\mathbb{P}(Y=i / X)\)</span>. The sum of all these values has to be equal to 1. The sum of all these values has to be equal to 1.
+<ul>
+<li>A common choice for multi-class ANN is the <em>softmax</em> activation function: <span class="math display">\[
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
-\]</span></p>
+\]</span></li>
+</ul></li>
+</ul>
 </section>
-<section id="mathematical-formulation-of-the-ann" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h3>
+</section>
+</section>
+<section id="some-mathematics-behind-ann" class="level1">
+<h1>Some mathematics behind ANN</h1>
+<ul>
+<li><p>An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties.</p></li>
+<li><p>In practice this means describing</p>
+<ul>
+<li>The ANN as a (non linear) function</li>
+<li>The (optimization) process for estimating the weights, which requires three elements
+<ul>
+<li>An estimation procedure: gradient based optimization</li>
+<li>A method for computing the required derivatives: back-propagation.</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="mathematical-formulation-of-the-ann" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h2>
 <p>We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:</p>
 <ul>
 <li>Set <span class="math inline">\(h^{(0)}(x)=x\)</span> For <span class="math inline">\(k=1, \ldots, L\)</span> (hidden layers),</li>
@@ -383,21 +429,20 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <p>At each step, <span class="math inline">\(W^{(k)}\)</span> is a matrix with number of rows equal to the number of neurons in the layer <span class="math inline">\(k\)</span> and number of columns the number of neurons in the layer <span class="math inline">\(k-1\)</span>.</p>
 <p>By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network.</p>
 </section>
-</section>
 <section id="an-example" class="level2">
 <h2 class="anchored" data-anchor-id="an-example">An example</h2>
 <p>In this example we train and use a “shallow neural network”, called this way in contrast with “deep neural networks”.</p>
 <p>We will use the <code>neuralnet</code> R package, which is not intended to work with deep neural networks, to build a simple neural network to predict if a type of stock pays dividends or not.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-4_6354ff426345aba11a1f5268b7127f6d">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(neuralnet)) </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"neuralnet"</span>, <span class="at">dep=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(caret)) </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"caret"</span>, <span class="at">dep=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-6_e7d8d19cae4e176e8eb3116f65d74c59">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(neuralnet)) </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"neuralnet"</span>, <span class="at">dep=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(caret)) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"caret"</span>, <span class="at">dep=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data for the example are the <code>dividendinfo.csv</code> dataset, available from: <a href="https://github.com/MGCodesandStats/datasets" class="uri">https://github.com/MGCodesandStats/datasets</a></p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-5_d01954b51bee580f2a6f5b38333a642f">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/MGCodesandStats/datasets/master/dividendinfo.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-7_c53a098d15c8c0b026d3a4627d23ed10">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/MGCodesandStats/datasets/master/dividendinfo.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   200 obs. of  6 variables:
  $ dividend       : int  0 1 1 0 1 1 1 0 1 1 ...
@@ -418,21 +463,21 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 </ul>
 <p>In this example We implement the max-min normalization technique.</p>
 <p>See <a href="https://vitalflux.com/data-science-scale-normalize-numeric-data-using-r/">this link</a> for further details on how to use the normalization function.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-6_f950dbab4fd813673b5d4300bfa2a5b3">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> ((x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>normData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">lapply</span>(mydata, normalize))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-8_fe7b6cba34ae9d4b663dba217359ce37">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> ((x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>normData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">lapply</span>(mydata, normalize))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As usually, the dataset is separated in a training and a test set. The training set contains a random selection with and (arbitrary) 66% of the observations.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-7_1e836b94730ca13ce336b6eee54038ea">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>perc2Train <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ssize <span class="ot">&lt;-</span> <span class="fu">nrow</span>(normData)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data_rows <span class="ot">&lt;-</span> <span class="fu">floor</span>(perc2Train <span class="sc">*</span>ssize)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>train_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>ssize), data_rows)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>trainset <span class="ot">&lt;-</span> normData[train_indices,]</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> normData[<span class="sc">-</span>train_indices,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-9_ed0a379596fbf8f767f606748135ceb4">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>perc2Train <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ssize <span class="ot">&lt;-</span> <span class="fu">nrow</span>(normData)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data_rows <span class="ot">&lt;-</span> <span class="fu">floor</span>(perc2Train <span class="sc">*</span>ssize)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>train_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>ssize), data_rows)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>trainset <span class="ot">&lt;-</span> normData[train_indices,]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> normData[<span class="sc">-</span>train_indices,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>trainset</code> set will be used to train the network and the <code>testset</code> set one will be used to evaluate it.</p>
 </section>
@@ -440,26 +485,26 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <h3 class="anchored" data-anchor-id="training-a-neural-network">Training a neural network</h3>
 <p>Setting the parameters of a neural network requires experience and understanding of their meaning, and even so, canges in the parameters can lead to similar results.</p>
 <p>We create a simple NN with two hidden layers, with 3 and 2 neurons respectively. This is specified in the <code>hidden</code> parameter. For other parameters see <a href="https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet">the package help</a>.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-8_e9a2b76fc7cc2bdc8c6243f9ad8939d6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(neuralnet)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">&lt;-</span> <span class="fu">neuralnet</span>(dividend <span class="sc">~</span> fcfps <span class="sc">+</span> earnings_growth <span class="sc">+</span> de <span class="sc">+</span> mcap <span class="sc">+</span> current_ratio, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>trainset, </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">hidden=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">linear.output=</span><span class="cn">FALSE</span>, </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">threshold=</span><span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-10_3196d64e764d46738396cfa10e10d37e">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(neuralnet)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">&lt;-</span> <span class="fu">neuralnet</span>(dividend <span class="sc">~</span> fcfps <span class="sc">+</span> earnings_growth <span class="sc">+</span> de <span class="sc">+</span> mcap <span class="sc">+</span> current_ratio, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>trainset, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">hidden=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">linear.output=</span><span class="cn">FALSE</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">threshold=</span><span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The output of the procedure is a neural network with estimated weights.</p>
 <p>This can be seen with a <code>plot</code> function (including the <code>rep</code> argument).</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-9_7155c329c183c676958af219cca123cd">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nn, <span class="at">rep =</span> <span class="st">"best"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-11_c418fb678bd43d0ae037d2ea2ea74487">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nn, <span class="at">rep =</span> <span class="st">"best"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Introduction_to_Deep_Learning_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="768"></p>
+<p><img src="Introduction_to_Deep_Learning_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <p>The object <code>nn</code>contains information the weights and the results although it is not particularly clear or useful.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-10_ce173abbf593eb07310480db4a052caf">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-12_ceb450f7f422f42fe4f731ae29d2fbde">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    Length Class      Mode    
 call                  6    -none-     call    
@@ -477,7 +522,7 @@ generalized.weights   1    -none-     list
 startweights          1    -none-     list    
 result.matrix        32    -none-     numeric </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nn<span class="sc">$</span>result.matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nn<span class="sc">$</span>result.matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                     [,1]
 error                        5.096531e-01
@@ -518,12 +563,12 @@ Intercept.to.dividend       -3.761263e-01
 <section id="model-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="model-evaluation">Model evaluation</h3>
 <p>A prediction for each value in the <code>testset</code> dataset can be built with the <code>compute</code> function.</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-11_0b7f78ae6a7d8ca5e989a62428f09691">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Test the resulting output</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>temp_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(testset, <span class="at">select =</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">c</span>(<span class="st">"fcfps"</span>,<span class="st">"earnings_growth"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"de"</span>, <span class="st">"mcap"</span>, <span class="st">"current_ratio"</span>))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-13_fe97e18bbd60341717805da9f2826aa8">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Test the resulting output</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>temp_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(testset, <span class="at">select =</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">c</span>(<span class="st">"fcfps"</span>,<span class="st">"earnings_growth"</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"de"</span>, <span class="st">"mcap"</span>, <span class="st">"current_ratio"</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fcfps earnings_growth        de       mcap current_ratio
 9  0.4929006      0.52417860 0.7862595 0.79741379   0.662994637
@@ -533,11 +578,11 @@ Intercept.to.dividend       -3.761263e-01
 27 0.4279919      0.70362258 0.1882952 0.30603448   0.628283435
 29 0.3509128      0.74203875 0.6030534 0.53017241   0.543404499</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nn.results <span class="ot">&lt;-</span> <span class="fu">compute</span>(nn, temp_test)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">actual =</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  testset<span class="sc">$</span>dividend, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prediction =</span> nn.results<span class="sc">$</span>net.result)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nn.results <span class="ot">&lt;-</span> <span class="fu">compute</span>(nn, temp_test)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">actual =</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                  testset<span class="sc">$</span>dividend, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prediction =</span> nn.results<span class="sc">$</span>net.result)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   actual    prediction
 9       1  1.000000e+00
@@ -549,12 +594,12 @@ Intercept.to.dividend       -3.761263e-01
 </div>
 </div>
 <p>A confusion matrix can be built to evaluate the predictive ability of the network:</p>
-<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-12_2119e93e7bc828c83cdb34cc0ebc35f5">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>roundedresults<span class="ot">&lt;-</span><span class="fu">sapply</span>(results,round,<span class="at">digits=</span><span class="dv">0</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>roundedresultsdf<span class="ot">=</span><span class="fu">data.frame</span>(roundedresults)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(roundedresultsdf)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>confMat<span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">confusionMatrix</span>(<span class="fu">table</span>(actual, prediction))</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>confMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-14_44f6e014830a50889f87c8e460c604ac">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>roundedresults<span class="ot">&lt;-</span><span class="fu">sapply</span>(results,round,<span class="at">digits=</span><span class="dv">0</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>roundedresultsdf<span class="ot">=</span><span class="fu">data.frame</span>(roundedresults)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(roundedresultsdf)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>confMat<span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">confusionMatrix</span>(<span class="fu">table</span>(actual, prediction))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>confMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 

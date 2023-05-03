@@ -327,7 +327,7 @@ knitr::include_graphics("images/ArtificialNeuron.png")
 
 $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
 
-## Multilayer perceptrons{smaller}
+## Multilayer perceptrons{.smaller}
 
 - A Multilayer Perceptron or Artificial Neural Network (ANN) is a computational model that mimics the structure and function of the human brain. 
 - It is composed of interconnected nodes, called neurons, that are organized into layers. 
@@ -336,39 +336,50 @@ $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
 - Last layer produces the final prediction
 - Intermediate (hidden) layers perform intermediate calculatuions.
 
-## An ANN
+## An Artificial Neural network
 
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/MultiLayer1.png")
 ```
 
 
-
 ## The architechture of ANN
 
--   Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.
+- Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.
 
--   The parameters of the architecture are:
+- The parameters of the architecture are:
 
-    -   the number of hidden layers and
-    -   the number of neurons in each layer.
-    -   The activation functions
+  -   the number of hidden layers and
+  -   the number of neurons in each layer.
+  -   The activation functions
 
-## The architecture of ANN {.smaller}
+## Activation functions for ANN  (1)
 
--   For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.
+- For the output layer, the activation function is generally different from the one used on the hidden layers. 
+  - For **regression**, we apply no activation function on the output layer.
+  - For **binary** classification, where output is a prediction of $\mathbb{P}(Y=1 /X) \in [0,1]$
+    - The *sigmoid* activation function is used.
+  - For **multi-class classification**, where ther is one neuron per class giving a prediction of $\mathbb{P}(Y=i / X)$.
+    - The *softmax* activation function is common
 
-    -   For regression, we apply no activation function on the output layer.
-    -   For binary classification, the output gives a prediction of $\mathbb{P}(Y=1 / X)$ since this value is in $[0,1]$ and the sigmoid activation function is generally considered.
-    -   For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of $\mathbb{P}(Y=i / X)$. The sum of all these values has to be equal to 1 . The sum of all these values has to be equal to 1
-
--   The multidimensional function *softmax* is generally used
+## The softmax activation function
 
 $$
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
 $$
+# Some mathematics behind ANN
 
-## Mathematical formulation {.smaller}
+# Mathematical formulation 
+
+- An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties. 
+
+- In practice this means describing
+  - The ANN as a (non linear) function.
+  - The (optimization) process for estimating the weights, which requires three elements.
+    - An estimation procedure: gradient based optimization
+    - A method for computing the required derivatives: back-propagation.
+
+## Mathematical description od ANN {.smaller}
 
 We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:
 

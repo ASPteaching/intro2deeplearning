@@ -209,17 +209,28 @@ Additionally, instead of hand coding the thresholding parameter $\theta$, we add
 
 Now, while this is an improvement (because both the weights and the threshold can be learned and the inputs can be real values) there is still a drawback in that a single perceptron can only be used to implement linearly separable functions.
 
-Artificial Neural Networks improve on this by introducing *Activation Functions*
+Artificial Neural Networks improve on this by introducing *Activation Functions* which, eventually, can be non-linear.
 
 ### Neurons and Activation Functions
 
 An activation function is a function that is added into an artificial neurone in order to help it learn complex patterns in the data.
 
-When comparing with a neuron-based model that is in our brains (when neurons are connected), the activation function is at the end deciding *what is to be fired to the next neuron*.
+How come biological and artificial neurons come to compare?
 
-That is exactly what an activation function does in an ANN as well. It takes in the output signal from the previous cell and converts it into some form that can be taken as input to the next cell. The comparison can be summarized in the figure below.
+Biological neurons are specialized cells in the central nervous system that transmit electrical and chemical signals to communicate with each other and the rest of the body. 
 
-[![](images/ActivationFunction0.png)](https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253).
+On the other hand, artificial neurons are mathematical models used in neural networks to process information.
+
+In both biological and artificial neurons, the **activation function** is what is responsible for *deciding whether the neuron activates or not based on the input it receives*.
+
+  - In the case of a biological neuron, the activation function is based on the release of neurotransmitters, which are chemical substances that transmit signals between nerve cells. When the electrical signal reaching the neuron exceeds a certain threshold, the neuron releases neurotransmitters, which are received by other neurons or cells in the body to continue the communication process.
+  - On the other hand, in an artificial neuron, the activation function is a mathematical function applied to the neuron's input to produce an output. Like in the biological neuron, this activation function decides whether the neuron activates or not based on the input it receives.
+
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/ActivationFunction0.png")
+```
+
+[Read more here about activation functions.](https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253)
 
 With all these inputs in mind we can now define an Artificial Neuron as a *computational unit* that - takes as input $x=(x_0,x_1,x_2,x_3)$ ($x_0$ = +1, called bias), and - outputs $h_{\theta}(x) = f(\theta^\intercal x) = f(\sum_i \theta_ix_i)$, - where $f:\mathbb{R}\mapsto \mathbb{R}$ is called the **activation function**.
 
@@ -269,7 +280,10 @@ Moreover, the output of a neuron can also be the input of a neuron of the same l
 
 The Figure below represents a neural network with three input variables, one output variable, and two hidden layers.
 
-![](images/MultiLayer1.png)
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/MultiLayer1.png")
+```
+
 
 Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.
 
@@ -280,15 +294,26 @@ The parameters of the architecture are:
 
 The activation functions are also to choose by the user. For the output layer, as mentioned previously, the activation function is generally different from the one used on the hidden layers. For example:.
 
--   In the case of regression, we apply no activation function on the output layer.
+-   For regression, we apply no activation function on the output layer.
 -   For binary classification, the output gives a prediction of $\mathbb{P}(Y=1 / X)$ since this value is in $[0,1]$ and the sigmoid activation function is generally considered.
--   For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of $\mathbb{P}(Y=i / X)$. The sum of all these values has to be equal to 1 . The sum of all these values has to be equal to 1 . The multidimensional function *softmax* is generally used
-
+-   For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of $\mathbb{P}(Y=i / X)$. The sum of all these values has to be equal to 1. The sum of all these values has to be equal to 1.
+    - A common choice for multi-class ANN is the *softmax* activation function:
 $$
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
 $$
 
-### Mathematical formulation of the ANN
+# Some mathematics behind ANN
+
+
+- An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties. 
+
+- In practice this means describing
+  - The ANN as a (non linear) function
+  - The (optimization) process for estimating the weights, which requires three elements
+    - An estimation procedure: gradient based optimization
+    - A method for computing the required derivatives: back-propagation.
+
+## Mathematical formulation of the ANN
 
 We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:
 
