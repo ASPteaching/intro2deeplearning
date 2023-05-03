@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.336">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,10 +18,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,13 +47,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -69,7 +98,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="Introduction_to_Deep_Learning_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Introduction_to_Deep_Learning_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -96,10 +124,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#neurons-and-activation-functions" id="toc-neurons-and-activation-functions" class="nav-link" data-scroll-target="#neurons-and-activation-functions">Neurons and Activation Functions</a></li>
   <li><a href="#multilayer-perceptrons" id="toc-multilayer-perceptrons" class="nav-link" data-scroll-target="#multilayer-perceptrons">Multilayer perceptrons</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#some-mathematics-behind-ann" id="toc-some-mathematics-behind-ann" class="nav-link" data-scroll-target="#some-mathematics-behind-ann">Some mathematics behind ANN</a>
-  <ul class="collapse">
-  <li><a href="#mathematical-formulation-of-the-ann" id="toc-mathematical-formulation-of-the-ann" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</a></li>
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An example</a>
   <ul class="collapse">
   <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data preprocessing</a></li>
@@ -107,8 +131,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model evaluation</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#some-mathematics-behind-ann" id="toc-some-mathematics-behind-ann" class="nav-link" data-scroll-target="#some-mathematics-behind-ann">Some mathematics behind ANN</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link" data-scroll-target="#mathematical-formulation">Mathematical formulation</a></li>
+  <li><a href="#mathematical-formulation-of-the-ann" id="toc-mathematical-formulation-of-the-ann" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</a>
+  <ul class="collapse">
+  <li><a href="#a-logistic-regression-ann" id="toc-a-logistic-regression-ann" class="nav-link" data-scroll-target="#a-logistic-regression-ann">A logistic regression ANN</a></li>
+  </ul></li>
+  <li><a href="#parametrizing-an-ann" id="toc-parametrizing-an-ann" class="nav-link" data-scroll-target="#parametrizing-an-ann">Parametrizing an ANN</a></li>
+  <li><a href="#compacting-notation" id="toc-compacting-notation" class="nav-link" data-scroll-target="#compacting-notation">Compacting notation</a></li>
+  </ul></li>
+  <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and resources</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Introduction_to_Deep_Learning.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -174,13 +209,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/AIHistory1.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">A Brief History of AI from 1940s till Today</figcaption>
+<p></p><figcaption class="figure-caption">A Brief History of AI from 1940s till Today</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/"><img src="images/AIHistory2.jpg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: “A Quick History of AI, ML and DL”</figcaption>
+<p></p><figcaption class="figure-caption">The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: “A Quick History of AI, ML and DL”</figcaption><p></p>
 </figure>
 </div>
 <p>The origins of AI, and as such of DL can be traced almost one century backwards. While it is an interesting, or even fascinating, history wee don’t go into it (see a summary in <a href="https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/" id="AIHistory">A Quick History of AI, ML and DL</a></p>
@@ -244,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/PerformanceVsAmountOfData.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance</figcaption>
+<p></p><figcaption class="figure-caption">An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance</figcaption><p></p>
 </figure>
 </div>
 <p><strong>Deep learning is having a strong impact</strong></p>
@@ -390,44 +425,6 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 </ul></li>
 </ul>
 </section>
-</section>
-</section>
-<section id="some-mathematics-behind-ann" class="level1">
-<h1>Some mathematics behind ANN</h1>
-<ul>
-<li><p>An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties.</p></li>
-<li><p>In practice this means describing</p>
-<ul>
-<li>The ANN as a (non linear) function</li>
-<li>The (optimization) process for estimating the weights, which requires three elements
-<ul>
-<li>An estimation procedure: gradient based optimization</li>
-<li>A method for computing the required derivatives: back-propagation.</li>
-</ul></li>
-</ul></li>
-</ul>
-<section id="mathematical-formulation-of-the-ann" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h2>
-<p>We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:</p>
-<ul>
-<li>Set <span class="math inline">\(h^{(0)}(x)=x\)</span> For <span class="math inline">\(k=1, \ldots, L\)</span> (hidden layers),</li>
-</ul>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; a^{(k)}(x)=b^{(k)}+W^{(k)} h^{(k-1)}(x) \\
-&amp; h^{(k)}(x)=\phi\left(a^{(k)}(x)\right)
-\end{aligned}
-\]</span></p>
-<p>For <span class="math inline">\(k=L+1\)</span> (output layer)</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; a^{(L+1)}(x)=b^{(L+1)}+W^{(L+1)} h^{(L)}(x) \\
-&amp; h^{(L+1)}(x)=\psi\left(a^{(L+1)}(x)\right):=f(x, \theta) .
-\end{aligned}
-\]</span></p>
-<p>where <span class="math inline">\(\phi\)</span> is the activation function and <span class="math inline">\(\psi\)</span> is the output layer activation function (for example softmax for multiclass classification).</p>
-<p>At each step, <span class="math inline">\(W^{(k)}\)</span> is a matrix with number of rows equal to the number of neurons in the layer <span class="math inline">\(k\)</span> and number of columns the number of neurons in the layer <span class="math inline">\(k-1\)</span>.</p>
-<p>By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network.</p>
 </section>
 <section id="an-example" class="level2">
 <h2 class="anchored" data-anchor-id="an-example">An example</h2>
@@ -633,6 +630,172 @@ actual  0  1
 </section>
 </section>
 </section>
+<section id="some-mathematics-behind-ann" class="level1">
+<h1>Some mathematics behind ANN</h1>
+<section id="mathematical-formulation" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-formulation">Mathematical formulation</h2>
+<ul>
+<li><p>An ANN is a predictive model whose functioning and properties can be mathematically characterized.</p></li>
+<li><p>In practice this means describing</p>
+<ul>
+<li>The ANN as a (non linear) function.</li>
+<li>The (optimization) process for estimating the weights.</li>
+</ul></li>
+<li><p>Estimation is done by minimizing an appropriate loss function which requires</p>
+<ul>
+<li>An appropriate procedure: <em>gradient based optimization</em></li>
+<li>A method for computing the required derivatives: <em>back-propagation</em>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="mathematical-formulation-of-the-ann" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h2>
+<p>We will use a concrete model to explain the concepts, which can be easily generalized to more neurons and layers.</p>
+<p>Consider the following simple ANN:</p>
+<p>Consider the following ANN:</p>
+<div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-15_91776ecb05face7d517a97020771e788">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/nn.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nn.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The circles labeled +1 are called bias units, and correspond to the intercept, here named <em>bias</em> term.</li>
+<li>The leftmost layer of the network is called the <em>input layer</em>.</li>
+<li>The rightmost layer is the <em>output</em> layer (which, in this example, has only one node).</li>
+<li>The middle layer(s) is(are) called the <em>hidden layer(s)</em>, because its values are not observed in the training set.</li>
+</ul>
+<p>So our example network has:</p>
+<ul>
+<li>The input layer with 3 input units (not counting the bias unit),</li>
+<li>1 hidden layer with 3 hidden units, and</li>
+<li>The output layer with 1 output unit.</li>
+</ul>
+<section id="a-logistic-regression-ann" class="level3">
+<h3 class="anchored" data-anchor-id="a-logistic-regression-ann">A logistic regression ANN</h3>
+<p>This ANN can be use to build a logistic regression model:</p>
+<ul>
+<li><p>From input layer to layer 2: non-linear transformation –&gt; new set of complex features.</p></li>
+<li><p>From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of <em>complex features</em>.</p></li>
+</ul>
+<p><span class="math display">\[
+\mbox{The output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
+\]</span></p>
+<p>Recall that, the logistic regression model is:</p>
+<p><span class="math display">\[
+\log\frac{p(Y=1|x)}{1-p(Y=1|x)}=\theta^\intercal x
+\]</span></p>
+<p>Isolating <span class="math inline">\(p(Y=1|x)\)</span> and taking logs in both sides, we have:</p>
+<p><span class="math display">\[
+\frac{p(Y=1|x)}{1-p(Y=1|x)}=e^{\theta^\intercal x}
+\]</span></p>
+<p>Thus <span class="math display">\[
+p(Y=1|x)=\frac{e^{\theta^\intercal x}}{1+e^{\theta^\intercal x}}=\frac{1}{1+e^{-\theta^\intercal x}}
+\]</span></p>
+<p>That is, <em>when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features</em></p>
+<ul>
+<li>And, with <span class="math inline">\(h_{\theta}(x)\)</span>, the output of the NN, we are estimating <span class="math inline">\(p(Y=1|x)\)</span>.</li>
+</ul>
+</section>
+</section>
+<section id="parametrizing-an-ann" class="level2">
+<h2 class="anchored" data-anchor-id="parametrizing-an-ann">Parametrizing an ANN</h2>
+<ul>
+<li><p>Let <span class="math inline">\(n_l\)</span> denote the number of layers in our network, thus <span class="math inline">\(n_l=3\)</span> in our example.</p></li>
+<li><p>Label layer <span class="math inline">\(l\)</span> as <span class="math inline">\(L_l\)</span>, so layer <span class="math inline">\(L_1\)</span> is the input layer, and layer <span class="math inline">\(L_{n_l}=L_3\)</span> the output layer.</p></li>
+<li><p>Our neural network has parameters: <span class="math inline">\(\Theta=(\Theta^{(1)},\Theta^{(2)})\)</span>, where we will write <span class="math inline">\(\theta^{(l)}_{ij}\)</span> to denote the parameter (or weight) associated with the connection between unit <span class="math inline">\(j\)</span> in layer <span class="math inline">\(l\)</span>, and unit <span class="math inline">\(i\)</span> in layer <span class="math inline">\(l+1\)</span>.</p></li>
+<li><p>Thus, in our example, we have:</p>
+<ul>
+<li><span class="math inline">\(\Theta^{(1)}\in\mathbb{R}^{3\times 4}\)</span>, and</li>
+<li><span class="math inline">\(\Theta^{(2)}\in\mathbb{R}^{1\times 4}\)</span>.</li>
+</ul></li>
+</ul>
+<p>Note that bias units don’t have inputs or connections going into them, since they always output the value +1.</p>
+<p>We also let <span class="math inline">\(s_l\)</span> denote the number of nodes in layer <span class="math inline">\(l\)</span> (not counting the bias unit).</p>
+<p>Now, write <span class="math inline">\(a^{(l)}_i\)</span> to denote the activation (meaning output value) of unit <span class="math inline">\(i\)</span> in layer <span class="math inline">\(l\)</span>.</p>
+<p>For <span class="math inline">\(l=1\)</span>, we also use <span class="math inline">\(a^{(1)}_i=x_i\)</span> to denote the <span class="math inline">\(i\)</span>-th input.</p>
+<p>Given a fixed setting of the parameters <span class="math inline">\(\Theta\)</span>, our neural network defines a model <span class="math inline">\(h_{\Theta}(x)\)</span> that outputs a real number.</p>
+<p>We can now see <em>how these weights are used to produce the output</em>:</p>
+<p>given by: <span class="math display">\[\begin{eqnarray}
+a_1^{(2)}&amp;=&amp;f(\theta_{10}^{(1)}+\theta_{11}^{(1)}x_1+\theta_{12}^{(1)}x_2+\theta_{13}^{(1)}x_3)\\
+a_2^{(2)}&amp;=&amp;f(\theta_{20}^{(1)}+\theta_{21}^{(1)}x_1+\theta_{22}^{(1)}x_2+\theta_{23}^{(1)}x_3)\\
+a_3^{(2)}&amp;=&amp;f(\theta_{30}^{(1)}+\theta_{31}^{(1)}x_1+\theta_{32}^{(1)}x_2+\theta_{33}^{(1)}x_3)\\
+h_{\Theta}(x)&amp;=&amp;a_1^{(3)}=f(\theta_{10}^{(2)}+\theta_{11}^{(2)}a_1^{(2)}+\theta_{12}^{(2)}a_2^{(2)}+\theta_{13}^{(2)}a_3^{(2)})
+\end{eqnarray}\]</span></p>
+<p>Now, letting <span class="math inline">\(z_i^{(l)}\)</span> denote the total weighted sum of inputs to unit <span class="math inline">\(i\)</span> in layer <span class="math inline">\(l\)</span>, including the bias term <span class="math display">\[
+z_i^{(2)}=\theta_{i0}^{(1)}+\theta_{i1}^{(1)}x_1+\theta_{i2}^{(1)}x_2+\theta_{i3}^{(1)}x_3,
+\]</span> the output becomes: <span class="math inline">\(a_i^{(l)}=f(z_i^{(l)})\)</span>.</p>
+</section>
+<section id="compacting-notation" class="level2">
+<h2 class="anchored" data-anchor-id="compacting-notation">Compacting notation</h2>
+<ul>
+<li><p>Note that this easily lends itself to a more compact notation.</p></li>
+<li><p>Extending the activation function <span class="math inline">\(f(\cdot)\)</span> to apply to vectors in an elementwise fashion: <span class="math display">\[
+f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
+\]</span></p></li>
+</ul>
+<p>then we can write the previous equations more compactly as:</p>
+<span class="math display">\[\begin{eqnarray}
+z^{(2)}&amp;=&amp;\Theta^{(1)}x\nonumber\\
+a^{(2)}&amp;=&amp;f(z^{(2)})\nonumber\\
+z^{(3)}&amp;=&amp;\Theta^{(2)}a^{(2)}\nonumber\\
+h_{\Theta}(x)&amp;=&amp;a^{(3)}=f(z^{(3)})\nonumber
+\end{eqnarray}\]</span>
+<ul>
+<li><p>More generally, recalling that we also use <span class="math inline">\(a^{(1)}=x\)</span> to also denote the values from the input layer,</p></li>
+<li><p>then given layer <span class="math inline">\(l\)</span>’s activations <span class="math inline">\(a^{(l)}\)</span>, we can compute layer <span class="math inline">\(l+1\)</span>’s activations <span class="math inline">\(a^{(l+1)}\)</span> as:</p></li>
+</ul>
+<p><span class="math display">\[\begin{eqnarray}
+z^{(l+1)}&amp;=&amp;\Theta^{(l)}a^{(l)}\\
+a^{(l+1)}&amp;=&amp;f(z^{(l+1)})
+\end{eqnarray}\]</span></p>
+<p>This can be used to provide a matrix representation for the weighted sum of inputs of all neurons:</p>
+<p><span class="math display">\[
+z^{(l+1)}=
+\begin{bmatrix}
+z_1^{(l+1)}\\
+z_2^{(l+1)}\\
+\vdots\\
+z_{s_{l+1}}^{(l)}
+\end{bmatrix}=
+\begin{bmatrix}
+\theta_{10}^{(l)}&amp; \theta_{11}^{(l)}&amp;\theta_{12}^{(l)}&amp;...&amp;\theta_{1s_{l}}^{(l)}&amp;\\
+\theta_{20}^{(l)}&amp; \theta_{21}^{(l)}&amp;\theta_{22}^{(l)}&amp;...&amp;\theta_{2s_{l}}^{(l)}&amp;\\
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots &amp; \vdots\\
+\theta_{s_{l+1}0}^{(l)}&amp; \theta_{s_{l+1}1}^{(l)}&amp;\theta_{s_{l+1}2}^{(l)}&amp;...&amp;\theta_{s_{l+1}s_{l}}^{(l)}&amp;\\
+\end{bmatrix}
+\cdot\begin{bmatrix}
+1\\
+a_1^{(l)}\\
+a_2^{(l)}\\
+\vdots\\
+a_{s_l}^{(l)}
+\end{bmatrix}
+\]</span></p>
+<p>So that, the activation is then:</p>
+<p><span class="math display">\[
+a^{(l+1)}=
+\begin{bmatrix}
+a_1^{(l+1)}\\
+a_2^{(l+1)}\\
+\vdots\\
+a_{s_{l+1}}^{(l)}
+\end{bmatrix}=f(z^{(l+1)})=\begin{bmatrix}
+f(z_1^{(l+1)})\\
+f(z_2^{(l+1)})\\
+\vdots\\
+f(z_{s_{l+1}}^{(l)})
+\end{bmatrix}
+\]</span></p>
+</section>
+</section>
+<section id="references-and-resources" class="level1">
+<h1>References and resources</h1>
+</section>
 
 </main>
 <!-- /main column -->
@@ -663,23 +826,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -744,92 +893,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

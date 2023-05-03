@@ -302,45 +302,6 @@ $$
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
 $$
 
-# Some mathematics behind ANN
-
-
-- An ANN is a predictive model which we aim to describe mathematically to understand its functioning and properties. 
-
-- In practice this means describing
-  - The ANN as a (non linear) function
-  - The (optimization) process for estimating the weights, which requires three elements
-    - An estimation procedure: gradient based optimization
-    - A method for computing the required derivatives: back-propagation.
-
-## Mathematical formulation of the ANN
-
-We can summarize the mathematical formulation of a multilayer perceptron with (L) hidden layers as follows:
-
--   Set $h^{(0)}(x)=x$ For $k=1, \ldots, L$ (hidden layers),
-
-$$
-\begin{aligned}
-& a^{(k)}(x)=b^{(k)}+W^{(k)} h^{(k-1)}(x) \\
-& h^{(k)}(x)=\phi\left(a^{(k)}(x)\right)
-\end{aligned}
-$$
-
-For $k=L+1$ (output layer)
-
-$$
-\begin{aligned}
-& a^{(L+1)}(x)=b^{(L+1)}+W^{(L+1)} h^{(L)}(x) \\
-& h^{(L+1)}(x)=\psi\left(a^{(L+1)}(x)\right):=f(x, \theta) .
-\end{aligned}
-$$
-
-where $\phi$ is the activation function and $\psi$ is the output layer activation function (for example softmax for multiclass classification).
-
-At each step, $W^{(k)}$ is a matrix with number of rows equal to the number of neurons in the layer $k$ and number of columns the number of neurons in the layer $k-1$.
-
-By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network.
-
 ## An example
 
 In this example we train and use a "shallow neural network", called this way in contrast with "deep neural networks".
@@ -454,3 +415,191 @@ attach(roundedresultsdf)
 confMat<- caret::confusionMatrix(table(actual, prediction))
 confMat
 ```
+
+# Some mathematics behind ANN
+
+## Mathematical formulation 
+
+- An ANN is a predictive model whose functioning and properties can be  mathematically characterized. 
+
+- In practice this means describing
+  - The ANN as a (non linear) function.
+  - The (optimization) process for estimating the weights. 
+
+- Estimation is done by minimizing an appropriate loss function which requires 
+  - An appropriate procedure: *gradient based optimization*
+  - A method for computing the required derivatives: *back-propagation*.
+
+## Mathematical formulation of the ANN
+
+We will use a concrete model to explain the concepts, which can be easily generalized to more neurons and layers.
+
+Consider the following simple ANN:
+
+Consider the following ANN:
+
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/nn.jpg")
+```
+
+- The circles labeled +1 are called bias units, and correspond to the intercept, here named *bias* term. 
+- The leftmost layer of the network is called the
+*input layer*.
+- The rightmost layer is the *output* layer (which, in this example, has only one node). 
+- The middle layer(s) is(are) called the *hidden layer(s)*, because its values are not observed in the training set.
+
+So our example network has: 
+
+- The input layer with 3 input units (not counting the bias unit), 
+- 1 hidden layer with 3 hidden units, and 
+- The output layer with 1 output unit.
+
+### A logistic regression ANN
+
+This ANN can be use to build a logistic regression model:
+
+- From input layer to layer 2:  non-linear   transformation --> new set of complex features.
+
+- From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of *complex features*.
+
+$$
+\mbox{The output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
+$$
+
+Recall that, the logistic regression model is:
+
+$$
+\log\frac{p(Y=1|x)}{1-p(Y=1|x)}=\theta^\intercal x
+$$
+
+Isolating $p(Y=1|x)$ and taking logs in both sides, we have:
+
+$$
+\frac{p(Y=1|x)}{1-p(Y=1|x)}=e^{\theta^\intercal x}
+$$ 
+
+Thus 
+$$
+p(Y=1|x)=\frac{e^{\theta^\intercal x}}{1+e^{\theta^\intercal x}}=\frac{1}{1+e^{-\theta^\intercal x}}
+$$
+
+That is, *when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features*
+
+
+- And, with $h_{\theta}(x)$, the output of the NN, we are estimating $p(Y=1|x)$.
+
+## Parametrizing an ANN
+
+- Let $n_l$ denote the number of layers in our network, thus $n_l=3$ in our example. 
+- Label layer $l$ as $L_l$, so layer $L_1$ is
+the input layer, and layer $L_{n_l}=L_3$ the output layer. 
+- Our neural network has parameters:
+$\Theta=(\Theta^{(1)},\Theta^{(2)})$, where we
+will write $\theta^{(l)}_{ij}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$. 
+- Thus, in our example, we have: 
+
+  - $\Theta^{(1)}\in\mathbb{R}^{3\times 4}$, and
+  - $\Theta^{(2)}\in\mathbb{R}^{1\times 4}$.
+
+Note that bias units don't have inputs or connections going into them, since they always output the value +1. 
+
+We also let $s_l$ denote the number of nodes in layer $l$ (not counting the bias unit).
+
+Now, write $a^{(l)}_i$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
+
+For $l=1$, we also use $a^{(1)}_i=x_i$ to denote the $i$-th input.
+
+Given a fixed setting of the parameters $\Theta$, our neural network defines a model $h_{\Theta}(x)$ that outputs a real number.
+
+We can now see *how these weights are used to produce the output*:
+
+given by: \begin{eqnarray}
+a_1^{(2)}&=&f(\theta_{10}^{(1)}+\theta_{11}^{(1)}x_1+\theta_{12}^{(1)}x_2+\theta_{13}^{(1)}x_3)\\
+a_2^{(2)}&=&f(\theta_{20}^{(1)}+\theta_{21}^{(1)}x_1+\theta_{22}^{(1)}x_2+\theta_{23}^{(1)}x_3)\\
+a_3^{(2)}&=&f(\theta_{30}^{(1)}+\theta_{31}^{(1)}x_1+\theta_{32}^{(1)}x_2+\theta_{33}^{(1)}x_3)\\
+h_{\Theta}(x)&=&a_1^{(3)}=f(\theta_{10}^{(2)}+\theta_{11}^{(2)}a_1^{(2)}+\theta_{12}^{(2)}a_2^{(2)}+\theta_{13}^{(2)}a_3^{(2)})
+\end{eqnarray} 
+
+Now, letting $z_i^{(l)}$ denote the total
+weighted sum of inputs to unit $i$ in layer $l$, including the bias term
+$$
+z_i^{(2)}=\theta_{i0}^{(1)}+\theta_{i1}^{(1)}x_1+\theta_{i2}^{(1)}x_2+\theta_{i3}^{(1)}x_3,
+$$ 
+the output becomes: $a_i^{(l)}=f(z_i^{(l)})$.
+
+## Compacting notation
+
+- Note that this easily lends itself to a more compact notation.
+
+- Extending the activation function $f(\cdot)$ to apply to vectors in an elementwise fashion:
+$$
+f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
+$$ 
+
+then we can write the previous equations 
+more compactly as:
+
+```{=tex}
+\begin{eqnarray}
+z^{(2)}&=&\Theta^{(1)}x\nonumber\\
+a^{(2)}&=&f(z^{(2)})\nonumber\\
+z^{(3)}&=&\Theta^{(2)}a^{(2)}\nonumber\\
+h_{\Theta}(x)&=&a^{(3)}=f(z^{(3)})\nonumber
+\end{eqnarray}
+```
+
+- More generally, recalling that we also use $a^{(1)}=x$ to also denote the values from the input layer, 
+
+- then given layer $l$'s activations $a^{(l)}$, we can compute layer $l+1$'s activations $a^{(l+1)}$ as:
+
+\begin{eqnarray}
+z^{(l+1)}&=&\Theta^{(l)}a^{(l)}\\
+a^{(l+1)}&=&f(z^{(l+1)})
+\end{eqnarray}
+
+This can be used to provide a matrix representation for the weighted sum of inputs of all neurons:
+
+$$
+z^{(l+1)}=
+\begin{bmatrix}
+z_1^{(l+1)}\\
+z_2^{(l+1)}\\
+\vdots\\
+z_{s_{l+1}}^{(l)}
+\end{bmatrix}=
+\begin{bmatrix}
+\theta_{10}^{(l)}& \theta_{11}^{(l)}&\theta_{12}^{(l)}&...&\theta_{1s_{l}}^{(l)}&\\
+\theta_{20}^{(l)}& \theta_{21}^{(l)}&\theta_{22}^{(l)}&...&\theta_{2s_{l}}^{(l)}&\\
+\vdots & \vdots& \vdots & \vdots & \vdots\\
+\theta_{s_{l+1}0}^{(l)}& \theta_{s_{l+1}1}^{(l)}&\theta_{s_{l+1}2}^{(l)}&...&\theta_{s_{l+1}s_{l}}^{(l)}&\\
+\end{bmatrix}
+\cdot\begin{bmatrix}
+1\\
+a_1^{(l)}\\
+a_2^{(l)}\\
+\vdots\\
+a_{s_l}^{(l)}
+\end{bmatrix}
+$$ 
+
+
+So that, the activation is then:
+
+$$
+a^{(l+1)}=
+\begin{bmatrix}
+a_1^{(l+1)}\\
+a_2^{(l+1)}\\
+\vdots\\
+a_{s_{l+1}}^{(l)}
+\end{bmatrix}=f(z^{(l+1)})=\begin{bmatrix}
+f(z_1^{(l+1)})\\
+f(z_2^{(l+1)})\\
+\vdots\\
+f(z_{s_{l+1}}^{(l)})
+\end{bmatrix}
+$$
+
+
+
+# References and resources
