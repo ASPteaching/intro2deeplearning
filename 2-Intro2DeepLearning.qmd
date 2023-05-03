@@ -818,120 +818,115 @@ series expansion gives
 $$
 J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
 $$ 
-Here
-$\frac{\partial J(\theta)}{\partial\theta_i}$ 
-denotes the
-partial derivative of the cost function with respect to the $i$-th
-weight. 
+<!-- Here -->
+<!-- $\frac{\partial J(\theta)}{\partial\theta_i}$  -->
+<!-- denotes the -->
+<!-- partial derivative of the cost function with respect to the $i$-th -->
+<!-- weight.  -->
 
-## How gradient descent works ()
+## How gradient descent works (II)
 
-For conveniende, we will let $\nabla J(\theta)\in\mathbb{R}^p$
-denote the vector of partial derivatives, known as the gradient, so that
+- Let $\nabla J(\theta)\in\mathbb{R}^p$
+be the vector of partial derivatives, aka the gradient:
 \begin{equation}\label{g1}
-\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal
-\end{equation} Then, \begin{equation}\label{g2}
+\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal, \mbox{then:}
+\end{equation}  \begin{equation}\label{g2}
 J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 \end{equation}
 
-Our aim is to reduce the value of the cost function. The relation
-(\ref{g2}) motivates the idea of choosing $\Delta\theta$ to make
+- Our aim is to reduce the value of the cost function. 
+- It seems reasonable to choose $\Delta\theta$ (a *direction*) to make
 $\nabla J(\theta)^\intercal\Delta\theta$ as negative as possible. 
 
-## How gradient descent works (I)
+## How gradient descent works (III)
 
-We can
-address this problem via the Cauchy-Schwarz inequality, which states
-that for any $f,g\in\mathbb{R}^p$, we have
-$|f^\intercal g|\leq ||f||\cdot ||g||$. Moreover, the two sides are
-equal if and only if $f$ and $g$ are linearly dependent (meaning they
-are parallel).
+- This can be addressed via the Cauchy-Schwarz inequality:
+  - For any $f,g\in\mathbb{R}^p$, we have $|f^\intercal g|\leq ||f||\cdot ||g||$. 
+  - Moreover, the two sides are equal if and only if $f$ and $g$ are linearly dependent (meaning they are parallel).
 
-So the most negative that $f^\intercal g$ can be is $-||f||\cdot||g||$,
-which happens when $f=-g$. Hence we should choose $\Delta\theta$ to lie
-in the direction of $-\nabla J(\theta)$. Keeping in mind that (\ref{g2})
-is an approximation that is relevant only for small $\Delta\theta$, we
-will limit ourselves to a small step in that direction. This leads to
-the update \begin{equation}\label{g3}
+## How gradient descent works (IV)
+
+- So *the most negative that $f^\intercal g$ can be is $-||f||\cdot||g||$,
+- This happens when $f=-g$. 
+- Hence *we should choose $\Delta\theta$ to lie in the direction of $-\nabla J(\theta)$. 
+
+- Keeping in mind that this approximation is relevant only for small $\Delta\theta$, we will limit ourselves to a small step in that direction. 
+
+## How gradient descent works (V)
+
+- This leads to the update 
+\begin{equation}\label{g3}
 \theta \rightarrow \theta-\eta\nabla J(\theta)
 \end{equation}
 
-## How gradient descent works (I)
+- $\eta$ is small step size known as the *learning rate*. 
 
-Here $\eta$ is small stepsize that, in this context, is known as the
-learning rate. This equation defines the steepest descent method. We
-choose an initial vector and iterate (\ref{g3}) until some stopping
-criterion has been met, or until the number of iterations has exceeded
-the computational budget.
+- This equation defines the steepest descent method. 
+- We choose an initial vector and iterate  
+  - until some stopping criterion has been met, 
+  - or until the number of iterations has exceeded the computational budget.
 
-Repeat:
+## The gradient descent algorithm 
+
+- Repeat:
 
 $$
 \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
 $$ 
 
 $$
-\qquad \textrm{ simultaneously update all }\qquad \theta_j
+\qquad \textrm{and simultaneously update all }\qquad \theta_j
 $$
 
 $\eta\in (0,1]$ denotes the learning parameter.
 
-## How gradient descent works (I)
+## Gradient descent computes derivatives
 
-We aim to minimice the cost function 
+- We aim to minimise the cost function 
 
 $$
 \underset{\theta}{\textrm{min }}J(\theta)
 $$
 
-In order to use gradient descent, we need to compute $J(\theta)$ and the
-partiall derivative terms $$
+- In order to use gradient descent, we need to compute $J(\theta)$ and the partial derivatives:
+$$
 \frac{\partial}{\partial\theta_j}J(\theta)
 $$
 
-## Initialization
+## Other requirements for gradient descent
 
 - The input data have to be normalized to have approximately the same
 range. 
-- The biases can be initialized to 0. They also cannot be initialized with the same values, otherwise, all the neurons of a hidden
-layer would have the same behavior. 
-- Perhaps the only property known with
-complete certainty is that the initial parameters need to break symmetry
-between different units. 
--  We generally initialize the weights at random:
-the values $\theta_{ij}^{(l)}$ are i.i.d. Uniform on $[-c,c]$ with
-possibly $c= 1/\sqrt{N_l}$ where $N_l$ is the size of the hidden layer
-$l$. We also sometimes initialize the weights with a normal distribution
+- Biases can be initialized to 0, but they *cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior*. 
+- Initial parameters need to break symmetry between different units so weights are usually initialized at random:
+
+## Weights inizialization
+
+- We assume values $\theta_{ij}^{(l)}$ to be 
+  - i.i.d. Uniform on $[-c,c]$ 
+  - with possibly $c= 1/\sqrt{N_l}$ where $N_l$ is the size of the hidden layer $l$. 
+  
+- We also sometimes initialize the weights with a normal distribution
 $N(0,0.01)$.
 
-## Stochastic Gradient
+## Gradient descent drawbacks
 
-- When we have a large
-number of parameters and a large number of training points, computing
-the gradient vector (\ref{g1}) at every iteration of the steepest
-descent method (\ref{g3}) can be prohibitively expensive 
-- because we have
-to sum across all training points (for instance in Big Data). 
-- A much
-cheaper alternative is to replace the mean of the individual gradients
-over all training points by the gradient at a single, randomly chosen,
-training point. This leads to the simplest form of what is called the
-stochastic gradient method. 
+- When we have a large number of parameters and a large number of training points, computing the gradient vector (\ref{g1}) at every iteration of the steepest descent method can be time consuming.
+- It is mainly due to that we have *to sum across all training points*. 
+- This becomes prohibitively expensive when we have Big Data. 
 
-## Stochastic gradient descent
+## Stochastic Gradient {.smaller}
 
-A single step may be summarized as
+- A much cheaper alternative is to replace the mean of the individual gradients over all training points 
+- by the gradient at a single, randomly chosen, training point. 
+- This leads to the simplest form of the *stochastic gradient method*. 
 
-```{=tex}
-\begin{itemize}
-\item Choose an integer $i$ uniformly at random from $\{1,...,n\}$
-\item update 
+- Choose an integer $i$ uniformly at random from $\{1,...,n\}$ and update 
 \begin{equation}\label{g4}
 \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(i)})
 \end{equation}
-\end{itemize}
-```
-Notice we have included $x^{(i)}$ in the notation of $J(\theta;x^{(i)})$
+
+- Notice we have included $x^{(i)}$ in the notation of $J(\theta;x^{(i)})$
 to remark the dependence. 
 
 ## Rationale for SGD

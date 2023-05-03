@@ -1210,68 +1210,120 @@ J(\Theta)&amp;=&amp;-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_
 <li>How should we choose a perturbation, <span class="math inline">\(\Delta\theta\)</span>, so that the next vector, <span class="math inline">\(\theta+\Delta\theta\)</span>, represents an improvement?</li>
 <li>If <span class="math inline">\(\Delta\theta\)</span> is small, then ignoring terms of order <span class="math inline">\(||\Delta\theta||^2\)</span>, a Taylor series expansion gives <span class="math display">\[
 J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
-\]</span> Here <span class="math inline">\(\frac{\partial J(\theta)}{\partial\theta_i}\)</span> denotes the partial derivative of the cost function with respect to the <span class="math inline">\(i\)</span>-th weight.</li>
+\]</span> <!-- Here --> <!-- $\frac{\partial J(\theta)}{\partial\theta_i}$  --> <!-- denotes the --> <!-- partial derivative of the cost function with respect to the $i$-th --> <!-- weight.  --></li>
 </ul>
 </section>
-<section id="how-gradient-descent-works" class="slide level2">
-<h2>How gradient descent works ()</h2>
-<p>For conveniende, we will let <span class="math inline">\(\nabla J(\theta)\in\mathbb{R}^p\)</span> denote the vector of partial derivatives, known as the gradient, so that <span class="math display">\[\begin{equation}\label{g1}
-\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal
-\end{equation}\]</span> Then, <span class="math display">\[\begin{equation}\label{g2}
+<section id="how-gradient-descent-works-ii" class="slide level2">
+<h2>How gradient descent works (II)</h2>
+<ul>
+<li><p>Let <span class="math inline">\(\nabla J(\theta)\in\mathbb{R}^p\)</span> be the vector of partial derivatives, aka the gradient: <span class="math display">\[\begin{equation}\label{g1}
+\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal, \mbox{then:}
+\end{equation}\]</span> <span class="math display">\[\begin{equation}\label{g2}
 J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
-\end{equation}\]</span></p>
-<p>Our aim is to reduce the value of the cost function. The relation (<span class="math inline">\(\ref{g2}\)</span>) motivates the idea of choosing <span class="math inline">\(\Delta\theta\)</span> to make <span class="math inline">\(\nabla J(\theta)^\intercal\Delta\theta\)</span> as negative as possible.</p>
+\end{equation}\]</span></p></li>
+<li><p>Our aim is to reduce the value of the cost function.</p></li>
+<li><p>It seems reasonable to choose <span class="math inline">\(\Delta\theta\)</span> (a <em>direction</em>) to make <span class="math inline">\(\nabla J(\theta)^\intercal\Delta\theta\)</span> as negative as possible.</p></li>
+</ul>
 </section>
-<section id="how-gradient-descent-works-i-1" class="slide level2">
-<h2>How gradient descent works (I)</h2>
-<p>We can address this problem via the Cauchy-Schwarz inequality, which states that for any <span class="math inline">\(f,g\in\mathbb{R}^p\)</span>, we have <span class="math inline">\(|f^\intercal g|\leq ||f||\cdot ||g||\)</span>. Moreover, the two sides are equal if and only if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are linearly dependent (meaning they are parallel).</p>
-<p>So the most negative that <span class="math inline">\(f^\intercal g\)</span> can be is <span class="math inline">\(-||f||\cdot||g||\)</span>, which happens when <span class="math inline">\(f=-g\)</span>. Hence we should choose <span class="math inline">\(\Delta\theta\)</span> to lie in the direction of <span class="math inline">\(-\nabla J(\theta)\)</span>. Keeping in mind that (<span class="math inline">\(\ref{g2}\)</span>) is an approximation that is relevant only for small <span class="math inline">\(\Delta\theta\)</span>, we will limit ourselves to a small step in that direction. This leads to the update <span class="math display">\[\begin{equation}\label{g3}
+<section id="how-gradient-descent-works-iii" class="slide level2">
+<h2>How gradient descent works (III)</h2>
+<ul>
+<li>This can be addressed via the Cauchy-Schwarz inequality:
+<ul>
+<li>For any <span class="math inline">\(f,g\in\mathbb{R}^p\)</span>, we have <span class="math inline">\(|f^\intercal g|\leq ||f||\cdot ||g||\)</span>.</li>
+<li>Moreover, the two sides are equal if and only if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are linearly dependent (meaning they are parallel).</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-gradient-descent-works-iv" class="slide level2">
+<h2>How gradient descent works (IV)</h2>
+<ul>
+<li><p>So *the most negative that <span class="math inline">\(f^\intercal g\)</span> can be is <span class="math inline">\(-||f||\cdot||g||\)</span>,</p></li>
+<li><p>This happens when <span class="math inline">\(f=-g\)</span>.</p></li>
+<li><p>Hence *we should choose <span class="math inline">\(\Delta\theta\)</span> to lie in the direction of <span class="math inline">\(-\nabla J(\theta)\)</span>.</p></li>
+<li><p>Keeping in mind that this approximation is relevant only for small <span class="math inline">\(\Delta\theta\)</span>, we will limit ourselves to a small step in that direction.</p></li>
+</ul>
+</section>
+<section id="how-gradient-descent-works-v" class="slide level2">
+<h2>How gradient descent works (V)</h2>
+<ul>
+<li><p>This leads to the update <span class="math display">\[\begin{equation}\label{g3}
 \theta \rightarrow \theta-\eta\nabla J(\theta)
-\end{equation}\]</span></p>
+\end{equation}\]</span></p></li>
+<li><p><span class="math inline">\(\eta\)</span> is small step size known as the <em>learning rate</em>.</p></li>
+<li><p>This equation defines the steepest descent method.</p></li>
+<li><p>We choose an initial vector and iterate</p>
+<ul>
+<li>until some stopping criterion has been met,</li>
+<li>or until the number of iterations has exceeded the computational budget.</li>
+</ul></li>
+</ul>
 </section>
-<section id="how-gradient-descent-works-i-2" class="slide level2">
-<h2>How gradient descent works (I)</h2>
-<p>Here <span class="math inline">\(\eta\)</span> is small stepsize that, in this context, is known as the learning rate. This equation defines the steepest descent method. We choose an initial vector and iterate (<span class="math inline">\(\ref{g3}\)</span>) until some stopping criterion has been met, or until the number of iterations has exceeded the computational budget.</p>
-<p>Repeat:</p>
+<section id="the-gradient-descent-algorithm" class="slide level2">
+<h2>The gradient descent algorithm</h2>
+<ul>
+<li>Repeat:</li>
+</ul>
 <p><span class="math display">\[
 \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
 \]</span></p>
 <p><span class="math display">\[
-\qquad \textrm{ simultaneously update all }\qquad \theta_j
+\qquad \textrm{and simultaneously update all }\qquad \theta_j
 \]</span></p>
 <p><span class="math inline">\(\eta\in (0,1]\)</span> denotes the learning parameter.</p>
 </section>
-<section id="how-gradient-descent-works-i-3" class="slide level2">
-<h2>How gradient descent works (I)</h2>
-<p>We aim to minimice the cost function</p>
+<section id="gradient-descent-computes-derivatives" class="slide level2">
+<h2>Gradient descent computes derivatives</h2>
+<ul>
+<li>We aim to minimise the cost function</li>
+</ul>
 <p><span class="math display">\[
 \underset{\theta}{\textrm{min }}J(\theta)
 \]</span></p>
-<p>In order to use gradient descent, we need to compute <span class="math inline">\(J(\theta)\)</span> and the partiall derivative terms <span class="math display">\[
+<ul>
+<li>In order to use gradient descent, we need to compute <span class="math inline">\(J(\theta)\)</span> and the partial derivatives: <span class="math display">\[
 \frac{\partial}{\partial\theta_j}J(\theta)
-\]</span></p>
+\]</span></li>
+</ul>
 </section>
-<section id="initialization" class="slide level2">
-<h2>Initialization</h2>
+<section id="other-requirements-for-gradient-descent" class="slide level2">
+<h2>Other requirements for gradient descent</h2>
 <ul>
 <li>The input data have to be normalized to have approximately the same range.</li>
-<li>The biases can be initialized to 0. They also cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior.</li>
-<li>Perhaps the only property known with complete certainty is that the initial parameters need to break symmetry between different units.</li>
-<li>We generally initialize the weights at random: the values <span class="math inline">\(\theta_{ij}^{(l)}\)</span> are i.i.d. Uniform on <span class="math inline">\([-c,c]\)</span> with possibly <span class="math inline">\(c= 1/\sqrt{N_l}\)</span> where <span class="math inline">\(N_l\)</span> is the size of the hidden layer <span class="math inline">\(l\)</span>. We also sometimes initialize the weights with a normal distribution <span class="math inline">\(N(0,0.01)\)</span>.</li>
+<li>Biases can be initialized to 0, but they <em>cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior</em>.</li>
+<li>Initial parameters need to break symmetry between different units so weights are usually initialized at random:</li>
 </ul>
 </section>
-<section id="stochastic-gradient" class="slide level2">
+<section id="weights-inizialization" class="slide level2">
+<h2>Weights inizialization</h2>
+<ul>
+<li>We assume values <span class="math inline">\(\theta_{ij}^{(l)}\)</span> to be
+<ul>
+<li>i.i.d. Uniform on <span class="math inline">\([-c,c]\)</span></li>
+<li>with possibly <span class="math inline">\(c= 1/\sqrt{N_l}\)</span> where <span class="math inline">\(N_l\)</span> is the size of the hidden layer <span class="math inline">\(l\)</span>.</li>
+</ul></li>
+<li>We also sometimes initialize the weights with a normal distribution <span class="math inline">\(N(0,0.01)\)</span>.</li>
+</ul>
+</section>
+<section id="gradient-descent-drawbacks" class="slide level2">
+<h2>Gradient descent drawbacks</h2>
+<ul>
+<li>When we have a large number of parameters and a large number of training points, computing the gradient vector (<span class="math inline">\(\ref{g1}\)</span>) at every iteration of the steepest descent method can be time consuming.</li>
+<li>It is mainly due to that we have <em>to sum across all training points</em>.</li>
+<li>This becomes prohibitively expensive when we have Big Data.</li>
+</ul>
+</section>
+<section id="stochastic-gradient" class="slide level2 smaller">
 <h2>Stochastic Gradient</h2>
 <ul>
-<li>When we have a large number of parameters and a large number of training points, computing the gradient vector (<span class="math inline">\(\ref{g1}\)</span>) at every iteration of the steepest descent method (<span class="math inline">\(\ref{g3}\)</span>) can be prohibitively expensive</li>
-<li>because we have to sum across all training points (for instance in Big Data).</li>
-<li>A much cheaper alternative is to replace the mean of the individual gradients over all training points by the gradient at a single, randomly chosen, training point. This leads to the simplest form of what is called the stochastic gradient method.</li>
+<li><p>A much cheaper alternative is to replace the mean of the individual gradients over all training points</p></li>
+<li><p>by the gradient at a single, randomly chosen, training point.</p></li>
+<li><p>This leads to the simplest form of the <em>stochastic gradient method</em>.</p></li>
+<li><p>Choose an integer <span class="math inline">\(i\)</span> uniformly at random from <span class="math inline">\(\{1,...,n\}\)</span> and update <span class="math display">\[\begin{equation}\label{g4}
+\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(i)})
+\end{equation}\]</span></p></li>
+<li><p>Notice we have included <span class="math inline">\(x^{(i)}\)</span> in the notation of <span class="math inline">\(J(\theta;x^{(i)})\)</span> to remark the dependence.</p></li>
 </ul>
-</section>
-<section id="stochastic-gradient-descent" class="slide level2">
-<h2>Stochastic gradient descent</h2>
-<p>A single step may be summarized as</p>
-<p>Notice we have included <span class="math inline">\(x^{(i)}\)</span> in the notation of <span class="math inline">\(J(\theta;x^{(i)})\)</span> to remark the dependence.</p>
 </section>
 <section id="rationale-for-sgd" class="slide level2">
 <h2>Rationale for SGD</h2>
