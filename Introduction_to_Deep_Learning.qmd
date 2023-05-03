@@ -601,5 +601,249 @@ f(z_{s_{l+1}}^{(l)})
 $$
 
 
+### Forward propagation
+
+- By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to  quickly perform calculations in our network.
+
+- This process is called *forward propagation*.
+
+
+## Multiple architechtures for ANN
+
+- We have so far focused on a single hidden layer neural network of the example
+One can build neural networks with many distinct  architectures (meaning patterns of
+connectivity between neurons), including ones with multiple hidden 
+layers. 
+
+- See [here the Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/).
+
+### Feed Forward Neural networks
+
+The most common choice is a $n_l$-layered network where layer 1 is the input layer, layer $n_l$ is the output layer, and each layer $l$
+is densely connected to layer $l+1$. 
+
+In this setting, to compute the
+output of the network, we can successively compute all the activations in layer $L_2$, then layer $L_3$, and so on, up to layer $L_{nl}$ ,
+using Equations (5-6). This is one example of a *feedforward neural network (FFNN)*, since the connectivity graph does not have any directed
+loops or cycles.
+
+### The number of output units
+
+Neural networks can also have multiple output units. 
+
+For example, in (Fig. 4) we can see a network with two hidden layers layers $L_2$ and
+$L_3$ and four output units in layer $L_4$, where bias of each layer were omited.
+
+![Neural network](images/nn2.jpg){width="60%"}
+
+To train this network, we would need training examples 
+$(x^{(i)},y^{(i)})$ where $y^{(i)}\in\mathbb{R}^4$. This sort of network
+is useful if there're multiple outputs that you're interested in
+predicting. 
+
+For example, in a medical diagnosis application, the vector
+$x$ might give the input features of a patient, and the different
+outputs $y_i$'s might indicate presence or absence of different
+diseases.
+
+## A loss function for optimization
+
+- In order to estimate the weights we will  aim at minimizing an appropriate loss function.
+
+- A first idea may be to use *squared error loss* 
+$$
+l(h_\theta(x),y)=(y-\frac{1}{1+e^{-\theta^\intercal x}})^2
+$$
+
+- However it happens to be that [*this is is not a convex problem*](https://towardsdatascience.com/why-not-mse-as-a-loss-function-for-logistic-regression-589816b5e03c) which means that MSE is not appropriate.
+
+
+- Alternatively, we use the *binary cross-entropy loss function* :
+$$
+l(h_\theta(x),y)=\big{\{}\begin{array}{ll}
+-\log h_\theta(x) & \textrm{if }y=1\\
+-\log(1-h_\theta(x))& \textrm{if }y=0
+\end{array}
+$$
+- It can be written compactly as:
+
+$$
+l(h_\theta(x),y)=-y\log h_\theta(x) - (1-y)\log(1-h_\theta(x))
+$$ 
+
+
+- Using cross-entropy loss, the cost function is of the form: 
+\begin{eqnarray*}
+J(\theta)=-\frac{1}{n}\big[\sum_{i=1}^n&&(y^{(i)}\log h_\theta(x^{(i)})+\\ &&(1-y^{(i)})\log(1-h_\theta(x^{(i)}))\big]
+\end{eqnarray*} 
+- This is a convex optimization problem.
+
+- Better to work with a *regularized version* of the cost function (we don't regularize the bias units)
+
+\begin{eqnarray*}
+J(\Theta)&=&-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_\theta(x^{(i)}))_k\\
+&+&(1-y_k^{(i)})\log(1-(h_\theta(x^{(i)}))_k)\big]\\
+&+&\lambda\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}
+(\theta_{ji}^{(l)})^2
+\end{eqnarray*}
+
+## Gradient descent
+
+We saw in the previous section that training a network corresponds to
+choosing the parameters, that is, the weights and biases, that minimize
+the cost function (see Fig. 5). The weights and biases take the form of
+matrices and vectors, but at this stage it is convenient to imagine them
+stored as a single vector that we call $\theta$. Generally, we will
+suppose $\theta\in\mathbb{R}^p$, and write the cost function as
+$J(\theta)$ to emphasize its dependence on the parameters. So Cost
+$J: \mathbb{R}^p\rightarrow \mathbb{R}$.
+
+![Error hypersurface](images/errorsurface.jpg){width="60%"}
+
+We now introduce a classical method in optimization that is often
+referred to as steepest descent or gradient descent. The method proceeds
+iteratively, computing a sequence of vectors in $\mathbb{R}^p$ with the
+aim of converging to a vector that minimizes the cost function. Suppose
+that our current vector is $\theta$. How should we choose a
+perturbation, $\Delta\theta$, so that the next vector,
+$\theta+\Delta\theta$, represents an improvement? If $\Delta\theta$ is
+small, then ignoring terms of order $||\Delta\theta||^2$, a Taylor
+series expansion gives
+
+$$
+J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
+$$ Here $\frac{\partial J(\theta)}{\partial\theta_i}$ denotes the
+partial derivative of the cost function with respect to the $i$-th
+weight. For conveniende, we will let $\nabla J(\theta)\in\mathbb{R}^p$
+denote the vector of partial derivatives, known as the gradient, so that
+\begin{equation}\label{g1}
+\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal
+\end{equation} Then, \begin{equation}\label{g2}
+J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
+\end{equation}
+
+Our aim is to reduce the value of the cost function. The relation
+(\ref{g2}) motivates the idea of choosing $\Delta\theta$ to make
+$\nabla J(\theta)^\intercal\Delta\theta$ as negative as possible. We can
+address this problem via the Cauchy-Schwarz inequality, which states
+that for any $f,g\in\mathbb{R}^p$, we have
+$|f^\intercal g|\leq ||f||\cdot ||g||$. Moreover, the two sides are
+equal if and only if $f$ and $g$ are linearly dependent (meaning they
+are parallel).
+
+So the most negative that $f^\intercal g$ can be is $-||f||\cdot||g||$,
+which happens when $f=-g$. Hence we should choose $\Delta\theta$ to lie
+in the direction of $-\nabla J(\theta)$. Keeping in mind that (\ref{g2})
+is an approximation that is relevant only for small $\Delta\theta$, we
+will limit ourselves to a small step in that direction. This leads to
+the update \begin{equation}\label{g3}
+\theta \rightarrow \theta-\eta\nabla J(\theta)
+\end{equation}
+
+Here $\eta$ is small stepsize that, in this context, is known as the
+learning rate. This equation defines the steepest descent method. We
+choose an initial vector and iterate (\ref{g3}) until some stopping
+criterion has been met, or until the number of iterations has exceeded
+the computational budget.
+
+Repeat:
+
+$$
+\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
+$$ $$
+\qquad \textrm{ simultaneously update all }\qquad \theta_j
+$$
+
+$\eta\in (0,1]$ denotes the learning parameter.
+
+We aim to minimice the cost function $$
+\underset{\theta}{\textrm{min }}J(\theta)
+$$
+
+In order to use gradient descent, we need to compute $J(\theta)$ and the
+partiall derivative terms $$
+\frac{\partial}{\partial\theta_j}J(\theta)
+$$
+
+### Initialization
+
+The input data have to be normalized to have approximately the same
+range. The biases can be initialized to 0. They also cannot be
+initialized with the same values, otherwise, all the neurons of a hidden
+layer would have the same behavior. Perhaps the only property known with
+complete certainty is that the initial parameters need to break symmetry
+between different units. We generally initialize the weights at random:
+the values $\theta_{ij}^{(l)}$ are i.i.d. Uniform on $[-c,c]$ with
+possibly $c= 1/\sqrt{N_l}$ where $N_l$ is the size of the hidden layer
+$l$. We also sometimes initialize the weights with a normal distribution
+$N(0,0.01)$.
+
+## Stochastic Gradient
+
+Algorithm for optimization the cost function. When we have a large
+number of parameters and a large number of training points, computing
+the gradient vector (\ref{g1}) at every iteration of the steepest
+descent method (\ref{g3}) can be prohibitively expensive because we have
+to sum across all training points (for instance in Big Data). A much
+cheaper alternative is to replace the mean of the individual gradients
+over all training points by the gradient at a single, randomly chosen,
+training point. This leads to the simplest form of what is called the
+stochastic gradient method. A single step may be summarized as
+
+```{=tex}
+\begin{itemize}
+\item Choose an integer $i$ uniformly at random from $\{1,...,n\}$
+\item update 
+\begin{equation}\label{g4}
+\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(i)})
+\end{equation}
+\end{itemize}
+```
+Notice we have included $x^{(i)}$ in the notation of $J(\theta;x^{(i)})$
+to remark the dependence. In words, at each step, the stochastic
+gradient method uses one randomly chosen training point to represent the
+full training set. As the iteration proceeds, the method sees more
+training points. So there is some hope that this dramatic reduction in
+cost-per-iteration will be worthwhile overall. We note that, even for
+very small $\eta$, the update (\ref{g4}) is not guaranteed to reduce the
+overall cost function we have traded the mean for a single sample.
+Hence, although the phrase stochastic gradient descent is widely used,
+we prefer to use **stochastic gradient**.
+
+The version of the stochastic gradient method that we introduced in
+(\ref{g4}) is the simplest from a large range of possibilities. In
+particular, the index $i$ in (\ref{g4}) was chosen by sampling with
+replacement after using a training point, it is returned to the training
+set and is just as likely as any other point to be chosen at the next
+step. An alternative is to sample without replacement; that is, to cycle
+through each of the $n$ training points in a random order. Performing
+$n$ steps in this manner, refered to as completing an epoch, may be
+summarized as follows:
+
+```{=tex}
+\begin{itemize}
+\item Shuffle the integers $\{1,...,n\}$ into a new order $\{k_1,...,k_n\}$
+\item for $i$ in  $1:n$ update $\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(k_i)})$
+\end{itemize}
+```
+If we regard the stochastic gradient method as approximating the mean
+over all training points by a single sample, then it is natural to
+consider a compromise where we use a small sample average. For some
+$m<<n$ we could take steps of the following form.
+
+```{=tex}
+\begin{itemize}
+\item Choose $m$ integers $\{k_1,...,k_m\}$ uniformly at random from $\{1,...,n\}$ 
+\item update $\theta_j=\theta_j-\eta\frac{1}{m}\sum_{i=1}^m\frac{\partial}{\partial\theta_j}J(\theta;x^{(k_i)})$
+\end{itemize}
+```
+In this iteration, the set $\{x^{(k_i)}\}_{i=1}^m$ is known as a
+mini-batch. Because the stochastic gradient method is usually
+implemented within the context of a very large scale computation,
+algorithmic choices such as mini-batch size and the form of
+randomization are often driven by the requirements of high performance
+computing architectures. Also, it is, of course, possible to vary these
+choices, along with others, such as the learning rate, dynamically as
+the training progresses in an attempt to accelerate convergence.
 
 # References and resources

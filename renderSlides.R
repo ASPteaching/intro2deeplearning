@@ -27,8 +27,8 @@
 #   
 #   to_pdf(from = "file_to_render.html")
 
-if (!require(renderthis))
-  remotes::install_github("jhelvy/renderthis", dependencies = TRUE)
+if (!require(quarto))
+  install.packages("quarto", dependencies = TRUE)
 
 library(quarto)
 

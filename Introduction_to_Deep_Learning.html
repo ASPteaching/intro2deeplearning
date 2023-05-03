@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -98,6 +69,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="Introduction_to_Deep_Learning_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Introduction_to_Deep_Learning_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -139,11 +111,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#a-logistic-regression-ann" id="toc-a-logistic-regression-ann" class="nav-link" data-scroll-target="#a-logistic-regression-ann">A logistic regression ANN</a></li>
   </ul></li>
   <li><a href="#parametrizing-an-ann" id="toc-parametrizing-an-ann" class="nav-link" data-scroll-target="#parametrizing-an-ann">Parametrizing an ANN</a></li>
-  <li><a href="#compacting-notation" id="toc-compacting-notation" class="nav-link" data-scroll-target="#compacting-notation">Compacting notation</a></li>
+  <li><a href="#compacting-notation" id="toc-compacting-notation" class="nav-link" data-scroll-target="#compacting-notation">Compacting notation</a>
+  <ul class="collapse">
+  <li><a href="#forward-propagation" id="toc-forward-propagation" class="nav-link" data-scroll-target="#forward-propagation">Forward propagation</a></li>
+  </ul></li>
+  <li><a href="#multiple-architechtures-for-ann" id="toc-multiple-architechtures-for-ann" class="nav-link" data-scroll-target="#multiple-architechtures-for-ann">Multiple architechtures for ANN</a>
+  <ul class="collapse">
+  <li><a href="#feed-forward-neural-networks" id="toc-feed-forward-neural-networks" class="nav-link" data-scroll-target="#feed-forward-neural-networks">Feed Forward Neural networks</a></li>
+  <li><a href="#the-number-of-output-units" id="toc-the-number-of-output-units" class="nav-link" data-scroll-target="#the-number-of-output-units">The number of output units</a></li>
+  </ul></li>
+  <li><a href="#a-loss-function-for-optimization" id="toc-a-loss-function-for-optimization" class="nav-link" data-scroll-target="#a-loss-function-for-optimization">A loss function for optimization</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient descent</a>
+  <ul class="collapse">
+  <li><a href="#initialization" id="toc-initialization" class="nav-link" data-scroll-target="#initialization">Initialization</a></li>
+  </ul></li>
+  <li><a href="#stochastic-gradient" id="toc-stochastic-gradient" class="nav-link" data-scroll-target="#stochastic-gradient">Stochastic Gradient</a></li>
   </ul></li>
   <li><a href="#references-and-resources" id="toc-references-and-resources" class="nav-link" data-scroll-target="#references-and-resources">References and resources</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Introduction_to_Deep_Learning.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -209,13 +195,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/AIHistory1.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">A Brief History of AI from 1940s till Today</figcaption><p></p>
+<figcaption class="figure-caption">A Brief History of AI from 1940s till Today</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/"><img src="images/AIHistory2.jpg" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: “A Quick History of AI, ML and DL”</figcaption><p></p>
+<figcaption class="figure-caption">The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: “A Quick History of AI, ML and DL”</figcaption>
 </figure>
 </div>
 <p>The origins of AI, and as such of DL can be traced almost one century backwards. While it is an interesting, or even fascinating, history wee don’t go into it (see a summary in <a href="https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/" id="AIHistory">A Quick History of AI, ML and DL</a></p>
@@ -279,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/PerformanceVsAmountOfData.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance</figcaption><p></p>
+<figcaption class="figure-caption">An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance</figcaption>
 </figure>
 </div>
 <p><strong>Deep learning is having a strong impact</strong></p>
@@ -791,6 +777,119 @@ f(z_2^{(l+1)})\\
 f(z_{s_{l+1}}^{(l)})
 \end{bmatrix}
 \]</span></p>
+<section id="forward-propagation" class="level3">
+<h3 class="anchored" data-anchor-id="forward-propagation">Forward propagation</h3>
+<ul>
+<li><p>By organizing our parameters in matrices and using matrix-vector operations, we can take advantage of fast linear algebra routines to quickly perform calculations in our network.</p></li>
+<li><p>This process is called <em>forward propagation</em>.</p></li>
+</ul>
+</section>
+</section>
+<section id="multiple-architechtures-for-ann" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-architechtures-for-ann">Multiple architechtures for ANN</h2>
+<ul>
+<li><p>We have so far focused on a single hidden layer neural network of the example One can build neural networks with many distinct architectures (meaning patterns of connectivity between neurons), including ones with multiple hidden layers.</p></li>
+<li><p>See <a href="https://www.asimovinstitute.org/neural-network-zoo/">here the Neural Network Zoo</a>.</p></li>
+</ul>
+<section id="feed-forward-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="feed-forward-neural-networks">Feed Forward Neural networks</h3>
+<p>The most common choice is a <span class="math inline">\(n_l\)</span>-layered network where layer 1 is the input layer, layer <span class="math inline">\(n_l\)</span> is the output layer, and each layer <span class="math inline">\(l\)</span> is densely connected to layer <span class="math inline">\(l+1\)</span>.</p>
+<p>In this setting, to compute the output of the network, we can successively compute all the activations in layer <span class="math inline">\(L_2\)</span>, then layer <span class="math inline">\(L_3\)</span>, and so on, up to layer <span class="math inline">\(L_{nl}\)</span> , using Equations (5-6). This is one example of a <em>feedforward neural network (FFNN)</em>, since the connectivity graph does not have any directed loops or cycles.</p>
+</section>
+<section id="the-number-of-output-units" class="level3">
+<h3 class="anchored" data-anchor-id="the-number-of-output-units">The number of output units</h3>
+<p>Neural networks can also have multiple output units.</p>
+<p>For example, in (Fig. 4) we can see a network with two hidden layers layers <span class="math inline">\(L_2\)</span> and <span class="math inline">\(L_3\)</span> and four output units in layer <span class="math inline">\(L_4\)</span>, where bias of each layer were omited.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nn2.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">Neural network</figcaption>
+</figure>
+</div>
+<p>To train this network, we would need training examples <span class="math inline">\((x^{(i)},y^{(i)})\)</span> where <span class="math inline">\(y^{(i)}\in\mathbb{R}^4\)</span>. This sort of network is useful if there’re multiple outputs that you’re interested in predicting.</p>
+<p>For example, in a medical diagnosis application, the vector <span class="math inline">\(x\)</span> might give the input features of a patient, and the different outputs <span class="math inline">\(y_i\)</span>’s might indicate presence or absence of different diseases.</p>
+</section>
+</section>
+<section id="a-loss-function-for-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="a-loss-function-for-optimization">A loss function for optimization</h2>
+<ul>
+<li><p>In order to estimate the weights we will aim at minimizing an appropriate loss function.</p></li>
+<li><p>A first idea may be to use <em>squared error loss</em> <span class="math display">\[
+l(h_\theta(x),y)=(y-\frac{1}{1+e^{-\theta^\intercal x}})^2
+\]</span></p></li>
+<li><p>However it happens to be that <a href="https://towardsdatascience.com/why-not-mse-as-a-loss-function-for-logistic-regression-589816b5e03c"><em>this is is not a convex problem</em></a> which means that MSE is not appropriate.</p></li>
+<li><p>Alternatively, we use the <em>binary cross-entropy loss function</em> : <span class="math display">\[
+l(h_\theta(x),y)=\big{\{}\begin{array}{ll}
+-\log h_\theta(x) &amp; \textrm{if }y=1\\
+-\log(1-h_\theta(x))&amp; \textrm{if }y=0
+\end{array}
+\]</span></p></li>
+<li><p>It can be written compactly as:</p></li>
+</ul>
+<p><span class="math display">\[
+l(h_\theta(x),y)=-y\log h_\theta(x) - (1-y)\log(1-h_\theta(x))
+\]</span></p>
+<ul>
+<li><p>Using cross-entropy loss, the cost function is of the form: <span class="math display">\[\begin{eqnarray*}
+J(\theta)=-\frac{1}{n}\big[\sum_{i=1}^n&amp;&amp;(y^{(i)}\log h_\theta(x^{(i)})+\\ &amp;&amp;(1-y^{(i)})\log(1-h_\theta(x^{(i)}))\big]
+\end{eqnarray*}\]</span></p></li>
+<li><p>This is a convex optimization problem.</p></li>
+<li><p>Better to work with a <em>regularized version</em> of the cost function (we don’t regularize the bias units)</p></li>
+</ul>
+<p><span class="math display">\[\begin{eqnarray*}
+J(\Theta)&amp;=&amp;-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_\theta(x^{(i)}))_k\\
+&amp;+&amp;(1-y_k^{(i)})\log(1-(h_\theta(x^{(i)}))_k)\big]\\
+&amp;+&amp;\lambda\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}
+(\theta_{ji}^{(l)})^2
+\end{eqnarray*}\]</span></p>
+</section>
+<section id="gradient-descent" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-descent">Gradient descent</h2>
+<p>We saw in the previous section that training a network corresponds to choosing the parameters, that is, the weights and biases, that minimize the cost function (see Fig. 5). The weights and biases take the form of matrices and vectors, but at this stage it is convenient to imagine them stored as a single vector that we call <span class="math inline">\(\theta\)</span>. Generally, we will suppose <span class="math inline">\(\theta\in\mathbb{R}^p\)</span>, and write the cost function as <span class="math inline">\(J(\theta)\)</span> to emphasize its dependence on the parameters. So Cost <span class="math inline">\(J: \mathbb{R}^p\rightarrow \mathbb{R}\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/errorsurface.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">Error hypersurface</figcaption>
+</figure>
+</div>
+<p>We now introduce a classical method in optimization that is often referred to as steepest descent or gradient descent. The method proceeds iteratively, computing a sequence of vectors in <span class="math inline">\(\mathbb{R}^p\)</span> with the aim of converging to a vector that minimizes the cost function. Suppose that our current vector is <span class="math inline">\(\theta\)</span>. How should we choose a perturbation, <span class="math inline">\(\Delta\theta\)</span>, so that the next vector, <span class="math inline">\(\theta+\Delta\theta\)</span>, represents an improvement? If <span class="math inline">\(\Delta\theta\)</span> is small, then ignoring terms of order <span class="math inline">\(||\Delta\theta||^2\)</span>, a Taylor series expansion gives</p>
+<p><span class="math display">\[
+J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
+\]</span> Here <span class="math inline">\(\frac{\partial J(\theta)}{\partial\theta_i}\)</span> denotes the partial derivative of the cost function with respect to the <span class="math inline">\(i\)</span>-th weight. For conveniende, we will let <span class="math inline">\(\nabla J(\theta)\in\mathbb{R}^p\)</span> denote the vector of partial derivatives, known as the gradient, so that <span class="math display">\[\begin{equation}\label{g1}
+\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal
+\end{equation}\]</span> Then, <span class="math display">\[\begin{equation}\label{g2}
+J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
+\end{equation}\]</span></p>
+<p>Our aim is to reduce the value of the cost function. The relation (<span class="math inline">\(\ref{g2}\)</span>) motivates the idea of choosing <span class="math inline">\(\Delta\theta\)</span> to make <span class="math inline">\(\nabla J(\theta)^\intercal\Delta\theta\)</span> as negative as possible. We can address this problem via the Cauchy-Schwarz inequality, which states that for any <span class="math inline">\(f,g\in\mathbb{R}^p\)</span>, we have <span class="math inline">\(|f^\intercal g|\leq ||f||\cdot ||g||\)</span>. Moreover, the two sides are equal if and only if <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are linearly dependent (meaning they are parallel).</p>
+<p>So the most negative that <span class="math inline">\(f^\intercal g\)</span> can be is <span class="math inline">\(-||f||\cdot||g||\)</span>, which happens when <span class="math inline">\(f=-g\)</span>. Hence we should choose <span class="math inline">\(\Delta\theta\)</span> to lie in the direction of <span class="math inline">\(-\nabla J(\theta)\)</span>. Keeping in mind that (<span class="math inline">\(\ref{g2}\)</span>) is an approximation that is relevant only for small <span class="math inline">\(\Delta\theta\)</span>, we will limit ourselves to a small step in that direction. This leads to the update <span class="math display">\[\begin{equation}\label{g3}
+\theta \rightarrow \theta-\eta\nabla J(\theta)
+\end{equation}\]</span></p>
+<p>Here <span class="math inline">\(\eta\)</span> is small stepsize that, in this context, is known as the learning rate. This equation defines the steepest descent method. We choose an initial vector and iterate (<span class="math inline">\(\ref{g3}\)</span>) until some stopping criterion has been met, or until the number of iterations has exceeded the computational budget.</p>
+<p>Repeat:</p>
+<p><span class="math display">\[
+\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
+\]</span> <span class="math display">\[
+\qquad \textrm{ simultaneously update all }\qquad \theta_j
+\]</span></p>
+<p><span class="math inline">\(\eta\in (0,1]\)</span> denotes the learning parameter.</p>
+<p>We aim to minimice the cost function <span class="math display">\[
+\underset{\theta}{\textrm{min }}J(\theta)
+\]</span></p>
+<p>In order to use gradient descent, we need to compute <span class="math inline">\(J(\theta)\)</span> and the partiall derivative terms <span class="math display">\[
+\frac{\partial}{\partial\theta_j}J(\theta)
+\]</span></p>
+<section id="initialization" class="level3">
+<h3 class="anchored" data-anchor-id="initialization">Initialization</h3>
+<p>The input data have to be normalized to have approximately the same range. The biases can be initialized to 0. They also cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior. Perhaps the only property known with complete certainty is that the initial parameters need to break symmetry between different units. We generally initialize the weights at random: the values <span class="math inline">\(\theta_{ij}^{(l)}\)</span> are i.i.d. Uniform on <span class="math inline">\([-c,c]\)</span> with possibly <span class="math inline">\(c= 1/\sqrt{N_l}\)</span> where <span class="math inline">\(N_l\)</span> is the size of the hidden layer <span class="math inline">\(l\)</span>. We also sometimes initialize the weights with a normal distribution <span class="math inline">\(N(0,0.01)\)</span>.</p>
+</section>
+</section>
+<section id="stochastic-gradient" class="level2">
+<h2 class="anchored" data-anchor-id="stochastic-gradient">Stochastic Gradient</h2>
+<p>Algorithm for optimization the cost function. When we have a large number of parameters and a large number of training points, computing the gradient vector (<span class="math inline">\(\ref{g1}\)</span>) at every iteration of the steepest descent method (<span class="math inline">\(\ref{g3}\)</span>) can be prohibitively expensive because we have to sum across all training points (for instance in Big Data). A much cheaper alternative is to replace the mean of the individual gradients over all training points by the gradient at a single, randomly chosen, training point. This leads to the simplest form of what is called the stochastic gradient method. A single step may be summarized as</p>
+<p>Notice we have included <span class="math inline">\(x^{(i)}\)</span> in the notation of <span class="math inline">\(J(\theta;x^{(i)})\)</span> to remark the dependence. In words, at each step, the stochastic gradient method uses one randomly chosen training point to represent the full training set. As the iteration proceeds, the method sees more training points. So there is some hope that this dramatic reduction in cost-per-iteration will be worthwhile overall. We note that, even for very small <span class="math inline">\(\eta\)</span>, the update (<span class="math inline">\(\ref{g4}\)</span>) is not guaranteed to reduce the overall cost function we have traded the mean for a single sample. Hence, although the phrase stochastic gradient descent is widely used, we prefer to use <strong>stochastic gradient</strong>.</p>
+<p>The version of the stochastic gradient method that we introduced in (<span class="math inline">\(\ref{g4}\)</span>) is the simplest from a large range of possibilities. In particular, the index <span class="math inline">\(i\)</span> in (<span class="math inline">\(\ref{g4}\)</span>) was chosen by sampling with replacement after using a training point, it is returned to the training set and is just as likely as any other point to be chosen at the next step. An alternative is to sample without replacement; that is, to cycle through each of the <span class="math inline">\(n\)</span> training points in a random order. Performing <span class="math inline">\(n\)</span> steps in this manner, refered to as completing an epoch, may be summarized as follows:</p>
+<p>If we regard the stochastic gradient method as approximating the mean over all training points by a single sample, then it is natural to consider a compromise where we use a small sample average. For some <span class="math inline">\(m&lt;&lt;n\)</span> we could take steps of the following form.</p>
+<p>In this iteration, the set <span class="math inline">\(\{x^{(k_i)}\}_{i=1}^m\)</span> is known as a mini-batch. Because the stochastic gradient method is usually implemented within the context of a very large scale computation, algorithmic choices such as mini-batch size and the form of randomization are often driven by the requirements of high performance computing architectures. Also, it is, of course, possible to vary these choices, along with others, such as the learning rate, dynamically as the training progresses in an attempt to accelerate convergence.</p>
 </section>
 </section>
 <section id="references-and-resources" class="level1">
@@ -826,9 +925,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -893,6 +1006,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
