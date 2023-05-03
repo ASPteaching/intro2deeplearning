@@ -1015,15 +1015,14 @@ neural network,
 -It contains two main phases referred to as the forward phase and backward phase:
 
 ## Backpropagation: **Forward Phase**: 
+
   - The inputs for a data example are fed into the FNN. 
   - These inputs will be propagated through the network for all the neurons in all the layers using the current set of weights, to finally compute the final output.
 
 ## Backpropagation: **Backward Phase**: 
 - Once the final output and the cost function are computed, we need to compute the gradients for all the weights in all the layers in the FNN to update them in order to reach the minimum. 
 - To compute the gradients the chain rule is used, is a backwards a process from output to input,
-- therefore we will start from the output
-node, compute all the gradients of the previous layer, and so on until we reach the
-input layer.
+- Therefore we will start from the output node, compute all the gradients of the previous layer, and so on until we reach the input layer.
 
 
 # References and Resources
