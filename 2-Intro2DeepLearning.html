@@ -1376,7 +1376,8 @@ J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 <ul>
 <li><p>In this paper, the authors presents a new method capable to change the predictions towards a desired output, they called it the delta rule.</p></li>
 <li><p>This rule consist in compute the total error for the network and check how the error changes when certain elements from the network changes its value.</p></li>
-<li><p>These changes are computed by differentiating the cost function with regard to each element in the network</p></li>
+<li><p>These changes are computed by differentiating the cost function with regard to each element in the network<br>
+</p></li>
 <li><p>Which would give us a measure of how much each element is contributing to the total error of the network,</p></li>
 <li><p>This is, computing the gradient of the cost function we can know how the total error changes with regard to each element, and therefore apply the delta rule.</p></li>
 </ul>
@@ -1386,25 +1387,21 @@ J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 <ul>
 <li>The cost function is an intricate composed function which contains the weights of all layers,</li>
 <li>the problem now is that the computations of this gradients are not straightforward as in a simple function,</li>
-<li>a node from a layer is the result of the composition of all the nodes from previous layers.</li>
+<li>A node from a layer is the result of the composition of all the nodes from previous layers.</li>
 <li>To overcome it, Backpropagation uses the chain rule of differential calculus to compute the gradients of each element in the neural network,</li>
 </ul>
 <p>-It contains two main phases referred to as the forward phase and backward phase:</p>
 </section>
-<section id="how-backpropagation-works-i" class="slide level2">
-<h2>How backpropagation works (I)</h2>
-<ul>
-<li><strong>Forward Phase</strong>:
+<section id="backpropagation-forward-phase" class="slide level2">
+<h2>Backpropagation: <strong>Forward Phase</strong>:</h2>
 <ul>
 <li>The inputs for a data example are fed into the FNN.</li>
 <li>These inputs will be propagated through the network for all the neurons in all the layers using the current set of weights, to finally compute the final output.</li>
-</ul></li>
 </ul>
 </section>
-<section id="how-backpropagation-works-i-1" class="slide level2">
-<h2>How backpropagation works (I)</h2>
+<section id="backpropagation-backward-phase" class="slide level2">
+<h2>Backpropagation: <strong>Backward Phase</strong>:</h2>
 <ul>
-<li><strong>Backward Phase</strong>:</li>
 <li>Once the final output and the cost function are computed, we need to compute the gradients for all the weights in all the layers in the FNN to update them in order to reach the minimum.</li>
 <li>To compute the gradients the chain rule is used, is a backwards a process from output to input,</li>
 <li>therefore we will start from the output node, compute all the gradients of the previous layer, and so on until we reach the input layer.</li>

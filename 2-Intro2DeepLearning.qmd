@@ -992,13 +992,11 @@ the basis of the algorithm in use today.
 
 ## The delta rule 
 
-- In this paper, the authors
-presents a new method capable to change the predictions towards a
-desired output, they called it the delta rule.
+- In this paper, the authors presents a new method capable to change the predictions towards a desired output, they called it the delta rule.
 
 - This rule consist in compute the total error for the network and check how the error changes when certain elements from the network changes its value. 
 
-- These changes are computed by differentiating the cost function with regard to each element in the network 
+- These changes are computed by differentiating the cost function with regard to each element in the network  
 - Which would give us a measure of
 how much each element is contributing to the total error of the network,
 - This is, computing the gradient of the cost function we can know how the
@@ -1009,22 +1007,18 @@ total error changes with regard to each element, and therefore apply the delta r
 - The cost function is an intricate composed function which contains the
 weights of all layers, 
 - the problem now is that the computations of this gradients are not straightforward as in a simple function,
-- a node from a layer is the result of the composition of all the nodes from previous
+- A node from a layer is the result of the composition of all the nodes from previous
 layers. 
 - To overcome it, Backpropagation uses the chain rule of differential calculus to compute the gradients of each element in the
 neural network, 
 
 -It contains two main phases referred to as the forward phase and backward phase:
 
-## How backpropagation works (I)
-
-- **Forward Phase**: 
+## Backpropagation: **Forward Phase**: 
   - The inputs for a data example are fed into the FNN. 
   - These inputs will be propagated through the network for all the neurons in all the layers using the current set of weights, to finally compute the final output.
 
-## How backpropagation works (I)
-
-- **Backward Phase**: 
+## Backpropagation: **Backward Phase**: 
 - Once the final output and the cost function are computed, we need to compute the gradients for all the weights in all the layers in the FNN to update them in order to reach the minimum. 
 - To compute the gradients the chain rule is used, is a backwards a process from output to input,
 - therefore we will start from the output
