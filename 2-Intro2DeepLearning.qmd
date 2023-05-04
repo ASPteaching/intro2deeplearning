@@ -300,7 +300,7 @@ $$
 
 - Output real values $\in (0,1)$.
 
-- Natural interpretations as *probabilit* of an event
+- Natural interpretations as *probability* of an event
 
 - *vanishing gradient* problem
 
@@ -406,15 +406,25 @@ knitr::include_graphics("images/MultiLayer1.png")
 ```
 
 
-## The architechture of ANN
+## The architecture of ANN
 
-- Multilayers perceptrons have a basic architecture since each unit (or neuron) of a layer is linked to all the units of the next layer but has no link with the neurons of the same layer.
+- Multilayers perceptrons have a basic architecture:
 
-- The parameters of the architecture are:
+  - each unit (or neuron) of a layer is linked to all the units of the next layer 
+  - but has no link with the neurons of the same layer.
+  
+- This basic architecture can changes in many possible ways
+  - There may be links between neurons in same layer,
+  - Missing links between two layers ...
 
-  -   the number of hidden layers and
-  -   the number of neurons in each layer.
-  -   The activation functions
+## The architecture of an ANN
+
+- The architecture of a multilayer perceptron is defined by:
+
+  -   The number of hidden layers and
+  -   The number of neurons in each layer
+
+- Activation functions are important in the definition of the ANN, but not relevant for the architecgtur.
 
 ## Activation functions for ANN  (1)
 
