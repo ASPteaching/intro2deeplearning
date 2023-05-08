@@ -1,0 +1,76 @@
+---
+title:  "Deep Neural Networks with Keras in R"
+author: "A. Sanchez, F. Reverter and E. Vegas"
+format:
+  revealjs: 
+    incremental: false  
+    transition: slide
+    background-transition: fade
+    transition-speed: slow
+    scrollable: true
+    menu:
+      side: left
+      width: half
+      numbers: true
+    slide-number: c/t
+    show-slide-number: all
+    progress: true
+    css: "css4CU.css"
+    theme: sky
+knit:
+  quarto:
+    chunk_options:
+      echo: true
+      cache: false
+      prompt: false
+      tidy: true
+      comment: NA
+      message: false
+      warning: false
+    knit_options:
+      width: 75
+# bibliography: "StatisticalLearning.bib"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Deep Learning with R
+
+- We assume familiarity with:
+
+  - Statistical learning basics
+    - Classification/Regression problems, 
+    - Model building, Model evaluation
+  - Deep Neural Networks (even more basic)
+    - Artificial neural networks, layers, activation function, gradient methods.
+
+- And we focus on **how to build and use deep neural networks using R**
+
+## Outline
+
+- Which software (and Hw) for Deep Learning
+  - Python vs R
+  - Tensorflow, Keras, Pytorch and many more
+- Deep learning, vectorization and Tensors
+  - Vectorization for efficient computation
+  - Tensors for data representation and manipulation
+- The Machine learning (Dl?) Workflow
+  - The general ML worjflow
+  - A Keras pipeline
+  
+## References and Resources
+
+### Workshops
+
+- [Deep learning with R *Summer course*](https://bios691-deep-learning-r.netlify.app/)
+- [Deep learning with keras and Tensorflow in R (Rstudio conf. 2020)](https://github.com/rstudio-conf-2020/dl-keras-tf)
+
+### Books
+
+- [Deep learning with R, 2nd edition. F. Chollet](https://livebook.manning.com/book/deep-learning-with-r-second-edition)
+
+## Documents
+
+- 
+
+
