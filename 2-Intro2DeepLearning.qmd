@@ -29,7 +29,7 @@ knit:
       warning: false
     knit_options:
       width: 75
-bibliography: "StatisticalLearning.bib"
+bibliography: "DeepLearning.bib"
 editor_options: 
   chunk_output_type: console
 ---
@@ -46,9 +46,11 @@ editor_options:
 
 ## Historical Background (2)
 
--   We don't discuss ethical, technological or sociological aspects, but is "*most of this is about prediction*".
+-   AI use statistical learning methods, such as machine learning algorithms, to make predictions based on large amounts of data.
 
--   Most AI engines rely on powerful prediction systems that use statistical learning methods.
+-   Prediction is a fundamental capability of AI and is used in a wide range of applications.
+
+-   However, it is important to keep in mind that AI has far-reaching implications beyond its predictive capabilities, including ethical, social or technological.
 
 ## Deep learning
 
@@ -57,17 +59,13 @@ editor_options:
 -   Essentially, deep learning extends the basic principles of artificial neural networks by
 
     -   Adding complex architectures and algorithms and
-    -   At the same time becoming more automatical
+    -   At the same time becoming more automatic
 
 -   We won't delve into the history of ANN, but a quick look at it may help fully grasp its current capabilities.
 
 ## The early history of AI (1)
 
 ![A Brief History of AI from 1940s till Today](images/AIHistory1.jpg){width="100%"}
-
-<!-- ## The early history of AI (2) -->
-
-<!-- [![The origins of Deep learning and modern Artificial Intelligence can be traced back to the per4ceptron. Source: "A Quick History of AI, ML and DL"](images/AIHistory2.jpg)](https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/) -->
 
 -   The origins of AI, and as such of DL can be traced almost one century backwards;
 -   [A Quick History of AI, ML and DL](https://nerdyelectronics.com/a-quick-history-of-ai-ml-and-dl/){#AIHistory}
@@ -78,7 +76,7 @@ We can see several hints worth to account for:
 
 -   The **Perceptron** and the first **Artificial Neural Network** where the basic building block was introduced.
 
--   The **Multilayered perceptron** and **backpropagation** where complex architechtures were suggested to improve the capabilities.
+-   The **Multilayered perceptron** and back-propagation where complex architectures were suggested to improve the capabilities.
 
 -   **Deep Neural Networks**, with many hidden layers, and auto-tunability capabilities.
 
@@ -100,42 +98,34 @@ have also contributed to the widespread adoption of AI.
 
 ## AI, ML, DL ...
 
-
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/AI-ML-DL-1.jpg")
 ```
 
 ## AI, ML, DL ...
 
-- Artificial intelligence: Ability of a computer to perform tasks commonly associated with intelligent beings.
+-   Artificial intelligence: Ability of a computer to perform tasks commonly associated with intelligent beings.
 
-- Machine learning: study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data
+-   Machine learning: study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data
 
-- Deep learning: subfield of ML focusing on learning data representations as successive successive layers of increasingly meaningful representations.
+-   Deep learning: sub field of ML focusing on learning data representations as successive successive layers of increasingly meaningful representations.
 
 ## Machine vs Deep Learning
-:::: {.columns}
 
-::: {.column width='40%'}
-- DNN: feature extraction and classification without (or with much les) human intervention.
-- DNN improves with data availability, without seemingly reaching plateaus.
-
+::: columns
+::: {.column width="40%"}
+-   DNN: feature extraction and classification without (or with much les) human intervention.
+-   DNN improves with data availability, without seemingly reaching plateaus.
 :::
 
-::: {.column width='60%'}
+::: {.column width="60%"}
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/ML_vs_DL-2.png")
 ```
-
-<!-- [![](images/Difference-between-ML-and-DL.png){width="100%"}](https://ieeexplore.ieee.org/document/9363896) -->
-
+:::
 :::
 
-::::
-
-
-
-## Size is important!
+## Size does matter!
 
 ![An illustration of the performance comparison between deep learning (DL) and other machine learning (ML) algorithms, where DL modeling from large amounts of data can increase the performance](images/PerformanceVsAmountOfData.png){fig-align="center" width="100%"}
 
@@ -177,15 +167,15 @@ knitr::include_graphics("images/ML_vs_DL-2.png")
 
 -   The perceptron, was introduced in the 50's (one version of the perceptron at least), as a mathematical model that might emulate a neuron.
 
--   The idea is: *how can we produce a model that given some inputs, and an appropriate set of examples, learn to produce the desired output*?
+-   The idea was *trying* *to produce a model that, given some inputs, and an appropriate set of examples, learn to produce the desired output*.
 
-## Mc Cullough's neurone
+## Mc Cullough's neuron
 
 -   The first computational model of a neuron was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.
 
 [![](images/MacCulloghPitts-Neuron.png){fig-align="center" width="93%"}](https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1)
 
-## Mc Cullough's neurone
+## Mc Cullough's neuron
 
 -   It may be divided into 2 parts.
     -   The first part, $g$,takes an input (ahem dendrite ahem),
@@ -198,7 +188,7 @@ See [the source of this picture](https://towardsdatascience.com/mcculloch-pitts-
 
 This first attempt to emulate neurons succeeded but with limitations:
 
--   What about non-boolean (say, real) inputs?
+-   What about non-Boolean (say, real) inputs?
 
 -   What if all inputs are not equal?
 
@@ -210,7 +200,7 @@ This first attempt to emulate neurons succeeded but with limitations:
 
 -   To overcome these limitations Frank Rosenblatt, proposed the classical perception model, the *artificial neuron*, in 1958.
 
--   It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.
+-   It is more generalized computational model than the McCullough-Pitts neuron where weights and thresholds can be learnt over time.
 
 -   Rosenblatt's perceptron is very similar to an M-P neuron but
 
@@ -245,25 +235,22 @@ This first attempt to emulate neurons succeeded but with limitations:
 
 ## Activation in biological neurons
 
-- Biological neurons are specialized cells in the CNS that transmit electrical and chemical signals to communicate with each other.
-- The neuron's activation is based on the release of neurotransmitters, chemical substances that transmit signals between nerve cells. 
-  - When the signal reaching the neuron exceeds a certain threshold, the neuron releases neurotransmitters to continue the communication process.
+-   Biological neurons are specialized cells in the CNS that transmit electrical and chemical signals to communicate with each other.
+-   The neuron's activation is based on the release of neurotransmitters, chemical substances that transmit signals between nerve cells.
+    -   When the signal reaching the neuron exceeds a certain threshold, the neuron releases neurotransmitters to continue the communication process.
 
 ## Activation functions in AN
 
-- Analogously, *activation functions* in AN are functions to decide if the AN it is activated or not.
-- In AN, the activation function is a mathematical function applied to the neuron's input to produce an output. 
-  - In practice it extends to complicated functions that can learn complex patterns in the data.
-  - Activation functions can incorporate non-linearity, improving over linear classifiers.
-
+-   Analogously, *activation functions* in AN are functions to decide if the AN it is activated or not.
+-   In AN, the activation function is a mathematical function applied to the neuron's input to produce an output.
+    -   In practice it extends to complicated functions that can learn complex patterns in the data.
+    -   Activation functions can incorporate non-linearity, improving over linear classifiers.
 
 ## Activation function
 
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/ActivationFunction0.png")
 ```
-
-
 
 ## Artificial Neuron
 
@@ -277,106 +264,90 @@ With all these ideas in mind we can now define an Artificial Neuron as a *comput
 
 ## Activation functions
 
--  Goal of activation function is to provide the neuron with *the capability of producing the required outputs*.
+-   Goal of activation function is to provide the neuron with *the capability of producing the required outputs*.
 
-- Flexible enough to produce 
-  - Either linear or non-linear transformations.
-  - Output in the desired range ([0,1], {-1,1}, $\mathbb{R}^+$...)
-  
-- Usually chosen from a (small) set of possibilities.
+-   Flexible enough to produce
 
-  - Sigmoid function:
-  - Hyperbolic tangent, or `tanh`, function
-  - ReLU
+    -   Either linear or non-linear transformations.
+    -   Output in the desired range (\[0,1\], {-1,1}, $\mathbb{R}^+$...)
+
+-   Usually chosen from a (small) set of possibilities.
+
+    -   Sigmoid function:
+    -   Hyperbolic tangent, or `tanh`, function
+    -   ReLU
 
 ## The sigmoid function {.smaller}
 
-:::: {.columns}
-
-::: {.column width='40%'}
+::: columns
+::: {.column width="40%"}
 $$
 f(z)=\frac{1}{1+e^{-z}}
-$$ 
+$$
 
-- Output real values $\in (0,1)$.
+-   Output real values $\in (0,1)$.
 
-- Natural interpretations as *probability* of an event
+-   Natural interpretations as *probability* of an event
 
-- *vanishing gradient* problem
+-   *vanishing gradient* problem
 
-- Its derivative is: $f'(z)=f(z)(1-f(z))$.
+-   Its derivative is: $f'(z)=f(z)(1-f(z))$.
 :::
 
-::: {.column width='60%'}
-
+::: {.column width="60%"}
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/SigmoidFunction.png")
 ```
 :::
-
-::::
-
+:::
 
 ## the hyperbolic tangent {.smaller}
 
-:::: {.columns}
-
-::: {.column width='40%'}
+::: columns
+::: {.column width="40%"}
 Also called `tanh`, function:
 
 $$
 f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 $$
 
-- outputs are zero-centered and bounded in −1,1
+-   outputs are zero-centered and bounded in −1,1
 
-- scaled and shifted Sigmoid
+-   scaled and shifted Sigmoid
 
-- stronger gradient but still has vanishing gradient problem
+-   stronger gradient but still has vanishing gradient problem
 
-- Its derivative is  $f'(z)=1-(f(z))^2$.
-
+-   Its derivative is $f'(z)=1-(f(z))^2$.
 :::
 
-::: {.column width='60%'}
-
+::: {.column width="60%"}
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/TanhFunction.png")
 ```
-
 :::
-
-::::
-
+:::
 
 ## The ReLU {.smaller}
 
-:::: {.columns}
+::: columns
+::: {.column width="40%"}
+-   *rectified linear unit*: $f(z)=\max\{0,z\}$.
 
-::: {.column width='40%'}
+-   Close to a linear: piece-wise *linear* function with two linear pieces.
 
-- *rectified linear unit*: $f(z)=\max\{0,z\}$.
+-   Outputs are in %(0,\infty)\$ , thus not bounded
 
-- Close to a linear: *piecewise linear* function with two linear pieces.
+-   Half rectified: activation threshold at 0
 
-- Outputs are in %(0,\infty)$ , thus not bounded
-
-- Half rectified: activation threshold at 0
-
-- No vanishing gradient problem
-
+-   No vanishing gradient problem
 :::
 
-::: {.column width='60%'}
-
+::: {.column width="60%"}
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/ReLUFunction.png")
 ```
-
 :::
-
-::::
-
+:::
 
 ## More activation functions
 
@@ -390,14 +361,14 @@ knitr::include_graphics("images/ArtificialNeuron.png")
 
 $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
 
-## Multilayer perceptrons{.smaller}
+## Multilayer perceptrons {.smaller}
 
-- A Multilayer Perceptron or Artificial Neural Network (ANN) is a computational model that mimics the structure and function of the human brain. 
-- It is composed of interconnected nodes, called neurons, that are organized into layers. 
-- Neurons in each layer are connected to neurons in the next layer, forming a directed graph-like structure. 
-- The first layer (input layer) receives input data. 
-- Last layer produces the final prediction
-- Intermediate (hidden) layers perform intermediate calculatuions.
+-   A Multilayer Perceptron or Artificial Neural Network (ANN) is a computational model that mimics the structure and function of the human brain.
+-   It is composed of interconnected nodes, called neurons, that are organized into layers.
+-   Neurons in each layer are connected to neurons in the next layer, forming a directed graph-like structure.
+-   The first layer (input layer) receives input data.
+-   Last layer produces the final prediction
+-   Intermediate (hidden) layers perform intermediate calculations.
 
 ## An Artificial Neural network
 
@@ -405,42 +376,41 @@ $\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}$
 knitr::include_graphics("images/MultiLayer1.png")
 ```
 
-
 ## The architecture of ANN
 
-- Multilayers perceptrons have a basic architecture:
+-   Multilayers perceptrons have a basic architecture:
 
-  - each unit (or neuron) of a layer is linked to all the units of the next layer 
-  - but has no link with the neurons of the same layer.
-  
-- This basic architecture can changes in many possible ways
-  - There may be links between neurons in same layer,
-  - Missing links between two layers ...
+    -   each unit (or neuron) of a layer is linked to all the units of the next layer
+    -   but has no link with the neurons of the same layer.
+
+-   This basic architecture can changes in many possible ways
+
+    -   There may be links between neurons in same layer,
+    -   Missing links between two layers ...
 
 ## The architecture of an ANN
 
-- The architecture of a multilayer perceptron is defined by:
+-   The architecture of a multilayer perceptron is defined by:
 
-  -   The number of hidden layers and
-  -   The number of neurons in each layer
+    -   The number of hidden layers and
+    -   The number of neurons in each layer
 
-- Activation functions are important in the definition of the ANN, but not relevant for the architecgtur.
+-   Activation functions are important in the definition of the ANN, but not relevant for the architecture.
 
-## Activation functions for ANN  (1)
+## Activation functions for ANN (1)
 
-- For the output layer, the activation function is generally different from the one used on the hidden layers. 
-  - For **regression**, we apply no activation function on the output layer.
-  - For **binary** classification, where output is a prediction of $\mathbb{P}(Y=1 /X) \in [0,1]$
-    - The *sigmoid* activation function is used.
-  - For **multi-class classification**, where ther is one neuron per class giving a prediction of $\mathbb{P}(Y=i / X)$.
-    - The *softmax* activation function is common
+-   For the output layer, the activation function is generally different from the one used on the hidden layers.
+    -   For **regression**, we apply no activation function on the output layer.
+    -   For **binary** classification, where output is a prediction of $\mathbb{P}(Y=1 /X) \in [0,1]$
+        -   The *sigmoid* activation function is used.
+    -   For **multi-class classification**, where there is one neuron per class giving a prediction of $\mathbb{P}(Y=i / X)$.
+        -   The soft-max activation function is common
 
-## The softmax activation function
+## The soft-max activation function
 
 $$
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
 $$
-
 
 # An example
 
@@ -453,8 +423,7 @@ if (!require(neuralnet))
   install.packages("neuralnet", dep=TRUE)
 ```
 
-
-## Data for the example 
+## Data for the example
 
 And use the `dividendinfo.csv` dataset from <https://github.com/MGCodesandStats/datasets>
 
@@ -463,7 +432,7 @@ mydata <- read.csv("https://raw.githubusercontent.com/MGCodesandStats/datasets/m
 str(mydata)
 ```
 
-## Data preprocessing
+## Data pre-processing
 
 ```{r echo=TRUE}
 normalize <- function(x) {
@@ -471,7 +440,6 @@ normalize <- function(x) {
 }
 normData <- as.data.frame(lapply(mydata, normalize))
 ```
-
 
 ## Test and training sets
 
@@ -533,58 +501,53 @@ table(actual,prediction)
 
 # Some mathematics behind ANN
 
-## Mathematical formulation 
+## Mathematical formulation
 
-- An ANN is a predictive model whose functioning and properties can be  mathematically characterized. 
+-   An ANN is a predictive model whose functioning and properties can be mathematically characterized.
 
-- In practice this means describing
-  - The ANN as a (non linear) function.
-  - The (optimization) process for estimating the weights.
+-   In practice this means describing
+
+    -   The ANN as a (non linear) function.
+    -   The (optimization) process for estimating the weights.
 
 ## Estimating the weights
 
-- In order to use the ANN for prediction, weights need to be estimated.
-- This is done by minimizing an appropriate loss function which requires 
-  - An appropriate procedure: *gradient based optimization*
-  - A method for computing the required derivatives: *back-propagation*.
+-   In order to use the ANN for prediction, weights need to be estimated.
+-   This is done by minimizing an appropriate loss function which requires
+    -   An appropriate procedure: *gradient based optimization*
+    -   A method for computing the required derivatives: *back-propagation*.
 
 ## A guiding example
 
-:::: {.columns}
-
-::: {.column width='40%'}
-
-- Input layer with 3 input units (plus bias unit), 
-- 1 hidden layer with 3 hidden units, 
-- Output layer with 1 output unit.
-
+::: columns
+::: {.column width="40%"}
+-   Input layer with 3 input units (plus bias unit),
+-   1 hidden layer with 3 hidden units,
+-   Output layer with 1 output unit.
 :::
 
-::: {.column width='60%'}
+::: {.column width="60%"}
 <br>
 
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/nn.jpg")
 ```
-
 :::
-
-::::
-
+:::
 
 ## A logistic regression ANN
 
 This ANN can be seen as a logistic regression model:
 
-- From input layer to layer 2:  non-linear   transformation --> new set of complex features.
+-   From input layer to layer 2: non-linear transformation --\> new set of complex features.
 
-- From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of *complex features*.
+-   From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of *complex features*.
 
 $$
 \mbox{The output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
 $$
 
-## Logistic regression (1) 
+## Logistic regression (1)
 
 Recall that, the logistic regression model is:
 
@@ -596,75 +559,64 @@ Isolating $p(Y=1|x)$ and taking logs in both sides, we have:
 
 $$
 \frac{p(Y=1|x)}{1-p(Y=1|x)}=e^{\theta^\intercal x}
-$$ 
+$$
 
 ## Logistic regression (2)
-
 
 $$
 p(Y=1|x)=\frac{e^{\theta^\intercal x}}{1+e^{\theta^\intercal x}}=\frac{1}{1+e^{-\theta^\intercal x}}
 $$
 
-- That is: *when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features*
+-   That is: *when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features*
 
-- And, with $h_{\theta}(x)$, the output of the NN, we are estimating $p(Y=1|x)$.
+-   And, with $h_{\theta}(x)$, the output of the NN, we are estimating $p(Y=1|x)$.
 
 ## An ANN has weights = *parameters*
 
-
-- Let $n_l$ denote the number of layers in our network, thus $n_l=3$ in our example. 
-- Label layer $l$ as $L_l$, so layer $L_1$ is
-the input layer, and layer $L_{n_l}=L_3$ the output layer. 
-- Our neural network has parameters:
-$\Theta=(\Theta^{(1)},\Theta^{(2)})$, where we
-will write $\theta^{(l)}_{ij}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$. 
+-   Let $n_l$ denote the number of layers in our network, thus $n_l=3$ in our example.
+-   Label layer $l$ as $L_l$, so layer $L_1$ is the input layer, and layer $L_{n_l}=L_3$ the output layer.
+-   Our neural network has parameters: $\Theta=(\Theta^{(1)},\Theta^{(2)})$, where we will write $\theta^{(l)}_{ij}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$.
 
 ## Back to the example:
 
-- Thus, in our example, we have: 
+-   Thus, in our example, we have:
 
-  - $\Theta^{(1)}\in\mathbb{R}^{3\times 4}$, and
-  - $\Theta^{(2)}\in\mathbb{R}^{1\times 4}$.
+    -   $\Theta^{(1)}\in\mathbb{R}^{3\times 4}$, and
+    -   $\Theta^{(2)}\in\mathbb{R}^{1\times 4}$.
 
-Note that bias units don't have inputs or connections going into them, since they always output the value +1. 
+Note that bias units don't have inputs or connections going into them, since they always output the value +1.
 
 ## The ANN is defined by its weights
 
-- We also let $s_l$ denote the number of nodes in layer $l$ (not counting the bias unit).
+-   We also let $s_l$ denote the number of nodes in layer $l$ (not counting the bias unit).
 
-- Now, write $a^{(l)}_i$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
+-   Now, write $a^{(l)}_i$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
 
-  - For $l=1$, we also use $a^{(1)}_i=x_i$ to denote the $i$-th input.
+    -   For $l=1$, we also use $a^{(1)}_i=x_i$ to denote the $i$-th input.
 
-- Given a fixed setting of the parameters $\Theta$, our neural network defines a model $h_{\Theta}(x)$ that outputs a real number.
+-   Given a fixed setting of the parameters $\Theta$, our neural network defines a model $h_{\Theta}(x)$ that outputs a real number.
 
-## Combining everything to compute{.smaller}
+## Combining everything to compute {.smaller}
 
-- We can now see *how these weights are used to produce the output*:
-\begin{eqnarray}
-a_1^{(2)}&=&f(\theta_{10}^{(1)}+\theta_{11}^{(1)}x_1+\theta_{12}^{(1)}x_2+\theta_{13}^{(1)}x_3)\\
-a_2^{(2)}&=&f(\theta_{20}^{(1)}+\theta_{21}^{(1)}x_1+\theta_{22}^{(1)}x_2+\theta_{23}^{(1)}x_3)\\
-a_3^{(2)}&=&f(\theta_{30}^{(1)}+\theta_{31}^{(1)}x_1+\theta_{32}^{(1)}x_2+\theta_{33}^{(1)}x_3)\\
-h_{\Theta}(x)&=&a_1^{(3)}=f(\theta_{10}^{(2)}+\theta_{11}^{(2)}a_1^{(2)}+\theta_{12}^{(2)}a_2^{(2)}+\theta_{13}^{(2)}a_3^{(2)})
-\end{eqnarray} 
+-   We can now see *how these weights are used to produce the output*: \begin{eqnarray}
+    a_1^{(2)}&=&f(\theta_{10}^{(1)}+\theta_{11}^{(1)}x_1+\theta_{12}^{(1)}x_2+\theta_{13}^{(1)}x_3)\\
+    a_2^{(2)}&=&f(\theta_{20}^{(1)}+\theta_{21}^{(1)}x_1+\theta_{22}^{(1)}x_2+\theta_{23}^{(1)}x_3)\\
+    a_3^{(2)}&=&f(\theta_{30}^{(1)}+\theta_{31}^{(1)}x_1+\theta_{32}^{(1)}x_2+\theta_{33}^{(1)}x_3)\\
+    h_{\Theta}(x)&=&a_1^{(3)}=f(\theta_{10}^{(2)}+\theta_{11}^{(2)}a_1^{(2)}+\theta_{12}^{(2)}a_2^{(2)}+\theta_{13}^{(2)}a_3^{(2)})
+    \end{eqnarray}
 
-- Now, letting $z_i^{(l)}$ denote the total
-weighted sum of inputs to unit $i$ in layer $l$, including the bias term
-  $$z_i^{(2)}=\theta_{i0}^{(1)}+\theta_{i1}^{(1)}x_1+\theta_{i2}^{(1)}x_2+\theta_{i3}^{(1)}x_3,
-  $$ 
-  the output becomes: $a_i^{(l)}=f(z_i^{(l)})$.
+-   Now, letting $z_i^{(l)}$ denote the total weighted sum of inputs to unit $i$ in layer $l$, including the bias term $$z_i^{(2)}=\theta_{i0}^{(1)}+\theta_{i1}^{(1)}x_1+\theta_{i2}^{(1)}x_2+\theta_{i3}^{(1)}x_3,
+    $$ the output becomes: $a_i^{(l)}=f(z_i^{(l)})$.
 
-## Compacting notation{.smaller}
+## Compacting notation {.smaller}
 
-- Note that this easily lends itself to a more compact notation.
+-   Note that this easily lends itself to a more compact notation.
 
-- Extending the activation function $f(\cdot)$ to apply to vectors in an elementwise fashion:
-$$
-f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
-$$ 
+-   Extending the activation function $f(\cdot)$ to apply to vectors in an element-wise fashion: $$
+    f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
+    $$
 
-then we can write the previous equations 
-more compactly as:
+then we can write the previous equations more compactly as:
 
 ```{=tex}
 \begin{eqnarray}
@@ -674,18 +626,18 @@ z^{(3)}&=&\Theta^{(2)}a^{(2)}\nonumber\\
 h_{\Theta}(x)&=&a^{(3)}=f(z^{(3)})\nonumber
 \end{eqnarray}
 ```
-
 ## Compacting notation (II)
 
-- More generally, recalling that we also use $a^{(1)}=x$ to also denote the values from the input layer, 
+-   More generally, recalling that we also use $a^{(1)}=x$ to also denote the values from the input layer,
 
-- then given layer $l$'s activations $a^{(l)}$, we can compute layer $l+1$'s activations $a^{(l+1)}$ as:
+-   then given layer $l$'s activations $a^{(l)}$, we can compute layer $l+1$'s activations $a^{(l+1)}$ as:
 
+```{=tex}
 \begin{eqnarray}
 z^{(l+1)}&=&\Theta^{(l)}a^{(l)}\\
 a^{(l+1)}&=&f(z^{(l+1)})
 \end{eqnarray}
-
+```
 ## Matricial representation (I)
 
 $$
@@ -709,8 +661,7 @@ a_2^{(l)}\\
 \vdots\\
 a_{s_l}^{(l)}
 \end{bmatrix}
-$$ 
-
+$$
 
 ## Matricial representation (II)
 
@@ -730,159 +681,164 @@ f(z_2^{(l+1)})\\
 f(z_{s_{l+1}}^{(l)})
 \end{bmatrix}
 $$
+
 ## Forward propagation
 
-- By organizing our parameters in matrices 
-- and using matrix-vector operations, 
-- we can take advantage of fast linear algebra routines to 
-- quickly perform calculations in our network.
+-   By organizing our parameters in matrices
 
-- This process is called *forward propagation*.
+-   and using matrix-vector operations,
 
+-   we can take advantage of fast linear algebra routines to
 
-## Multiple architechtures for ANN
+-   quickly perform calculations in our network.
 
-- We have so far focused on a single hidden layer neural network of the example
-- One can build neural networks with many distinct  architectures (meaning patterns of
-connectivity between neurons), including ones with multiple hidden layers. 
+-   This process is called *forward propagation*.
 
-- See [here the Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/).
+## Multiple architectures for ANN
+
+-   We have so far focused on a single hidden layer neural network of the example
+
+-   One can build neural networks with many distinct architectures (meaning patterns of connectivity between neurons), including ones with multiple hidden layers.
+
+-   See [here the Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/).
 
 ## Multiple layer dense Networks
 
-- Most common choice is a $n_l$-layered network:
-  - layer 1 is the input layer, 
-  - layer $n_l$ is the output layer, 
-  - and each layer $l$ is densely connected to layer $l+1$. 
-
-- In this setting, to compute the output of the network, we can compute all the activations in layer $L_2$, then layer $L_3$, and so on, up to layer $L_{nl}$, using equations seen previously. 
+-   Most common choice is a $n_l$-layered network:
+    -   layer 1 is the input layer,
+    -   layer $n_l$ is the output layer,
+    -   and each layer $l$ is densely connected to layer $l+1$.
+-   In this setting, to compute the output of the network, we can compute all the activations in layer $L_2$, then layer $L_3$, and so on, up to layer $L_{nl}$, using equations seen previously.
 
 ## Feed Forward neural networks (FFNN)
 
-- The type of NN described is called  *feedforward neural network (FFNN)*, since 
-  - All computations are done by Forward propagation
-  - The connectivity graph does not have any directed loops or cycles.
+-   The type of NN described is called feed-forward *neural network (FFNN)*, since
+    -   All computations are done by Forward propagation
+    -   The connectivity graph does not have any directed loops or cycles.
 
 ## A loss function for optimization
 
-- In order to estimate the weights we will  aim at minimizing an appropriate loss function.
+-   In order to estimate the weights we will aim at minimizing an appropriate loss function.
 
-- A first idea may be to use *squared error loss* 
-$$
-l(h_\theta(x),y)=(y-\frac{1}{1+e^{-\theta^\intercal x}})^2
-$$
+-   A first idea may be to use *squared error loss* $$
+    l(h_\theta(x),y)=(y-\frac{1}{1+e^{-\theta^\intercal x}})^2
+    $$
 
-- However it happens to be that [*this is is not a convex problem*](https://towardsdatascience.com/why-not-mse-as-a-loss-function-for-logistic-regression-589816b5e03c) which means that MSE is not appropriate.
+-   However it happens to be that [*this is is not a convex problem*](https://towardsdatascience.com/why-not-mse-as-a-loss-function-for-logistic-regression-589816b5e03c) which means that MSE is not appropriate.
 
 ## Cross-entropy loss function
 
-- Alternatively, we use the *binary cross-entropy loss function* :
-$$
-l(h_\theta(x),y)=\big{\{}\begin{array}{ll}
--\log h_\theta(x) & \textrm{if }y=1\\
--\log(1-h_\theta(x))& \textrm{if }y=0
-\end{array}
-$$
-- It can be written compactly as:
+-   Alternatively, we use the *binary cross-entropy loss function* : $$
+    l(h_\theta(x),y)=\big{\{}\begin{array}{ll}
+    -\log h_\theta(x) & \textrm{if }y=1\\
+    -\log(1-h_\theta(x))& \textrm{if }y=0
+    \end{array}
+    $$
+-   It can be written compactly as:
 
 $$
 l(h_\theta(x),y)=-y\log h_\theta(x) - (1-y)\log(1-h_\theta(x))
-$$ 
+$$
 
 ## A convex cost function
 
-- Using cross-entropy loss, the cost function is of the form: 
-\begin{eqnarray*}
-J(\theta)=-\frac{1}{n}\big[\sum_{i=1}^n&&(y^{(i)}\log h_\theta(x^{(i)})+\\ &&(1-y^{(i)})\log(1-h_\theta(x^{(i)}))\big]
-\end{eqnarray*} 
-- This is a convex optimization problem.
+-   Using cross-entropy loss, the cost function is of the form: \begin{eqnarray*}
+    J(\theta)=-\frac{1}{n}\big[\sum_{i=1}^n&&(y^{(i)}\log h_\theta(x^{(i)})+\\ &&(1-y^{(i)})\log(1-h_\theta(x^{(i)}))\big]
+    \end{eqnarray*}
+-   This is a convex optimization problem.
 
 ## A regularized cost function
 
-- Better to work with a *regularized version* of the cost function (we don't regularize the bias units)
+-   Better to work with a *regularized version* of the cost function (we don't regularize the bias units)
 
+```{=tex}
 \begin{eqnarray*}
 J(\Theta)&=&-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_\theta(x^{(i)}))_k\\
 &+&(1-y_k^{(i)})\log(1-(h_\theta(x^{(i)}))_k)\big]\\
 &+&\lambda\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}
 (\theta_{ji}^{(l)})^2
 \end{eqnarray*}
-
+```
 ## Optimization with gradient descent
 
-- In ANN we do not aim at finding estimating equations (like *likekihood equations*) whose solution will solve the optimization problem
-- Instead we use iterative procedures, that 
-  - Are much faster
-  - Yield results as near the optimum as required.
-- The (first) option of choice is the gradient descent method.
+-   In ANN we do not aim at finding estimating equations (like *likekihood equations*) whose solution will solve the optimization problem
+-   Instead we use iterative procedures, that
+    -   Are much faster
+    -   Yield results as near the optimum as required.
+-   The (first) option of choice is the gradient descent method.
 
 ## How gradient descent works (I)
 
 <!-- - The method proceeds iteratively, computing a sequence of vectors in $\mathbb{R}^p$  -->
+
 <!-- - with the aim of converging to a vector that minimizes the cost function.  -->
-- Suppose that our current vector is $\theta$.
-- How should we choose a perturbation, $\Delta\theta$, so that the next vector,
-$\theta+\Delta\theta$, represents an improvement? 
-- If $\Delta\theta$ is small, then ignoring terms of order $||\Delta\theta||^2$, a Taylor
-series expansion gives
-$$
-J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
-$$ 
+
+-   Suppose that our current vector is $\theta$.
+-   How should we choose a perturbation, $\Delta\theta$, so that the next vector, $\theta+\Delta\theta$, represents an improvement?
+-   If $\Delta\theta$ is small, then ignoring terms of order $||\Delta\theta||^2$, a Taylor series expansion gives $$
+    J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
+    $$
+
 <!-- Here -->
+
 <!-- $\frac{\partial J(\theta)}{\partial\theta_i}$  -->
+
 <!-- denotes the -->
+
 <!-- partial derivative of the cost function with respect to the $i$-th -->
+
 <!-- weight.  -->
 
 ## How gradient descent works (II)
 
-- Let $\nabla J(\theta)\in\mathbb{R}^p$
-be the vector of partial derivatives, aka the gradient:
-\begin{equation}\label{g1}
-\nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal, \mbox{then:}
-\end{equation}  \begin{equation}\label{g2}
-J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
-\end{equation}
+-   Let $\nabla J(\theta)\in\mathbb{R}^p$ be the vector of partial derivatives, aka the gradient: \begin{equation}\label{g1}
+    \nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal, \mbox{then:}
+    \end{equation} \begin{equation}\label{g2}
+    J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
+    \end{equation}
 
-- Our aim is to reduce the value of the cost function. 
-- It seems reasonable to choose $\Delta\theta$ (a *direction*) to make
-$\nabla J(\theta)^\intercal\Delta\theta$ as negative as possible. 
+-   Our aim is to reduce the value of the cost function.
+
+-   It seems reasonable to choose $\Delta\theta$ (a *direction*) to make $\nabla J(\theta)^\intercal\Delta\theta$ as negative as possible.
 
 ## How gradient descent works (III)
 
-- This can be addressed via the Cauchy-Schwarz inequality:
-  - For any $f,g\in\mathbb{R}^p$, we have $|f^\intercal g|\leq ||f||\cdot ||g||$. 
-  - Moreover, the two sides are equal if and only if $f$ and $g$ are linearly dependent (meaning they are parallel).
+-   This can be addressed via the Cauchy-Schwarz inequality:
+    -   For any $f,g\in\mathbb{R}^p$, we have $|f^\intercal g|\leq ||f||\cdot ||g||$.
+    -   Moreover, the two sides are equal if and only if $f$ and $g$ are linearly dependent (meaning they are parallel).
 
 ## How gradient descent works (IV)
 
-- So *the most negative that $f^\intercal g$ can be is $-||f||\cdot||g||$,
-- This happens when $f=-g$. 
-- Hence *we should choose $\Delta\theta$ to lie in the direction of $-\nabla J(\theta)$. 
+-   So \*the most negative that $f^\intercal g$ can be is $-||f||\cdot||g||$,
 
-- Keeping in mind that this approximation is relevant only for small $\Delta\theta$, we will limit ourselves to a small step in that direction. 
+-   This happens when $f=-g$.
+
+-   Hence \*we should choose $\Delta\theta$ to lie in the direction of $-\nabla J(\theta)$.
+
+-   Keeping in mind that this approximation is relevant only for small $\Delta\theta$, we will limit ourselves to a small step in that direction.
 
 ## How gradient descent works (V)
 
-- This leads to the update 
-\begin{equation}\label{g3}
-\theta \rightarrow \theta-\eta\nabla J(\theta)
-\end{equation}
+-   This leads to the update \begin{equation}\label{g3}
+    \theta \rightarrow \theta-\eta\nabla J(\theta)
+    \end{equation}
 
-- $\eta$ is small step size known as the *learning rate*. 
+-   $\eta$ is small step size known as the *learning rate*.
 
-- This equation defines the steepest descent method. 
-- We choose an initial vector and iterate  
-  - until some stopping criterion has been met, 
-  - or until the number of iterations has exceeded the computational budget.
+-   This equation defines the steepest descent method.
 
-## The gradient descent algorithm 
+-   We choose an initial vector and iterate
 
-- Repeat:
+    -   until some stopping criterion has been met,
+    -   or until the number of iterations has exceeded the computational budget.
+
+## The gradient descent algorithm
+
+-   Repeat:
 
 $$
 \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
-$$ 
+$$
 
 $$
 \qquad \textrm{and simultaneously update all }\qquad \theta_j
@@ -892,75 +848,67 @@ $\eta\in (0,1]$ denotes the learning parameter.
 
 ## Gradient descent computes derivatives
 
-- We aim to minimise the cost function 
+-   We aim to minimise the cost function
 
 $$
 \underset{\theta}{\textrm{min }}J(\theta)
 $$
 
-- In order to use gradient descent, we need to compute $J(\theta)$ and the partial derivatives:
-$$
-\frac{\partial}{\partial\theta_j}J(\theta)
-$$
+-   In order to use gradient descent, we need to compute $J(\theta)$ and the partial derivatives: $$
+    \frac{\partial}{\partial\theta_j}J(\theta)
+    $$
 
 ## Other requirements for gradient descent
 
-- The input data have to be normalized to have approximately the same
-range. 
-- Biases can be initialized to 0, but they *cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior*. 
-- Initial parameters need to break symmetry between different units so weights are usually initialized at random:
+-   The input data have to be normalized to have approximately the same range.
+-   Biases can be initialized to 0, but they *cannot be initialized with the same values, otherwise, all the neurons of a hidden layer would have the same behavior*.
+-   Initial parameters need to break symmetry between different units so weights are usually initialized at random:
 
-## Weights inizialization
+## Weights initialization
 
-- We assume values $\theta_{ij}^{(l)}$ to be 
-  - i.i.d. Uniform on $[-c,c]$ 
-  - with possibly $c= 1/\sqrt{N_l}$ where $N_l$ is the size of the hidden layer $l$. 
-  
-- We also sometimes initialize the weights with a normal distribution
-$N(0,0.01)$.
+-   We assume values $\theta_{ij}^{(l)}$ to be
+    -   i.i.d. Uniform on $[-c,c]$
+    -   with possibly $c= 1/\sqrt{N_l}$ where $N_l$ is the size of the hidden layer $l$.
+-   We also sometimes initialize the weights with a normal distribution $N(0,0.01)$.
 
 ## Gradient descent drawbacks
 
-- When we have a large number of parameters and a large number of training points, computing the gradient vector (\ref{g1}) at every iteration of the steepest descent method can be time consuming.
-- It is mainly due to that we have *to sum across all training points*. 
-- This becomes prohibitively expensive when we have Big Data. 
+-   When we have a large number of parameters and a large number of training points, computing the gradient vector (\ref{g1}) at every iteration of the steepest descent method can be time consuming.
+-   It is mainly due to that we have *to sum across all training points*.
+-   This becomes prohibitively expensive when we have Big Data.
 
 ## Stochastic Gradient {.smaller}
 
-- A much cheaper alternative is to replace the mean of the individual gradients over all training points 
-- by the gradient at a single, randomly chosen, training point. 
-- This leads to the simplest form of the *stochastic gradient method*. 
+-   A much cheaper alternative is to replace the mean of the individual gradients over all training points
 
-- Choose an integer $i$ uniformly at random from $\{1,...,n\}$ and update 
-\begin{equation}\label{g4}
-\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(i)})
-\end{equation}
+-   by the gradient at a single, randomly chosen, training point.
 
-- Notice we have included $x^{(i)}$ in the notation of $J(\theta;x^{(i)})$
-to remark the dependence. 
+-   This leads to the simplest form of the *stochastic gradient method*.
+
+-   Choose an integer $i$ uniformly at random from $\{1,...,n\}$ and update \begin{equation}\label{g4}
+    \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(i)})
+    \end{equation}
+
+-   Notice we have included $x^{(i)}$ in the notation of $J(\theta;x^{(i)})$ to remark the dependence.
 
 ## Rationale for SGD
 
--At each step, the stochastic gradient method uses one randomly chosen training point to represent the full training set. 
+-At each step, the stochastic gradient method uses one randomly chosen training point to represent the full training set.
 
-- As the iteration proceeds, the method sees more training points. 
+-   As the iteration proceeds, the method sees more training points.
 
-- So *there is some hope* that this dramatic reduction in cost-per-iteration will be worthwhile overall. 
+-   So *there is some hope* that this dramatic reduction in cost-per-iteration will be worthwhile overall.
 
-- Note that, even for very small $\eta$, the update (\ref{g4}) is not guaranteed to reduce the overall cost function we have traded the mean for a single sample.
-- Hence, although the phrase stochastic gradient descent is widely used,
-we prefer to use **stochastic gradient**.
+-   Note that, even for very small $\eta$, the update (\ref{g4}) is not guaranteed to reduce the overall cost function we have traded the mean for a single sample.
+
+-   Hence, although the phrase stochastic gradient descent is widely used, we prefer to use **stochastic gradient**.
 
 ## SGD variants
 
-- The version of the stochastic gradient method that we introduced in (\ref{g4}) is the simplest from a large range of possibilities. 
-- In particular, the index $i$ in (\ref{g4}) was chosen by sampling with replacement after using a training point, it is returned to the training
-set and is just as likely as any other point to be chosen at the next
-step. 
-- An alternative is to sample without replacement; that is, to cycle
-through each of the $n$ training points in a random order. 
-- Performing $n$ steps in this manner, referred to as completing an epoch, may be
-summarized as follows:
+-   The version of the stochastic gradient method that we introduced in (\ref{g4}) is the simplest from a large range of possibilities.
+-   In particular, the index $i$ in (\ref{g4}) was chosen by sampling with replacement after using a training point, it is returned to the training set and is just as likely as any other point to be chosen at the next step.
+-   An alternative is to sample without replacement; that is, to cycle through each of the $n$ training points in a random order.
+-   Performing $n$ steps in this manner, referred to as completing an epoch, may be summarized as follows:
 
 ```{=tex}
 \begin{itemize}
@@ -968,12 +916,10 @@ summarized as follows:
 \item for $i$ in  $1:n$ update $\theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta;x^{(k_i)})$
 \end{itemize}
 ```
+## SGD variants (3)
 
-## SGD variants (3) 
-
-- If we regard the stochastic gradient method as approximating the mean over all training points by a single sample, then
-- It is natural to consider a compromise where we use a small sample average. For some
-$m<<n$ we could take steps of the following form.
+-   If we regard the stochastic gradient method as approximating the mean over all training points by a single sample, then
+-   It is natural to consider a compromise where we use a small sample average. For some $m<<n$ we could take steps of the following form.
 
 ```{=tex}
 \begin{itemize}
@@ -981,60 +927,50 @@ $m<<n$ we could take steps of the following form.
 \item update $\theta_j=\theta_j-\eta\frac{1}{m}\sum_{i=1}^m\frac{\partial}{\partial\theta_j}J(\theta;x^{(k_i)})$
 \end{itemize}
 ```
-- In this iteration, the set $\{x^{(k_i)}\}_{i=1}^m$ is known as a
-mini-batch. 
+-   In this iteration, the set $\{x^{(k_i)}\}_{i=1}^m$ is known as a mini-batch.
 
 ## Improving SGD
 
-- Because the stochastic gradient method is usually implemented within the context of a very large scale computation, algorithmic choices such as mini-batch size and the form of
-randomization are often driven by the requirements of high performance
-computing architectures. 
-- Also, it is, of course, possible to vary these
-choices, along with others, such as the learning rate, dynamically as the training progresses in an attempt to accelerate convergence.
+-   Because the stochastic gradient method is usually implemented within the context of a very large scale computation, algorithmic choices such as mini-batch size and the form of randomization are often driven by the requirements of high performance computing architectures.
+-   Also, it is, of course, possible to vary these choices, along with others, such as the learning rate, dynamically as the training progresses in an attempt to accelerate convergence.
 
 ## Back propagation
 
-- Backpropagation is the algorithm used to compute the gradients of the network. 
-- This procedure was developed by several authors in the decade of the 60's but is Paul J. Werbos, (1974) in his thesis when
-demonstrates the use of this algorithm for ANN. - Years later, (David, E.
-1986) presents the modern way to apply this technique to ANN, and sets
-the basis of the algorithm in use today. 
+-   Back-propagation is the algorithm used to compute the gradients of the network.
+-   This procedure was developed by several authors in the decade of the 60's but is Paul J. Werbos, (1974) in his thesis when demonstrates the use of this algorithm for ANN. - Years later, (David, E.
 
-## The delta rule 
+1986) presents the modern way to apply this technique to ANN, and sets the basis of the algorithm in use today.
 
-- In this paper, the authors presents a new method capable to change the predictions towards a desired output, they called it the delta rule.
+## The delta rule
 
-- This rule consist in compute the total error for the network and check how the error changes when certain elements from the network changes its value. 
+-   In this paper, the authors presents a new method capable to change the predictions towards a desired output, they called it the delta rule.
 
-- These changes are computed by differentiating the cost function with regard to each element in the network  
-- Which would give us a measure of
-how much each element is contributing to the total error of the network,
-- This is, computing the gradient of the cost function we can know how the
-total error changes with regard to each element, and therefore apply the delta rule.
+-   This rule consist in compute the total error for the network and check how the error changes when certain elements from the network changes its value.
+
+-   These changes are computed by differentiating the cost function with regard to each element in the network\
+
+-   Which would give us a measure of how much each element is contributing to the total error of the network,
+
+-   This is, computing the gradient of the cost function we can know how the total error changes with regard to each element, and therefore apply the delta rule.
 
 ## Applying the chain rule
 
-- The cost function is an intricate composed function which contains the
-weights of all layers, 
-- the problem now is that the computations of this gradients are not straightforward as in a simple function,
-- A node from a layer is the result of the composition of all the nodes from previous
-layers. 
-- To overcome it, Backpropagation uses the chain rule of differential calculus to compute the gradients of each element in the
-neural network, 
+-   The cost function is an intricate composed function which contains the weights of all layers,
+-   the problem now is that the computations of this gradients are not straightforward as in a simple function,
+-   A node from a layer is the result of the composition of all the nodes from previous layers.
+-   To overcome it, Back-propagation uses the chain rule of differential calculus to compute the gradients of each element in the neural network,
 
 -It contains two main phases referred to as the forward phase and backward phase:
 
-## Backpropagation: **Forward Phase**: 
+## Back-propagation: **Forward Phase**:
 
-  - The inputs for a data example are fed into the FNN. 
-  - These inputs will be propagated through the network for all the neurons in all the layers using the current set of weights, to finally compute the final output.
+-   The inputs for a data example are fed into the FNN.
+-   These inputs will be propagated through the network for all the neurons in all the layers using the current set of weights, to finally compute the final output.
 
-## Backpropagation: **Backward Phase**: 
-- Once the final output and the cost function are computed, we need to compute the gradients for all the weights in all the layers in the FNN to update them in order to reach the minimum. 
-- To compute the gradients the chain rule is used, is a backwards a process from output to input,
-- Therefore we will start from the output node, compute all the gradients of the previous layer, and so on until we reach the input layer.
+## Back-propagation: **Backward Phase**:
 
+-   Once the final output and the cost function are computed, we need to compute the gradients for all the weights in all the layers in the FNN to update them in order to reach the minimum.
+-   To compute the gradients the chain rule is used, is a backwards a process from output to input,
+-   Therefore we will start from the output node, compute all the gradients of the previous layer, and so on until we reach the input layer.
 
 # References and Resources
-
-
