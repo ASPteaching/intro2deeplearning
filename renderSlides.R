@@ -34,7 +34,18 @@ library(quarto)
 
 quarto::quarto_render(input = "Introduction_to_Deep_Learning.qmd", 
                       output_format = c("html", "pdf"))
-quarto::quarto_render(input = "2-Intro2DeepLearning.qmd", 
+
+quarto::quarto_render(input = "Introduction_to_Deep_Learning-Slides.qmd", 
                       output_format = c("html", "pdf"))
+
+quarto::quarto_render(input = "ConvolutionalNN.qmd", 
+                      output_format = c("html", "pdf"))
+
+quarto::quarto_render(input = "ConvolutionalNN-Slides.qmd", 
+                      output_format = c("html", "pdf"))
+
+quarto::quarto_render(input = "DNNwithKeras_inR.qmd", 
+                      output_format = c("html", "pdf"))
+
 
 

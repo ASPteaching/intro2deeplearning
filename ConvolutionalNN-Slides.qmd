@@ -1,0 +1,60 @@
+---
+title:  "Convolutional Neural Networks"
+author: "F. Reverter, A. Sanchez, and E. Vegas"
+format:
+  revealjs: 
+    incremental: false  
+    transition: slide
+    background-transition: fade
+    transition-speed: slow
+    scrollable: true
+    menu:
+      side: left
+      width: half
+      numbers: true
+    slide-number: c/t
+    show-slide-number: all
+    progress: true
+    css: "css4CU.css"
+    theme: sky
+knit:
+  quarto:
+    chunk_options:
+      echo: true
+      cache: false
+      prompt: false
+      tidy: true
+      comment: NA
+      message: false
+      warning: false
+    knit_options:
+      width: 75
+bibliography: "DeepLearning.bib"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+## Session Outline
+
+1. The problem of artificial vision
+
+2. Convolutional Layers
+
+    <!-- Convolution and Padding -->
+    <!-- Filters, Strides, and Channels -->
+
+3. Pooling Layers
+  <!-- Max Pooling and Average Pooling -->
+  <!-- Downsampling and Translation Invariance -->
+
+4. Building and Training CNNs
+  <!-- Architecture Design and Hyperparameter Tuning -->
+  <!-- Transfer Learning and Fine-Tuning -->
+5. Applications of CNNs
+  <!-- Object Detection and Segmentation -->
+  <!-- Image Classification and Captioning -->
+  <!-- Face Recognition and Style Transfer -->
+  
+# References and Resources
