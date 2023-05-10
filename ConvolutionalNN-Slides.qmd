@@ -627,7 +627,7 @@ model %>% fit(
 
 - Use test data to evaluate the model.
 
-```{r echo=TRUE}
+```{r echo=TRUE, eval=FALSE}
 score <- model %>% evaluate(x_test,
                             y_test)
 
@@ -637,7 +637,9 @@ cat('Test accuracy: ', score$acc, "\n")
 ```
 
 
-# References and Resources{.smaller}
+# References and Resources
+
+## Resources {.smaller}
 
 ### Courses
 

@@ -1072,14 +1072,49 @@ ________________________________________________________________________________
 <li>A <strong>minibatch</strong> is a smaller subset of a batch used for memory efficiency</li>
 <li>An <strong>epoch</strong> is a complete pass of the entire training dataset during model training.</li>
 </ul>
-</li></ol></aside></section></section>
+</li></ol></aside></section>
+<section id="model-evaluation" class="slide level2">
+<h2>Model evaluation</h2>
+<ul>
+<li>Use test data to evaluate the model.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>score <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(x_test,</span>
+<span id="cb15-2"><a href="#cb15-2"></a>                            y_test)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">cat</span>(<span class="st">'Test loss: '</span>, score<span class="sc">$</span>loss, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">cat</span>(<span class="st">'Test accuracy: '</span>, score<span class="sc">$</span>acc, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
 <section id="references-and-resources" class="title-slide slide level1 center">
 <h1>References and Resources</h1>
+
+</section>
+<section id="resources" class="slide level2 smaller">
+<h2>Resources</h2>
+<h3 id="courses">Courses</h3>
+<ul>
+<li><a href="http://introtodeeplearning.com/">An introduction to Deep Learning. Alex Amini. MIT</a></li>
+</ul>
+<h3 id="workshops">Workshops</h3>
+<ul>
+<li><a href="https://bios691-deep-learning-r.netlify.app/">Deep learning with R <em>Summer course</em></a></li>
+<li><a href="https://github.com/rstudio-conf-2020/dl-keras-tf">Deep learning with keras and Tensorflow in R (Rstudio conf. 2020)</a></li>
+</ul>
+<h3 id="books">Books</h3>
+<ul>
+<li><a href="https://livebook.manning.com/book/deep-learning-with-r-second-edition">Deep learning with R, 2nd edition. F. Chollet</a></li>
+</ul>
+<h3 id="documents">Documents</h3>
+<ul>
+<li>[Introduction to Convolutional Neural Networks (CNN] (https://www.analyticsvidhya.com/blog/2021/05/convolutional-neural-networks-cnn/)</li>
+<li><a href="https://www.r-bloggers.com/2018/07/convolutional-neural-networks-in-r/">Convolutional Neural Networks in R</a></li>
+</ul>
 <div class="footer footer-default">
 
 </div>
-</section>
-
+</section></section>
 
     </div>
   </div>
