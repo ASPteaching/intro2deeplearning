@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="ConvolutionalNN-Slides_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link rel="stylesheet" href="css4CU.css">
@@ -861,12 +926,161 @@ F. Reverter, A. Sanchez, and E. Vegas
 <h2>Summary: CNNs for classification</h2>
 
 <img data-src="images/aminiCV38.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">source: MIT Course, http://introtodeeplearning.com/, L3</p></section></section>
+<section>
+<section id="a-toy-example" class="title-slide slide level1 center">
+<h1>A toy example</h1>
+
+</section>
+<section id="the-mnist-dataset" class="slide level2">
+<h2>The MNIST dataset</h2>
+<ul>
+<li>A popular dataset or handwritten numbers.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(keras)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>mnist <span class="ot">&lt;-</span> <span class="fu">dataset_mnist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Made of features (images) and target values (labels)</li>
+<li>Divided into a <em>training</em> and <em>test</em> set.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x_train <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>x; y_train <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>y</span>
+<span id="cb2-2"><a href="#cb2-2"></a>x_test <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>x; y_test <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>(mnistDims <span class="ot">&lt;-</span> <span class="fu">dim</span>(x_train))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60000    28    28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>img_rows <span class="ot">&lt;-</span> mnistDims[<span class="dv">2</span>];  img_cols <span class="ot">&lt;-</span> mnistDims[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-pre-processing-1-reshaping" class="slide level2">
+<h2>Data pre-processing (1): Reshaping</h2>
+<ul>
+<li>These images are not in the the requires shape, as the number of channels is missing.</li>
+<li>This can be corrected using the <code>array_reshape()</code> function.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x_train <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>(x_train, <span class="fu">c</span>(<span class="fu">nrow</span>(x_train), img_rows, img_cols, <span class="dv">1</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>x_test <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>(x_test, <span class="fu">c</span>(<span class="fu">nrow</span>(x_test), img_rows, img_cols, <span class="dv">1</span>)) </span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>input_shape <span class="ot">&lt;-</span> <span class="fu">c</span>(img_rows, img_cols, <span class="dv">1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">dim</span>(x_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60000    28    28     1</code></pre>
+</div>
+</div>
+</section>
+<section id="data-pre-processing-2-other-transforms" class="slide level2">
+<h2>Data pre-processing (2): Other transforms</h2>
+<ul>
+<li>Data is first normalized (to values in [0,1])</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>x_train <span class="ot">&lt;-</span> x_train <span class="sc">/</span> <span class="dv">255</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>x_test <span class="ot">&lt;-</span> x_test <span class="sc">/</span> <span class="dv">255</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Labels are one-hot-encoded using the <code>to_categorical()</code> function.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>num_classes <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>y_train <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(y_train, num_classes)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>y_test <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(y_test, num_classes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modeling-1-definition" class="slide level2">
+<h2>Modeling (1): Definition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>model <span class="ot">&lt;-</span> <span class="fu">keras_model_sequential</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">layer_conv_2d</span>(<span class="at">filters =</span> <span class="dv">16</span>,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>                <span class="at">kernel_size =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),</span>
+<span id="cb10-4"><a href="#cb10-4"></a>                <span class="at">activation =</span> <span class="st">'relu'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>                <span class="at">input_shape =</span> input_shape) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">layer_max_pooling_2d</span>(<span class="at">pool_size =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">layer_dropout</span>(<span class="at">rate =</span> <span class="fl">0.25</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">layer_flatten</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">10</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>              <span class="at">activation =</span> <span class="st">'relu'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="fu">layer_dropout</span>(<span class="at">rate =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">layer_dense</span>(<span class="at">units =</span> num_classes,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>              <span class="at">activation =</span> <span class="st">'softmax'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modeling-1-model-summary" class="slide level2">
+<h2>Modeling (1): Model Summary</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "sequential"
+________________________________________________________________________________
+ Layer (type)                       Output Shape                    Param #     
+================================================================================
+ conv2d (Conv2D)                    (None, 26, 26, 16)              160         
+ max_pooling2d (MaxPooling2D)       (None, 13, 13, 16)              0           
+ dropout_1 (Dropout)                (None, 13, 13, 16)              0           
+ flatten (Flatten)                  (None, 2704)                    0           
+ dense_1 (Dense)                    (None, 10)                      27050       
+ dropout (Dropout)                  (None, 10)                      0           
+ dense (Dense)                      (None, 10)                      110         
+================================================================================
+Total params: 27,320
+Trainable params: 27,320
+Non-trainable params: 0
+________________________________________________________________________________</code></pre>
+</div>
+</div>
+</section>
+<section id="modeling-2-compilation" class="slide level2">
+<h2>Modeling (2): Compilation</h2>
+<ul>
+<li><strong>Categorical cross-entropy</strong> as loss function.</li>
+<li><strong>Adadelta</strong> optimizes the gradient descent.</li>
+<li><strong>Accuracy</strong> serves as metric.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">compile</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">loss =</span> loss_categorical_crossentropy,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">optimizer =</span> <span class="fu">optimizer_adadelta</span>(),</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">'accuracy'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-training" class="slide level2 smaller">
+<h2>Model training</h2>
+<ul>
+<li>A mini-batch<sup>1</sup> size of 128 should allow the tensors to fit into the memory of most “normal” machines.</li>
+<li>The model will run over 12 epochs,</li>
+<li>With a validation split set at 0.2</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>batch_size <span class="ot">&lt;-</span> <span class="dv">128</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>epochs <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a>model <span class="sc">%&gt;%</span> <span class="fu">fit</span>(</span>
+<span id="cb14-5"><a href="#cb14-5"></a>  x_train, y_train,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="at">batch_size =</span> batch_size,</span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="at">epochs =</span> epochs,</span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="at">validation_split =</span> <span class="fl">0.2</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><ul>
+<li>A <strong>batch</strong> is a collection of training examples processed together,</li>
+<li>A <strong>minibatch</strong> is a smaller subset of a batch used for memory efficiency</li>
+<li>An <strong>epoch</strong> is a complete pass of the entire training dataset during model training.</li>
+</ul>
+</li></ol></aside></section></section>
 <section id="references-and-resources" class="title-slide slide level1 center">
 <h1>References and Resources</h1>
 <div class="footer footer-default">
 
 </div>
 </section>
+
+
     </div>
   </div>
 

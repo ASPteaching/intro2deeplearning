@@ -503,5 +503,159 @@ knitr::include_graphics("images/aminiCV37.png")
 knitr::include_graphics("images/aminiCV38.png")
 ```
 
+# A toy example
 
-# References and Resources
+## The MNIST dataset
+
+- A popular dataset or handwritten numbers.
+
+```{r echo=TRUE}
+library(keras)
+mnist <- dataset_mnist()
+```
+
+- Made of features (images) and target values (labels)
+- Divided into a *training* and *test* set.
+
+```{r echo=TRUE}
+x_train <- mnist$train$x; y_train <- mnist$train$y
+x_test <- mnist$test$x; y_test <- mnist$test$y
+```
+
+
+```{r echo=TRUE}
+(mnistDims <- dim(x_train))
+img_rows <- mnistDims[2];  img_cols <- mnistDims[3]
+```
+
+
+## Data pre-processing (1): Reshaping
+
+- These images are not in the the requires shape, as the number of channels is missing. 
+- This can be corrected using the `array_reshape()` function. 
+
+```{r echo=TRUE}
+x_train <- array_reshape(x_train, c(nrow(x_train), img_rows, img_cols, 1))
+x_test <- array_reshape(x_test, c(nrow(x_test), img_rows, img_cols, 1)) 
+
+input_shape <- c(img_rows, img_cols, 1)
+
+dim(x_train)
+```
+
+## Data pre-processing (2): Other transforms
+
+- Data is first normalized (to values in [0,1])
+
+```{r echo=TRUE}
+x_train <- x_train / 255
+x_test <- x_test / 255
+```
+
+- Labels are one-hot-encoded using the `to_categorical()` function.
+
+```{r echo=TRUE}
+num_classes = 10
+y_train <- to_categorical(y_train, num_classes)
+y_test <- to_categorical(y_test, num_classes)
+```
+
+## Modeling (1): Definition
+
+```{r echo=TRUE, highlight=c(2,3,4)}
+model <- keras_model_sequential() %>%
+  layer_conv_2d(filters = 16,
+                kernel_size = c(3,3),
+                activation = 'relu',
+                input_shape = input_shape) %>% 
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 10,
+              activation = 'relu') %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = num_classes,
+              activation = 'softmax')
+
+```
+
+## Modeling (1): Model Summary
+
+```{r echo=TRUE}
+model %>% summary()
+```
+
+## Modeling (2): Compilation
+
+- **Categorical cross-entropy** as loss function. 
+- **Adadelta** optimizes the gradient descent.
+- **Accuracy** serves as metric.
+
+```{r echo=TRUE}
+model %>% compile(
+  loss = loss_categorical_crossentropy,
+  optimizer = optimizer_adadelta(),
+  metrics = c('accuracy')
+)
+```
+
+## Model training{.smaller}
+
+- A mini-batch[^1] size of 128  should allow the tensors to fit into the memory of most "normal" machines. 
+- The model will run over 12  epochs, 
+- With a validation split set at 0.2
+
+
+```{r echo=TRUE}
+batch_size <- 128
+epochs <- 12
+
+model %>% fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  validation_split = 0.2
+)
+```
+
+[^1]:
+- A **batch** is a collection of training examples processed together, 
+- A **minibatch** is a smaller subset of a batch used for memory efficiency
+- An **epoch** is a complete pass of the entire training dataset during model training. 
+
+## Model evaluation
+
+- Use test data to evaluate the model.
+
+```{r echo=TRUE}
+score <- model %>% evaluate(x_test,
+                            y_test)
+
+cat('Test loss: ', score$loss, "\n")
+cat('Test accuracy: ', score$acc, "\n")
+
+```
+
+
+# References and Resources{.smaller}
+
+### Courses
+
+- [An introduction to Deep Learning. Alex Amini. MIT](http://introtodeeplearning.com/)
+
+### Workshops
+
+- [Deep learning with R *Summer course*](https://bios691-deep-learning-r.netlify.app/)
+- [Deep learning with keras and Tensorflow in R (Rstudio conf. 2020)](https://github.com/rstudio-conf-2020/dl-keras-tf)
+
+### Books
+
+- [Deep learning with R, 2nd edition. F. Chollet](https://livebook.manning.com/book/deep-learning-with-r-second-edition)
+
+### Documents
+
+- [Introduction to Convolutional Neural Networks (CNN]
+(https://www.analyticsvidhya.com/blog/2021/05/convolutional-neural-networks-cnn/)
+- [Convolutional Neural Networks in R](https://www.r-bloggers.com/2018/07/convolutional-neural-networks-in-r/)
+
+
