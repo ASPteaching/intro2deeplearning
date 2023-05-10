@@ -1,0 +1,105 @@
+---
+title: "Notes on Computer Vision"
+author: "Alex Sanchez"
+format: html
+---
+
+# What do we mean by computers vision?
+
+We want to build computer systems able to see what is present in the world, **but also** to predict and anticipate events.
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+Deep learning is enabling many systems to undertake a variety of computer vision related tasks.
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV2.png")
+```
+
+
+In particular it enables automatic feature extraction, something that before DNN used to require relevant human participation.
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV3.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV4.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV5.png")
+```
+
+# What computers see?
+
+To a computer images, of course, are numbers.
+
+An (RGB) image is just a NxNx3 matrix of numbers [0,255]
+
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV6.png")
+```
+
+Main tasks in Computer Vision:
+
+- **Regression**: Output variable takes continuous value. E.g. *Distance to target*
+- **Classification**: Output variable takes class labels. E.g. *Probability of belonging to a class*
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV7.png")
+```
+
+Before attempting to build a computer vision system we need to be aware of *what feature keys are in our data that need to be __identified__ and __detected__*.
+
+Each image may have a different set of features.
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV8.png")
+```
+
+- Manual feature extraction is hard!
+Especially if it has to be done "by hand"
+
+- Notice also that feature characterization needs to define a hierarchy of features that allowas an increasing level of detail
+
+  HEAD -> Eyes/Mouth/Nose/... -> 
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV9.png")
+```
+
+Can we learn a **hierarchy of features** directly from the data 
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV10.png")
+```
+
+
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width="100%",fig.cap="source: MIT Course, http://introtodeeplearning.com/, L3 "}
+knitr::include_graphics("images/aminiCV1.png")
+```
+
