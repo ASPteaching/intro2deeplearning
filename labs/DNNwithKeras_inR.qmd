@@ -280,7 +280,7 @@ validation_split = 0.2
 
 ```{r evaluateModel, eval=TRUE, echo=TRUE}
 model %>% evaluate(x_test, y_test)
-model %>% predict(x_test)
+predictions <- model %>% predict(x_test)
 ```
 
 ## One must-do digression: Tensors
