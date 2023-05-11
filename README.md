@@ -1,6 +1,6 @@
 # Introduction to Artificial Neural Networks and Deep Learning
 
-This repository contains some of the materials for the ANN/DL lessons taught as part of the Statistical Learning course at the Master in Statistics and Operations Research (MESIO) 
+This repository contains some of the materials for the ANN/DL lessons taught as part of the Statistical Learning course at the [UPC-UB Master in Statistics and Operations Research (MESIO)]https://mesioupcub.masters.upc.edu/es) 
 
 
 | Archivo                                                        | HTML                                             | PDF                                              | QMD                                              |
