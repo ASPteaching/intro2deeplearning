@@ -267,7 +267,7 @@ model %>% compile(
 
 ## *Hello world* of deep learning (5)
 
-```{r fitModel, eval=FALSE, echo=TRUE}
+```{r fitModel, eval=TRUE, echo=TRUE}
 # train (fit)
 model %>% fit(
 x_train, y_train,
@@ -278,9 +278,9 @@ validation_split = 0.2
 
 ## *Hello world* of deep learning (6)
 
-```{r evaluateModel, eval=FALSE, echo=TRUE}
+```{r evaluateModel, eval=TRUE, echo=TRUE}
 model %>% evaluate(x_test, y_test)
-model %>% predict_classes(x_test)
+model %>% predict(x_test)
 ```
 
 ## One must-do digression: Tensors
