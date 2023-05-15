@@ -5,6 +5,7 @@
 # Solucions dels exercicis proposats a classe
 
 /labs/solutions/
+/labs/CNN_labs/cats_and_dogs/*.*
 
 # History files
 .Rhistory
