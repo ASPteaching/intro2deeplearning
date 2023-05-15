@@ -1,10 +1,9 @@
 # Training an image recognizer on MNIST data
 
-
 # Install & libraries
-#devtools::install_github("rstudio/keras")
+# devtools::install_github("rstudio/keras")
+
 library(keras)
-#install_keras()
 
 # set hyperparameter flags
 

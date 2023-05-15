@@ -1,5 +1,5 @@
 ---
-title:  "Deep Neural Networks with Keras in R"
+title:  "Deep Neural Networks with \n Keras in R"
 author: "A. Sanchez, F. Reverter and E. Vegas"
 format:
   revealjs: 
@@ -15,7 +15,7 @@ format:
     slide-number: c/t
     show-slide-number: all
     progress: true
-    css: "css4CU.css"
+    css: "../css4CU.css"
     theme: sky
 knit:
   quarto:
@@ -267,7 +267,7 @@ model %>% compile(
 
 ## *Hello world* of deep learning (5)
 
-```{r fitModel, eval=TRUE, echo=TRUE}
+```{r fitModel, eval=FALSE, echo=TRUE}
 # train (fit)
 model %>% fit(
 x_train, y_train,
@@ -278,10 +278,12 @@ validation_split = 0.2
 
 ## *Hello world* of deep learning (6)
 
-```{r evaluateModel, eval=TRUE, echo=TRUE}
+```{r evaluateModel, eval=FALSE, echo=TRUE}
 model %>% evaluate(x_test, y_test)
 predictions <- model %>% predict(x_test)
 ```
+
+# Tensors
 
 ## One must-do digression: Tensors
 
@@ -431,6 +433,104 @@ knitr::include_graphics("images/reshape4MNIST.png")
 ```
 
 See [Deep learning with R](https://livebook.manning.com/book/deep-learning-with-r-second-edition) for more.
+
+# Hyperparameter tuning
+
+## Tuning hyperparameters of DNN
+
+- Tuning the parameters of a DNN requires 
+  - Evaluating distinct combinations at multiple points and 
+  - Comparing the quality of the fitted models at each combination.
+
+- This can be manually hand-crafted but some tools such as [Tensorboard](https://www.tensorflow.org/tensorboard) or the `tfruns`package facilitate it.
+
+
+## The `tfruns` package
+
+- Use the [`tfruns`](https://tensorflow.rstudio.com/tools/tfruns/overview/) package to:
+
+  - Track the hyperparameters, metrics, output, and source code of every training run.
+  -  Compare hyperparameters and metrics across runs to find the best performing model.
+  -  Automatically generate reports to visualize individual training runs or comparisons between runs.
+
+## A `tfruns` example
+
+- Consider the Keras "Hello World" example,
+- To test different sizes for `layer1` and `layer2`:
+  - Use the `flags` function to set/change values for hyperparameters to be tuned, here  layer sizes.
+  - Modify these values iteratively from outside the run (e.g. the script) that uses each value.
+  - Compare the results of having trained the model with the distinct sets of values.
+- Implemented in `MNIST_tfruns.r`  and `MNIST_flags.r`
+
+## Example: Setting the flags
+
+In `MNIST_flags.r`:
+
+- Set the flags:
+
+```{r eval=FALSE, echo=TRUE}
+# set hyperparameter flags
+FLAGS <- flags(
+  flag_numeric("hl1", 256),
+  flag_numeric("hl2", 128)
+)
+```
+
+- Use the flags:
+  
+```{r eval=FALSE, echo=TRUE}
+model %>%
+layer_dense(units = FLAGS$hl1, activation = 'relu',
+            input_shape = c(784)) %>%
+layer_dense(units = FLAGS$hl2, activation = 'relu') %>%
+layer_dense(units = 10, activation = 'softmax')
+```
+
+## Example: changing flag values
+
+In `MNIST_tfruns.r`:
+
+- Can use a loop to iterate along distinct flag values:
+
+```{r eval=FALSE, echo=TRUE}
+library(tfruns)
+
+for (hl1 in c(200, 300))
+  for (hl2 in c(50, 150))
+    training_run('MNIST_flags.r', 
+                 flags = c(hl1 = hl1))
+```
+
+## Comparing distinct runs:
+
+- The metrics and output of each run are automatically captured within a (unique) `runs` directory 
+  
+- Some functions to view the results are:
+  - `latest run()` shows the results of the last run.
+  - `view run("runs/2023-05-15T10-19-47Z")` shows the
+results of a given run.
+
+- Some `tfruns` functions available from  Rstudio Addins menu.
+
+## Example: Access comparison results
+
+```{r echo=TRUE, eval=FALSE}
+# Show last completed run
+latest_run()
+# Show all runs
+ls_runs()
+# Show all runs with improved presentation
+View(ls_runs())
+# show selected items from all runs
+ls_runs(metric_val_accuracy > 0.94, 
+        order = metric_val_accuracy)
+# compare_runs() visual comparison of two training runs. 
+compare_runs() # Default is compre two last runs
+
+```
+
+
+# References and Resources
 
 ## References and Resources{.smaller}
 

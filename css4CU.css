@@ -6,11 +6,11 @@
 }
 
 .math.inline .MathJax  {
-  font-size: 80% !important;
+  font-size: t0% !important;
 }
 
 .math.display .MathJax  {
-  font-size: 80% !important;
+  font-size: 70% !important;
 }
 
 /*FONTS*/
@@ -30,7 +30,7 @@ body {
 
 .remark-code, .remark-inline-code {
   font-family: 'Fira Code', serif;
-  font-size: 95%;
+  font-size: 100%;
 }
 
 .huge .remark-code { /*Change made here*/
@@ -113,12 +113,12 @@ position: absolute;
 }
 
 .remark-slide-content > h2, .pull-left > h2, .pull-right > h2 {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .remark-slide-content > h3, .remark-slide-content > h4,
 .pull-left > h3, .pull-left > h4, .pull-right > h3, .pull-right > h4 {
-  font-size: 25px;
+  font-size: 22px;
 }
 
 

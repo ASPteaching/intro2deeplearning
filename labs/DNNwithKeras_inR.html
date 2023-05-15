@@ -8,7 +8,7 @@
 <link href="DNNwithKeras_inR_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="DNNwithKeras_inR_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="DNNwithKeras_inR_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.336">
+  <meta name="generator" content="quarto-1.3.340">
 
   <meta name="author" content="A. Sanchez, F. Reverter and E. Vegas">
   <title>Deep Neural Networks with Keras in R</title>
@@ -96,7 +96,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="DNNwithKeras_inR_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="css4CU.css">
+  <link rel="stylesheet" href="../css4CU.css">
   <link href="DNNwithKeras_inR_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="DNNwithKeras_inR_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="DNNwithKeras_inR_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -621,13 +621,14 @@ A. Sanchez, F. Reverter and E. Vegas
 <section id="hello-world-of-deep-learning-6" class="slide level2">
 <h2><em>Hello world</em> of deep learning (6)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(x_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      loss   accuracy 
-0.07858076 0.98299998 </code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(x_test, y_test)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>predictions <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>predictions <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+<section>
+<section id="tensors" class="title-slide slide level1 center">
+<h1>Tensors</h1>
+
 </section>
 <section id="one-must-do-digression-tensors" class="slide level2">
 <h2>One must-do digression: Tensors</h2>
@@ -759,8 +760,120 @@ A. Sanchez, F. Reverter and E. Vegas
 </ul>
 
 <img data-src="images/reshape4MNIST.png" width="605" class="r-stretch"><p>See <a href="https://livebook.manning.com/book/deep-learning-with-r-second-edition">Deep learning with R</a> for more.</p>
+</section></section>
+<section>
+<section id="hyperparameter-tuning" class="title-slide slide level1 center">
+<h1>Hyperparameter tuning</h1>
+
 </section>
-<section id="references-and-resources" class="slide level2 smaller">
+<section id="tuning-hyperparameters-of-dnn" class="slide level2">
+<h2>Tuning hyperparameters of DNN</h2>
+<ul>
+<li>Tuning the parameters of a DNN requires
+<ul>
+<li>Evaluating distinct combinations at multiple points and</li>
+<li>Comparing the quality of the fitted models at each combination.</li>
+</ul></li>
+<li>This can be manually hand-crafted but some tools such as <a href="https://www.tensorflow.org/tensorboard">Tensorboard</a> or the <code>tfruns</code>package facilitate it.</li>
+</ul>
+</section>
+<section id="the-tfruns-package" class="slide level2">
+<h2>The <code>tfruns</code> package</h2>
+<ul>
+<li><p>Use the <a href="https://tensorflow.rstudio.com/tools/tfruns/overview/"><code>tfruns</code></a> package to:</p>
+<ul>
+<li>Track the hyperparameters, metrics, output, and source code of every training run.</li>
+<li>Compare hyperparameters and metrics across runs to find the best performing model.</li>
+<li>Automatically generate reports to visualize individual training runs or comparisons between runs.</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-tfruns-example" class="slide level2">
+<h2>A <code>tfruns</code> example</h2>
+<ul>
+<li>Consider the Keras “Hello World” example,</li>
+<li>To test different sizes for <code>layer1</code> and <code>layer2</code>:
+<ul>
+<li>Use the <code>flags</code> function to set/change values for hyperparameters to be tuned, here layer sizes.</li>
+<li>Modify these values iteratively from outside the run (e.g.&nbsp;the script) that uses each value.</li>
+<li>Compare the results of having trained the model with the distinct sets of values.</li>
+</ul></li>
+<li>Implemented in <code>MNIST_tfruns.r</code> and <code>MNIST_flags.r</code></li>
+</ul>
+</section>
+<section id="example-setting-the-flags" class="slide level2">
+<h2>Example: Setting the flags</h2>
+<p>In <code>MNIST_flags.r</code>:</p>
+<ul>
+<li>Set the flags:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># set hyperparameter flags</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>FLAGS <span class="ot">&lt;-</span> <span class="fu">flags</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">flag_numeric</span>(<span class="st">"hl1"</span>, <span class="dv">256</span>),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">flag_numeric</span>(<span class="st">"hl2"</span>, <span class="dv">128</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Use the flags:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>model <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">layer_dense</span>(<span class="at">units =</span> FLAGS<span class="sc">$</span>hl1, <span class="at">activation =</span> <span class="st">'relu'</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">input_shape =</span> <span class="fu">c</span>(<span class="dv">784</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">layer_dense</span>(<span class="at">units =</span> FLAGS<span class="sc">$</span>hl2, <span class="at">activation =</span> <span class="st">'relu'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">10</span>, <span class="at">activation =</span> <span class="st">'softmax'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-changing-flag-values" class="slide level2">
+<h2>Example: changing flag values</h2>
+<p>In <code>MNIST_tfruns.r</code>:</p>
+<ul>
+<li>Can use a loop to iterate along distinct flag values:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(tfruns)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="cf">for</span> (hl1 <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">300</span>))</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="cf">for</span> (hl2 <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">150</span>))</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="fu">training_run</span>(<span class="st">'MNIST_flags.r'</span>, </span>
+<span id="cb9-6"><a href="#cb9-6"></a>                 <span class="at">flags =</span> <span class="fu">c</span>(<span class="at">hl1 =</span> hl1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparing-distinct-runs" class="slide level2">
+<h2>Comparing distinct runs:</h2>
+<ul>
+<li><p>The metrics and output of each run are automatically captured within a (unique) <code>runs</code> directory</p></li>
+<li><p>Some functions to view the results are:</p>
+<ul>
+<li><code>latest run()</code> shows the results of the last run.</li>
+<li><code>view run("runs/2023-05-15T10-19-47Z")</code> shows the results of a given run.</li>
+</ul></li>
+<li><p>Some <code>tfruns</code> functions available from Rstudio Addins menu.</p></li>
+</ul>
+</section>
+<section id="example-access-comparison-results" class="slide level2">
+<h2>Example: Access comparison results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Show last completed run</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">latest_run</span>()</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># Show all runs</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="fu">ls_runs</span>()</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Show all runs with improved presentation</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">View</span>(<span class="fu">ls_runs</span>())</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># show selected items from all runs</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">ls_runs</span>(metric_val_accuracy <span class="sc">&gt;</span> <span class="fl">0.94</span>, </span>
+<span id="cb10-9"><a href="#cb10-9"></a>        <span class="at">order =</span> metric_val_accuracy)</span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co"># compare_runs() visual comparison of two training runs. </span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="fu">compare_runs</span>() <span class="co"># Default is compre two last runs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="references-and-resources" class="title-slide slide level1 center">
+<h1>References and Resources</h1>
+
+</section>
+<section id="references-and-resources-1" class="slide level2 smaller">
 <h2>References and Resources</h2>
 <h3 id="workshops">Workshops</h3>
 <ul>
@@ -778,7 +891,7 @@ A. Sanchez, F. Reverter and E. Vegas
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
