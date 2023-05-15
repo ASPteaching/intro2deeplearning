@@ -41,7 +41,7 @@ execute:
     message: false
     warning: false
     cache: true
-bibliography: "../DeepLearning.bib"
+bibliography: "DeepLearning.bib"
 editor_options: 
   chunk_output_type: console
 editor: 
@@ -569,37 +569,33 @@ confMat
 
 # Some mathematics behind ANN
 
-## Mathematical formulation
+- An ANN is a predictive model whose properties and behaviour  can be
+mathematically characterized.
 
--   An ANN is a predictive model whose functioning and properties can be
-    mathematically characterized.
+- In practice this means:
+  - The ANN acts by composing a series of linear and non-linear (activation) functions.
+  - These are characterized by their *weights* and *biases*, that need to be *learnt*.
+- *Training* the network is done by 
+  - Selecting an appropriate (convex) loss function,
+  - Finding those weights that minimize a the total *cost* function (avg. loss).
+- This is usually done using some iterative optimization procedure such as *gradient descent*.
+- This requires evaluating derivatives in a huge number of points.
+    - Such high number may be reduced by *Stochastic Gradient Descent*.
+    - The evaluation of derivatives is simplified thanks to *Backpropagation*.
 
--   In practice this means describing
 
-    -   The ANN as a (non linear) function.
-    -   The (optimization) process for estimating the weights.
-
--   Estimation is done by minimizing an appropriate loss function which
-    requires
-
-    -   An appropriate procedure: *gradient based optimization*
-    -   A method for computing the required derivatives:
-        *back-propagation*.
-
-## Mathematical formulation of the ANN
+## A guiding example
 
 We will use a concrete model to explain the concepts, which can be
 easily generalized to more neurons and layers.
 
 Consider the following simple ANN:
 
-Consider the following ANN:
-
-```{r, fig.align='center', out.width="100%"}
+```{r, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/nn.jpg")
 ```
 
--   The circles labeled +1 are called bias units, and correspond to the
+-   The circles labelled +1 are called bias units, and correspond to the
     intercept, here named *bias* term.
 -   The leftmost layer of the network is called the *input layer*.
 -   The rightmost layer is the *output* layer (which, in this example,
@@ -615,13 +611,11 @@ So our example network has:
 
 ### A logistic regression ANN
 
-This ANN can be use to build a logistic regression model:
+This ANN canseen as a device to perform a logistic regression:
 
--   From input layer to layer 2: non-linear transformation --\> new set
-    of complex features.
+-   From input layer to layer 2: non-linear transformation $\rightarrow$ new set of complex features.
 
--   From layer 2 to output layer use a sigmoid activation function to
-    produce the following output from the set of *complex features*.
+-   From layer 2 to output layer use a sigmoid activation function to   produce the following output from the set of *complex features*.
 
 $$
 \mbox{The output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
@@ -647,8 +641,7 @@ That is, *when the activation function of the output node is the sigmoid
 activation function, the output coincides with a logistic regression on
 complex features*
 
--   And, with $h_{\theta}(x)$, the output of the NN, we are estimating
-    $p(Y=1|x)$.
+-   And, $h_{\theta}(x)$, the output of the ANN, estimates  $p(Y=1|x)$.
 
 ## Parametrizing an ANN
 
@@ -864,15 +857,16 @@ J(\Theta)&=&-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_\theta(x
 (\theta_{ji}^{(l)})^2
 \end{eqnarray*}
 ```
+
 ## Gradient descent
 
-We saw in the previous section that training a network corresponds to
-choosing the parameters, that is, the weights and biases, that minimize
-the cost function (see Fig. 5). The weights and biases take the form of
+We saw in the previous section that training a network corresponds to choosing the parameters, that is, the weights and biases, that minimize
+the cost function. 
+
+The weights and biases take the form of
 matrices and vectors, but at this stage it is convenient to imagine them
-stored as a single vector that we call $\theta$. Generally, we will
-suppose $\theta\in\mathbb{R}^p$, and write the cost function as
-$J(\theta)$ to emphasize its dependence on the parameters. So Cost
+stored as a single vector that we call $\theta$. 
+Generally, we will suppose $\theta\in\mathbb{R}^p$, and write the cost function as $J(\theta)$ to emphasize its dependence on the parameters. So Cost
 $J: \mathbb{R}^p\rightarrow \mathbb{R}$.
 
 ![Error hyper-surface](images/errorsurface.jpg){width="60%"}

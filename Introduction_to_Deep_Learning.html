@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-05-04">
+<meta name="dcterms.date" content="2023-05-15">
 
 <title>Introduction to Deep Neural Networks</title>
 <style>
@@ -84,9 +84,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction-to-deep-neural-networks" id="toc-introduction-to-deep-neural-networks" class="nav-link active" data-scroll-target="#introduction-to-deep-neural-networks">Introduction to Deep Neural Networks</a>
   <ul class="collapse">
-  <li><a href="#overview-of-deep-learning" id="toc-overview-of-deep-learning" class="nav-link" data-scroll-target="#overview-of-deep-learning">Overview of Deep Learning</a>
+  <li><a href="#historical-background-and-key-milestones" id="toc-historical-background-and-key-milestones" class="nav-link" data-scroll-target="#historical-background-and-key-milestones">Historical Background and Key Milestones</a>
   <ul class="collapse">
-  <li><a href="#historical-background-and-key-milestones" id="toc-historical-background-and-key-milestones" class="nav-link" data-scroll-target="#historical-background-and-key-milestones">Historical Background and Key Milestones</a></li>
+  <li><a href="#the-rise-of-deep-learning" id="toc-the-rise-of-deep-learning" class="nav-link" data-scroll-target="#the-rise-of-deep-learning">The rise of Deep learning</a></li>
   <li><a href="#the-early-history-of-artificial-neural-networksintelligence" id="toc-the-early-history-of-artificial-neural-networksintelligence" class="nav-link" data-scroll-target="#the-early-history-of-artificial-neural-networksintelligence">The early history of artificial [neural networks]/intelligence</a></li>
   <li><a href="#comparison-with-traditional-machine-learning" id="toc-comparison-with-traditional-machine-learning" class="nav-link" data-scroll-target="#comparison-with-traditional-machine-learning">Comparison with Traditional Machine Learning</a></li>
   </ul></li>
@@ -98,15 +98,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An example</a>
   <ul class="collapse">
-  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data preprocessing</a></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data pre-processing</a></li>
   <li><a href="#training-a-neural-network" id="toc-training-a-neural-network" class="nav-link" data-scroll-target="#training-a-neural-network">Training a neural network</a></li>
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model evaluation</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#some-mathematics-behind-ann" id="toc-some-mathematics-behind-ann" class="nav-link" data-scroll-target="#some-mathematics-behind-ann">Some mathematics behind ANN</a>
   <ul class="collapse">
-  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link" data-scroll-target="#mathematical-formulation">Mathematical formulation</a></li>
-  <li><a href="#mathematical-formulation-of-the-ann" id="toc-mathematical-formulation-of-the-ann" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</a>
+  <li><a href="#a-guiding-example" id="toc-a-guiding-example" class="nav-link" data-scroll-target="#a-guiding-example">A guiding example</a>
   <ul class="collapse">
   <li><a href="#a-logistic-regression-ann" id="toc-a-logistic-regression-ann" class="nav-link" data-scroll-target="#a-logistic-regression-ann">A logistic regression ANN</a></li>
   </ul></li>
@@ -115,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#forward-propagation" id="toc-forward-propagation" class="nav-link" data-scroll-target="#forward-propagation">Forward propagation</a></li>
   </ul></li>
-  <li><a href="#multiple-architechtures-for-ann" id="toc-multiple-architechtures-for-ann" class="nav-link" data-scroll-target="#multiple-architechtures-for-ann">Multiple architechtures for ANN</a>
+  <li><a href="#multiple-architectures-for-ann" id="toc-multiple-architectures-for-ann" class="nav-link" data-scroll-target="#multiple-architectures-for-ann">Multiple architectures for ANN</a>
   <ul class="collapse">
   <li><a href="#feed-forward-neural-networks" id="toc-feed-forward-neural-networks" class="nav-link" data-scroll-target="#feed-forward-neural-networks">Feed Forward Neural networks</a></li>
   <li><a href="#the-number-of-output-units" id="toc-the-number-of-output-units" class="nav-link" data-scroll-target="#the-number-of-output-units">The number of output units</a></li>
@@ -154,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 4, 2023</p>
+      <p class="date">May 15, 2023</p>
     </div>
   </div>
   
@@ -173,10 +172,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="introduction-to-deep-neural-networks" class="level1">
 <h1>Introduction to Deep Neural Networks</h1>
-<section id="overview-of-deep-learning" class="level2">
-<h2 class="anchored" data-anchor-id="overview-of-deep-learning">Overview of Deep Learning</h2>
-<section id="historical-background-and-key-milestones" class="level3">
-<h3 class="anchored" data-anchor-id="historical-background-and-key-milestones">Historical Background and Key Milestones</h3>
+<section id="historical-background-and-key-milestones" class="level2">
+<h2 class="anchored" data-anchor-id="historical-background-and-key-milestones">Historical Background and Key Milestones</h2>
 <p>Today, in April 2023, our world is convulsed by the explosion of Artificial Intelligence.</p>
 <p>Although it has been growing steadily, it has probably been in the last months (weeks), since ChatGPT has arrived, that everybody has an opinion, or a fear on the topic.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -184,8 +181,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="https://bernardmarr.com/wp-content/uploads/2022/04/The-Dangers-Of-Not-Aligning-Artificial-Intelligence-With-Human-Values.jpg" title="The 5 Biggest Artificial Intelligence (AI) Trends In 2023, Bernard Marr" class="img-fluid figure-img"></p>
 </figure>
 </div>
-<p>While we are not going to discuss ethical, technological or sociological aspects, what seems clear to the data scientist’s eye is that “<em>most of this is about prediction</em>”.</p>
-<p>Most AI engines rely on powerful prediction systems that use statistical learning methods.</p>
+<p>AI engines use statistical learning methods, such as machine learning algorithms, to make predictions based on large amounts of data.</p>
+<p>Prediction is a fundamental capability of AI and is used in a wide range of applications, from recommendation systems to natural language processing to image recognition.</p>
+<p>However, it is important to keep in mind that AI has far-reaching implications beyond its predictive capabilities, including ethical, social, and technological considerations that must be taken into account when developing and deploying AI systems.</p>
+<section id="the-rise-of-deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="the-rise-of-deep-learning">The rise of Deep learning</h3>
 <p>Deep learning is a highly successful model in the field of AI, which has powered numerous applications in various domains. It has shown remarkable performance in tasks such as image recognition, natural language processing, and speech recognition.</p>
 <p>Deep learning extends the basic principles of artificial neural networks by introducing more complex architectures and algorithms and, at the same time, by enabling machines to learn from large datasets by automatically identifying relevant patterns and features without explicit programming.</p>
 <p>One key advantage of deep learning over traditional machine learning algorithms is its ability to handle high-dimensional and unstructured data such as images, videos, and audio.</p>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can see there however, several hints worth to account for because we will go through them to understand how a deep neural network works. These are:</p>
 <ul>
 <li><p>The <strong>Perceptron</strong> and the first <strong>Artificial Neural Network</strong> where the basic building block was introduced.</p></li>
-<li><p>The <strong>Multilayered perceptron</strong> and <strong>backpropagation</strong> where complex architechtures were suggested to improve the capabilities.</p></li>
+<li><p>The <strong>Multilayered perceptron</strong> and back-propagation where complex architectures were suggested to improve the capabilities.</p></li>
 <li><p><strong>Deep Neural Networks</strong>, with many hidden layers, and auto-tunability capabilities.</p></li>
 </ul>
 <p>In short, there has been an mathematical and a technological evolution that at some point has allowed to meet with</p>
@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="comparison-with-traditional-machine-learning" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-with-traditional-machine-learning">Comparison with Traditional Machine Learning</h3>
-<p>A reasonable question is “<em>how are ArtificiaI Intelligence, Machine Learning and Deep learning related</em>”?</p>
+<p>A reasonable question is: “<em>How are Artificial Intelligence, Machine Learning and Deep learning related</em>”?</p>
 <p>A standard answer can be found in the image below that has a myriad variations:</p>
 <div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-2_01086ad8d94a6150ca19bcf3ba777a53">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/AI-ML-DL-1.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -241,11 +241,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We can keep three definitions:</p>
+<p>We can keep, for instance, the followin three definitions, which also have many variants:</p>
 <ul>
 <li><p>Artificial intelligence is the ability of a computer to perform tasks commonly associated with intelligent beings.</p></li>
 <li><p>Machine learning is the study of algorithms that learn from examples and experience instead of relying on hard-coded rules and make predictions on new data</p></li>
-<li><p>Deep learning is a subfield of machine learning focusing on learning data representations as successive successive layers of increasingly meaningful representations.</p></li>
+<li><p>Deep learning is a sub-field of machine learning focusing on learning data representations as successive successive layers of increasingly meaningful representations.</p></li>
 </ul>
 <div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-3_a5fa9d639ae9d6458a58f33e44eb255c">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/ML_vs_DL-2.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We will be coming back to the difference between ML and DL, but two strengths of DL that differentiate it from ML should be clear from the beginning:</p>
+<p>We will be coming back to the difference between ML and DL, but two strengths of DL that differentiate it from ML <strong>,</strong>:</p>
 <ul>
 <li>DNN combine feature extraction and classification in a way that does not require (or dramatically decreases) human intervention.</li>
 <li>The power of DNN requires in its ability to improve with data availability, without seemingly reaching plateaus as ML.</li>
@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Ability to answer natural language questions</p></li>
 <li><p>Superhuman Go playing</p></li>
 </ul>
-<p>According to <span class="citation" data-cites="chollet2022">[@chollet2022]</span> … “<em>we shouldn’t believe the short-term hype, but should believe in the long-term vision. It may take a while for AI to be deployed to its true potential—a potential the full extent of which no one has yet dared to dream—but AI is coming, and it will transform our world in a fantastic way</em>”.</p>
+<p>According to <span class="citation" data-cites="chollet2022">(<a href="#ref-chollet2022" role="doc-biblioref"><strong>chollet2022?</strong></a>)</span> … “<em>we shouldn’t believe the short-term hype, but should believe in the long-term vision. It may take a while for AI to be deployed to its true potential—a potential the full extent of which no one has yet dared to dream—but AI is coming, and it will transform our world in a fantastic way</em>”.</p>
 <p>Once the introduction is ready we con move onto the building blocks of neural networks, perceptrons.</p>
 </section>
 </section>
@@ -291,8 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-perceptron-the-building-block" class="level3">
 <h3 class="anchored" data-anchor-id="the-perceptron-the-building-block">The perceptron, the building block</h3>
 <p>The perceptron, was introduced by Rosenblatt (one version of the perceptron at least), as a mathematical model that might emulate a neuron.</p>
-<p>The idea is: <em>how can we produce a model that given some inputs, and an appropriate set of examples, learn to produce the desired output</em>?</p>
-<p>The first computational model of a neuron was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.</p>
+<p>The idea is: <em>how can we produce a model that, given some inputs, and an appropriate set of examples, learn to produce the desired output</em>?</p>
+<p>The first computational model of a neuron was proposed by Warren McCullough (neuroscientist) and Walter Pitts (logician) in 1943.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1"><img src="images/MacCulloghPitts-Neuron.png" class="img-fluid figure-img"></a></p>
@@ -301,12 +301,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It may be divided into 2 parts. The first part, <span class="math inline">\(g\)</span>,takes an input (ahem dendrite ahem), performs an aggregation and based on the aggregated value the second part, <span class="math inline">\(f\)</span>, makes a decision. See <a href="https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1">the source of this picture</a> for an illustration on how this can be used to emulate logical operations such as AND, OR or NOT, but not XOR.</p>
 <p>This first attempt to emulate neurons succeeded but with limitations:</p>
 <ul>
-<li><p>What about non-boolean (say, real) inputs?</p></li>
+<li><p>What about non-Boolean (say, real) inputs?</p></li>
 <li><p>What if all inputs are not equal?</p></li>
 <li><p>What if we want to assign more importance to some inputs?</p></li>
 <li><p>What about functions which are not linearly separable? Say XOR function</p></li>
 </ul>
-<p>To overcome these limitations Frank Rosenblatt, an American psychologist, proposed the classical perception model, the <em>artificial neuron</em>, in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.</p>
+<p>To overcome these limitations Frank Rosenblatt, an American psychologist, proposed the classical perception model, the <em>artificial neuron</em>, in 1958. It is more generalized computational model than the McCullough-Pitts neuron where weights and thresholds can be learnt over time.</p>
 <p>The perceptron proposed by Rosenblatt this is very similar to an M-P neuron but we take a weighted sum of the inputs and set the output as one only when the sum is more than an arbitrary threshold (<strong><em>theta</em></strong>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -329,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="neurons-and-activation-functions" class="level3">
 <h3 class="anchored" data-anchor-id="neurons-and-activation-functions">Neurons and Activation Functions</h3>
-<p>An activation function is a function that is added into an artificial neurone in order to help it learn complex patterns in the data.</p>
+<p>An activation function is a function that is added into an artificial neuron in order to help it learn complex patterns in the data.</p>
 <p>How come biological and artificial neurons come to compare?</p>
 <p>Biological neurons are specialized cells in the central nervous system that transmit electrical and chemical signals to communicate with each other and the rest of the body.</p>
 <p>On the other hand, artificial neurons are mathematical models used in neural networks to process information.</p>
@@ -365,17 +365,17 @@ f(z)=\frac{1}{1+e^{-z}}
 <p><span class="math display">\[
 f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 \]</span></p>
-<p>The <code>tanh(z)</code> function is a rescaled version of the sigmoid, and its output range is <span class="math inline">\([-1,1]\)</span> instead of <span class="math inline">\([0,1]\)</span>.</p>
+<p>The <code>tanh(z)</code> function is a re-scaled version of the sigmoid, and its output range is <span class="math inline">\([-1,1]\)</span> instead of <span class="math inline">\([0,1]\)</span>.</p>
 <p>Two useful properties to recall are that: - <em>If</em> <span class="math inline">\(f(z)=1/(1+e^z)\)</span> is the sigmoid function, then its derivative is given by <span class="math inline">\(f'(z)=f(z)(1-f(z))\)</span>.</p>
 <ul>
 <li><p><em>Similarly, if</em> <span class="math inline">\(f\)</span> is the <code>tanh</code> function, then its derivative is given by <span class="math inline">\(f'(z)=1-(f(z))^2\)</span>.</p></li>
 <li><p>In modern neural networks, the default recommendation is to use the <em>rectified linear unit</em> or ReLU defined by the activation function <span class="math inline">\(f(z)=\max\{0,z\}\)</span>.</p></li>
 </ul>
-<p>This function remains very close to a linear one, in the sense that is a piecewise linear function with two linear pieces.</p>
+<p>This function remains very close to a linear one, in the sense that is a piece-wise linear function with two linear pieces.</p>
 <p>Because rectified linear units are nearly linear, they preserve many of the properties that make linear models easy to optimize with gradient based methods.</p>
 <p>They also preserve many of the properties that make linear models generalize well.</p>
 <p><a href="https://medium.com/@shrutijadon/survey-on-activation-functions-for-deep-learning-9689331ba092"><img src="images/ActivationFunctions.png" class="img-fluid"></a>.</p>
-<p><strong>Putting alltogether</strong> we have the following schematic representation of an artificial neuron where <span class="math inline">\(\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}\)</span> and <span class="math inline">\(\left\langle w_{j}, x\right\rangle\)</span> represents the dot product between vectors <span class="math inline">\(w\)</span> and <span class="math inline">\(x\)</span>.</p>
+<p><strong>Putting altogether</strong> we have the following schematic representation of an artificial neuron where <span class="math inline">\(\Sigma=\left\langle w_{j}, x\right\rangle+ b_{j}\)</span> and <span class="math inline">\(\left\langle w_{j}, x\right\rangle\)</span> represents the dot product between vectors <span class="math inline">\(w\)</span> and <span class="math inline">\(x\)</span>.</p>
 <p><img src="images/ArtificialNeuron.png" class="img-fluid"></p>
 </section>
 <section id="multilayer-perceptrons" class="level3">
@@ -405,7 +405,7 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 <li>For binary classification, the output gives a prediction of <span class="math inline">\(\mathbb{P}(Y=1 / X)\)</span> since this value is in <span class="math inline">\([0,1]\)</span> and the sigmoid activation function is generally considered.</li>
 <li>For multi-class classification, the output layer contains one neuron per class (i), giving a prediction of <span class="math inline">\(\mathbb{P}(Y=i / X)\)</span>. The sum of all these values has to be equal to 1. The sum of all these values has to be equal to 1.
 <ul>
-<li>A common choice for multi-class ANN is the <em>softmax</em> activation function: <span class="math display">\[
+<li>A common choice for multi-class ANN is the soft-max activation function: <span class="math display">\[
 \operatorname{softmax}(z)_{i}=\frac{\exp \left(z_{i}\right)}{\sum_{j} \exp \left(z_{j}\right)}
 \]</span></li>
 </ul></li>
@@ -436,8 +436,8 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
  $ current_ratio  : num  0.924 1.469 1.976 1.942 2.487 ...</code></pre>
 </div>
 </div>
-<section id="data-preprocessing" class="level3">
-<h3 class="anchored" data-anchor-id="data-preprocessing">Data preprocessing</h3>
+<section id="data-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-pre-processing">Data pre-processing</h3>
 <p>One of the most important procedures when forming a neural network is data normalization. This involves adjusting the data to a common scale so as to accurately compare predicted and actual values. Failure to normalize the data will typically result in the prediction value remaining the same across all observations, regardless of the input values.</p>
 <p>We can do this in two ways in R:</p>
 <ul>
@@ -466,7 +466,7 @@ f(z)=\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}
 </section>
 <section id="training-a-neural-network" class="level3">
 <h3 class="anchored" data-anchor-id="training-a-neural-network">Training a neural network</h3>
-<p>Setting the parameters of a neural network requires experience and understanding of their meaning, and even so, canges in the parameters can lead to similar results.</p>
+<p>Setting the parameters of a neural network requires experience and understanding of their meaning, and even so, changes in the parameters can lead to similar results.</p>
 <p>We create a simple NN with two hidden layers, with 3 and 2 neurons respectively. This is specified in the <code>hidden</code> parameter. For other parameters see <a href="https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet">the package help</a>.</p>
 <div class="cell" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-10_3196d64e764d46738396cfa10e10d37e">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network</span></span>
@@ -618,29 +618,30 @@ actual  0  1
 </section>
 <section id="some-mathematics-behind-ann" class="level1">
 <h1>Some mathematics behind ANN</h1>
-<section id="mathematical-formulation" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-formulation">Mathematical formulation</h2>
 <ul>
-<li><p>An ANN is a predictive model whose functioning and properties can be mathematically characterized.</p></li>
-<li><p>In practice this means describing</p>
+<li><p>An ANN is a predictive model whose properties and behaviour can be mathematically characterized.</p></li>
+<li><p>In practice this means:</p>
 <ul>
-<li>The ANN as a (non linear) function.</li>
-<li>The (optimization) process for estimating the weights.</li>
+<li>The ANN acts by composing a series of linear and non-linear (activation) functions.</li>
+<li>These are characterized by their <em>weights</em> and <em>biases</em>, that need to be <em>learnt</em>.</li>
 </ul></li>
-<li><p>Estimation is done by minimizing an appropriate loss function which requires</p>
+<li><p><em>Training</em> the network is done by</p>
 <ul>
-<li>An appropriate procedure: <em>gradient based optimization</em></li>
-<li>A method for computing the required derivatives: <em>back-propagation</em>.</li>
+<li>Selecting an appropriate (convex) loss function,</li>
+<li>Finding those weights that minimize a the total <em>cost</em> function (avg. loss).</li>
+</ul></li>
+<li><p>This is usually done using some iterative optimization procedure such as <em>gradient descent</em>.</p></li>
+<li><p>This requires evaluating derivatives in a huge number of points.</p>
+<ul>
+<li>Such high number may be reduced by <em>Stochastic Gradient Descent</em>.</li>
+<li>The evaluation of derivatives is simplified thanks to <em>Backpropagation</em>.</li>
 </ul></li>
 </ul>
-</section>
-<section id="mathematical-formulation-of-the-ann" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-formulation-of-the-ann">Mathematical formulation of the ANN</h2>
+<section id="a-guiding-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-guiding-example">A guiding example</h2>
 <p>We will use a concrete model to explain the concepts, which can be easily generalized to more neurons and layers.</p>
 <p>Consider the following simple ANN:</p>
-<p>Consider the following ANN:</p>
-<div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-15_91776ecb05face7d517a97020771e788">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/nn.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center" data-hash="Introduction_to_Deep_Learning_cache/html/unnamed-chunk-15_1d5464df5247e552b6e1fdae3dc15893">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -650,7 +651,7 @@ actual  0  1
 </div>
 </div>
 <ul>
-<li>The circles labeled +1 are called bias units, and correspond to the intercept, here named <em>bias</em> term.</li>
+<li>The circles labelled +1 are called bias units, and correspond to the intercept, here named <em>bias</em> term.</li>
 <li>The leftmost layer of the network is called the <em>input layer</em>.</li>
 <li>The rightmost layer is the <em>output</em> layer (which, in this example, has only one node).</li>
 <li>The middle layer(s) is(are) called the <em>hidden layer(s)</em>, because its values are not observed in the training set.</li>
@@ -663,9 +664,9 @@ actual  0  1
 </ul>
 <section id="a-logistic-regression-ann" class="level3">
 <h3 class="anchored" data-anchor-id="a-logistic-regression-ann">A logistic regression ANN</h3>
-<p>This ANN can be use to build a logistic regression model:</p>
+<p>This ANN canseen as a device to perform a logistic regression:</p>
 <ul>
-<li><p>From input layer to layer 2: non-linear transformation –&gt; new set of complex features.</p></li>
+<li><p>From input layer to layer 2: non-linear transformation <span class="math inline">\(\rightarrow\)</span> new set of complex features.</p></li>
 <li><p>From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of <em>complex features</em>.</p></li>
 </ul>
 <p><span class="math display">\[
@@ -684,7 +685,7 @@ p(Y=1|x)=\frac{e^{\theta^\intercal x}}{1+e^{\theta^\intercal x}}=\frac{1}{1+e^{-
 \]</span></p>
 <p>That is, <em>when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features</em></p>
 <ul>
-<li>And, with <span class="math inline">\(h_{\theta}(x)\)</span>, the output of the NN, we are estimating <span class="math inline">\(p(Y=1|x)\)</span>.</li>
+<li>And, <span class="math inline">\(h_{\theta}(x)\)</span>, the output of the ANN, estimates <span class="math inline">\(p(Y=1|x)\)</span>.</li>
 </ul>
 </section>
 </section>
@@ -720,7 +721,7 @@ z_i^{(2)}=\theta_{i0}^{(1)}+\theta_{i1}^{(1)}x_1+\theta_{i2}^{(1)}x_2+\theta_{i3
 <h2 class="anchored" data-anchor-id="compacting-notation">Compacting notation</h2>
 <ul>
 <li><p>Note that this easily lends itself to a more compact notation.</p></li>
-<li><p>Extending the activation function <span class="math inline">\(f(\cdot)\)</span> to apply to vectors in an elementwise fashion: <span class="math display">\[
+<li><p>Extending the activation function <span class="math inline">\(f(\cdot)\)</span> to apply to vectors in an element-wise fashion: <span class="math display">\[
 f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
 \]</span></p></li>
 </ul>
@@ -735,10 +736,10 @@ h_{\Theta}(x)&amp;=&amp;a^{(3)}=f(z^{(3)})\nonumber
 <li><p>More generally, recalling that we also use <span class="math inline">\(a^{(1)}=x\)</span> to also denote the values from the input layer,</p></li>
 <li><p>then given layer <span class="math inline">\(l\)</span>’s activations <span class="math inline">\(a^{(l)}\)</span>, we can compute layer <span class="math inline">\(l+1\)</span>’s activations <span class="math inline">\(a^{(l+1)}\)</span> as:</p></li>
 </ul>
-<p><span class="math display">\[\begin{eqnarray}
+<span class="math display">\[\begin{eqnarray}
 z^{(l+1)}&amp;=&amp;\Theta^{(l)}a^{(l)}\\
 a^{(l+1)}&amp;=&amp;f(z^{(l+1)})
-\end{eqnarray}\]</span></p>
+\end{eqnarray}\]</span>
 <p>This can be used to provide a matrix representation for the weighted sum of inputs of all neurons:</p>
 <p><span class="math display">\[
 z^{(l+1)}=
@@ -785,8 +786,8 @@ f(z_{s_{l+1}}^{(l)})
 </ul>
 </section>
 </section>
-<section id="multiple-architechtures-for-ann" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-architechtures-for-ann">Multiple architechtures for ANN</h2>
+<section id="multiple-architectures-for-ann" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-architectures-for-ann">Multiple architectures for ANN</h2>
 <ul>
 <li><p>We have so far focused on a single hidden layer neural network of the example One can build neural networks with many distinct architectures (meaning patterns of connectivity between neurons), including ones with multiple hidden layers.</p></li>
 <li><p>See <a href="https://www.asimovinstitute.org/neural-network-zoo/">here the Neural Network Zoo</a>.</p></li>
@@ -794,19 +795,19 @@ f(z_{s_{l+1}}^{(l)})
 <section id="feed-forward-neural-networks" class="level3">
 <h3 class="anchored" data-anchor-id="feed-forward-neural-networks">Feed Forward Neural networks</h3>
 <p>The most common choice is a <span class="math inline">\(n_l\)</span>-layered network where layer 1 is the input layer, layer <span class="math inline">\(n_l\)</span> is the output layer, and each layer <span class="math inline">\(l\)</span> is densely connected to layer <span class="math inline">\(l+1\)</span>.</p>
-<p>In this setting, to compute the output of the network, we can successively compute all the activations in layer <span class="math inline">\(L_2\)</span>, then layer <span class="math inline">\(L_3\)</span>, and so on, up to layer <span class="math inline">\(L_{nl}\)</span> , using Equations (5-6). This is one example of a <em>feedforward neural network (FFNN)</em>, since the connectivity graph does not have any directed loops or cycles.</p>
+<p>In this setting, to compute the output of the network, we can successively compute all the activations in layer <span class="math inline">\(L_2\)</span>, then layer <span class="math inline">\(L_3\)</span>, and so on, up to layer <span class="math inline">\(L_{nl}\)</span> , using Equations (5-6). This is one example of a feed-forward <em>neural network (FFNN)</em>, since the connectivity graph does not have any directed loops or cycles.</p>
 </section>
 <section id="the-number-of-output-units" class="level3">
 <h3 class="anchored" data-anchor-id="the-number-of-output-units">The number of output units</h3>
 <p>Neural networks can also have multiple output units.</p>
-<p>For example, in (Fig. 4) we can see a network with two hidden layers layers <span class="math inline">\(L_2\)</span> and <span class="math inline">\(L_3\)</span> and four output units in layer <span class="math inline">\(L_4\)</span>, where bias of each layer were omited.</p>
+<p>For example, in (Fig. 4) we can see a network with two hidden layers layers <span class="math inline">\(L_2\)</span> and <span class="math inline">\(L_3\)</span> and four output units in layer <span class="math inline">\(L_4\)</span>, where bias of each layer were omitted.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/nn2.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
 <figcaption class="figure-caption">Neural network</figcaption>
 </figure>
 </div>
-<p>To train this network, we would need training examples <span class="math inline">\((x^{(i)},y^{(i)})\)</span> where <span class="math inline">\(y^{(i)}\in\mathbb{R}^4\)</span>. This sort of network is useful if there’re multiple outputs that you’re interested in predicting.</p>
+<p>To train this network, we would need training examples <span class="math inline">\((x^{(i)},y^{(i)})\)</span> where <span class="math inline">\(y^{(i)}\in\mathbb{R}^4\)</span>. This sort of network is useful if there are multiple outputs that you’re interested in predicting.</p>
 <p>For example, in a medical diagnosis application, the vector <span class="math inline">\(x\)</span> might give the input features of a patient, and the different outputs <span class="math inline">\(y_i\)</span>’s might indicate presence or absence of different diseases.</p>
 </section>
 </section>
@@ -836,26 +837,27 @@ J(\theta)=-\frac{1}{n}\big[\sum_{i=1}^n&amp;&amp;(y^{(i)}\log h_\theta(x^{(i)})+
 <li><p>This is a convex optimization problem.</p></li>
 <li><p>Better to work with a <em>regularized version</em> of the cost function (we don’t regularize the bias units)</p></li>
 </ul>
-<p><span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[\begin{eqnarray*}
 J(\Theta)&amp;=&amp;-\frac{1}{n}\big[\sum_{i=1}^n \sum_{k=1}^K y_k^{(i)}\log( h_\theta(x^{(i)}))_k\\
 &amp;+&amp;(1-y_k^{(i)})\log(1-(h_\theta(x^{(i)}))_k)\big]\\
 &amp;+&amp;\lambda\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}
 (\theta_{ji}^{(l)})^2
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 </section>
 <section id="gradient-descent" class="level2">
 <h2 class="anchored" data-anchor-id="gradient-descent">Gradient descent</h2>
-<p>We saw in the previous section that training a network corresponds to choosing the parameters, that is, the weights and biases, that minimize the cost function (see Fig. 5). The weights and biases take the form of matrices and vectors, but at this stage it is convenient to imagine them stored as a single vector that we call <span class="math inline">\(\theta\)</span>. Generally, we will suppose <span class="math inline">\(\theta\in\mathbb{R}^p\)</span>, and write the cost function as <span class="math inline">\(J(\theta)\)</span> to emphasize its dependence on the parameters. So Cost <span class="math inline">\(J: \mathbb{R}^p\rightarrow \mathbb{R}\)</span>.</p>
+<p>We saw in the previous section that training a network corresponds to choosing the parameters, that is, the weights and biases, that minimize the cost function.</p>
+<p>The weights and biases take the form of matrices and vectors, but at this stage it is convenient to imagine them stored as a single vector that we call <span class="math inline">\(\theta\)</span>. Generally, we will suppose <span class="math inline">\(\theta\in\mathbb{R}^p\)</span>, and write the cost function as <span class="math inline">\(J(\theta)\)</span> to emphasize its dependence on the parameters. So Cost <span class="math inline">\(J: \mathbb{R}^p\rightarrow \mathbb{R}\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/errorsurface.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Error hypersurface</figcaption>
+<figcaption class="figure-caption">Error hyper-surface</figcaption>
 </figure>
 </div>
 <p>We now introduce a classical method in optimization that is often referred to as steepest descent or gradient descent. The method proceeds iteratively, computing a sequence of vectors in <span class="math inline">\(\mathbb{R}^p\)</span> with the aim of converging to a vector that minimizes the cost function. Suppose that our current vector is <span class="math inline">\(\theta\)</span>. How should we choose a perturbation, <span class="math inline">\(\Delta\theta\)</span>, so that the next vector, <span class="math inline">\(\theta+\Delta\theta\)</span>, represents an improvement? If <span class="math inline">\(\Delta\theta\)</span> is small, then ignoring terms of order <span class="math inline">\(||\Delta\theta||^2\)</span>, a Taylor series expansion gives</p>
 <p><span class="math display">\[
 J(\theta+\Delta\theta)\approx J(\theta)+\sum_{i=1}^p\frac{\partial J(\theta)}{\partial\theta_i}\Delta\theta_i
-\]</span> Here <span class="math inline">\(\frac{\partial J(\theta)}{\partial\theta_i}\)</span> denotes the partial derivative of the cost function with respect to the <span class="math inline">\(i\)</span>-th weight. For conveniende, we will let <span class="math inline">\(\nabla J(\theta)\in\mathbb{R}^p\)</span> denote the vector of partial derivatives, known as the gradient, so that <span class="math display">\[\begin{equation}\label{g1}
+\]</span> Here <span class="math inline">\(\frac{\partial J(\theta)}{\partial\theta_i}\)</span> denotes the partial derivative of the cost function with respect to the <span class="math inline">\(i\)</span>-th weight. For convenience, we will let <span class="math inline">\(\nabla J(\theta)\in\mathbb{R}^p\)</span> denote the vector of partial derivatives, known as the gradient, so that <span class="math display">\[\begin{equation}\label{g1}
 \nabla J(\theta)=\big(\frac{\partial J(\theta)}{\partial\theta_1},...,\frac{\partial J(\theta)}{\partial\theta_p}\big)^\intercal
 \end{equation}\]</span> Then, <span class="math display">\[\begin{equation}\label{g2}
 J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
@@ -864,7 +866,7 @@ J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 <p>So the most negative that <span class="math inline">\(f^\intercal g\)</span> can be is <span class="math inline">\(-||f||\cdot||g||\)</span>, which happens when <span class="math inline">\(f=-g\)</span>. Hence we should choose <span class="math inline">\(\Delta\theta\)</span> to lie in the direction of <span class="math inline">\(-\nabla J(\theta)\)</span>. Keeping in mind that (<span class="math inline">\(\ref{g2}\)</span>) is an approximation that is relevant only for small <span class="math inline">\(\Delta\theta\)</span>, we will limit ourselves to a small step in that direction. This leads to the update <span class="math display">\[\begin{equation}\label{g3}
 \theta \rightarrow \theta-\eta\nabla J(\theta)
 \end{equation}\]</span></p>
-<p>Here <span class="math inline">\(\eta\)</span> is small stepsize that, in this context, is known as the learning rate. This equation defines the steepest descent method. We choose an initial vector and iterate (<span class="math inline">\(\ref{g3}\)</span>) until some stopping criterion has been met, or until the number of iterations has exceeded the computational budget.</p>
+<p>Here <span class="math inline">\(\eta\)</span> is small step size that, in this context, is known as the learning rate. This equation defines the steepest descent method. We choose an initial vector and iterate (<span class="math inline">\(\ref{g3}\)</span>) until some stopping criterion has been met, or until the number of iterations has exceeded the computational budget.</p>
 <p>Repeat:</p>
 <p><span class="math display">\[
 \theta_j=\theta_j-\eta\frac{\partial}{\partial\theta_j}J(\theta)
@@ -872,10 +874,10 @@ J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 \qquad \textrm{ simultaneously update all }\qquad \theta_j
 \]</span></p>
 <p><span class="math inline">\(\eta\in (0,1]\)</span> denotes the learning parameter.</p>
-<p>We aim to minimice the cost function <span class="math display">\[
+<p>We aim to minimize the cost function <span class="math display">\[
 \underset{\theta}{\textrm{min }}J(\theta)
 \]</span></p>
-<p>In order to use gradient descent, we need to compute <span class="math inline">\(J(\theta)\)</span> and the partiall derivative terms <span class="math display">\[
+<p>In order to use gradient descent, we need to compute <span class="math inline">\(J(\theta)\)</span> and the partial derivative terms <span class="math display">\[
 \frac{\partial}{\partial\theta_j}J(\theta)
 \]</span></p>
 <section id="initialization" class="level3">
@@ -887,7 +889,7 @@ J(\theta+\Delta\theta)\approx J(\theta)+\nabla J(\theta)^\intercal\Delta\theta
 <h2 class="anchored" data-anchor-id="stochastic-gradient">Stochastic Gradient</h2>
 <p>Algorithm for optimization the cost function. When we have a large number of parameters and a large number of training points, computing the gradient vector (<span class="math inline">\(\ref{g1}\)</span>) at every iteration of the steepest descent method (<span class="math inline">\(\ref{g3}\)</span>) can be prohibitively expensive because we have to sum across all training points (for instance in Big Data). A much cheaper alternative is to replace the mean of the individual gradients over all training points by the gradient at a single, randomly chosen, training point. This leads to the simplest form of what is called the stochastic gradient method. A single step may be summarized as</p>
 <p>Notice we have included <span class="math inline">\(x^{(i)}\)</span> in the notation of <span class="math inline">\(J(\theta;x^{(i)})\)</span> to remark the dependence. In words, at each step, the stochastic gradient method uses one randomly chosen training point to represent the full training set. As the iteration proceeds, the method sees more training points. So there is some hope that this dramatic reduction in cost-per-iteration will be worthwhile overall. We note that, even for very small <span class="math inline">\(\eta\)</span>, the update (<span class="math inline">\(\ref{g4}\)</span>) is not guaranteed to reduce the overall cost function we have traded the mean for a single sample. Hence, although the phrase stochastic gradient descent is widely used, we prefer to use <strong>stochastic gradient</strong>.</p>
-<p>The version of the stochastic gradient method that we introduced in (<span class="math inline">\(\ref{g4}\)</span>) is the simplest from a large range of possibilities. In particular, the index <span class="math inline">\(i\)</span> in (<span class="math inline">\(\ref{g4}\)</span>) was chosen by sampling with replacement after using a training point, it is returned to the training set and is just as likely as any other point to be chosen at the next step. An alternative is to sample without replacement; that is, to cycle through each of the <span class="math inline">\(n\)</span> training points in a random order. Performing <span class="math inline">\(n\)</span> steps in this manner, refered to as completing an epoch, may be summarized as follows:</p>
+<p>The version of the stochastic gradient method that we introduced in (<span class="math inline">\(\ref{g4}\)</span>) is the simplest from a large range of possibilities. In particular, the index <span class="math inline">\(i\)</span> in (<span class="math inline">\(\ref{g4}\)</span>) was chosen by sampling with replacement after using a training point, it is returned to the training set and is just as likely as any other point to be chosen at the next step. An alternative is to sample without replacement; that is, to cycle through each of the <span class="math inline">\(n\)</span> training points in a random order. Performing <span class="math inline">\(n\)</span> steps in this manner, refereed to as completing an epoch, may be summarized as follows:</p>
 <p>If we regard the stochastic gradient method as approximating the mean over all training points by a single sample, then it is natural to consider a compromise where we use a small sample average. For some <span class="math inline">\(m&lt;&lt;n\)</span> we could take steps of the following form.</p>
 <p>In this iteration, the set <span class="math inline">\(\{x^{(k_i)}\}_{i=1}^m\)</span> is known as a mini-batch. Because the stochastic gradient method is usually implemented within the context of a very large scale computation, algorithmic choices such as mini-batch size and the form of randomization are often driven by the requirements of high performance computing architectures. Also, it is, of course, possible to vary these choices, along with others, such as the learning rate, dynamically as the training progresses in an attempt to accelerate convergence.</p>
 </section>

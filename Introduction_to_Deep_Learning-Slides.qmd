@@ -501,33 +501,38 @@ table(actual,prediction)
 
 # Some mathematics behind ANN
 
-## Mathematical formulation
+## Training an ANN {.smaller}
 
--   An ANN is a predictive model whose functioning and properties can be mathematically characterized.
+- An ANN is a predictive model whose properties and behaviour  can be mathematically characterized.
 
--   In practice this means describing
+- In practice this means:
+  - The ANN acts by composing a series of linear and non-linear (activation) functions.
+  - These are characterized by their *weights* and *biases*, that need to be *learnt*
+  .
+- *Training* the network is done by 
+  - Selecting an appropriate (convex) loss function,
+  - Finding those weights that minimize a the total *cost* function (avg loss).
 
-    -   The ANN as a (non linear) function.
-    -   The (optimization) process for estimating the weights.
+## The tools for training
 
-## Estimating the weights
+- Training an ANN is usually done using some iterative optimization procedure such as *Gradient Descent*.
 
--   In order to use the ANN for prediction, weights need to be estimated.
--   This is done by minimizing an appropriate loss function which requires
-    -   An appropriate procedure: *gradient based optimization*
-    -   A method for computing the required derivatives: *back-propagation*.
+- This requires evaluating derivatives in a huge number of points.
+    - Such high number may be reduced by *Stochastic Gradient Descent*.
+    - The evaluation of derivatives is simplified thanks to *Backpropagation*.
 
 ## A guiding example
 
+Consider a toy ANN to illustrate the concepts
+
 ::: columns
-::: {.column width="40%"}
--   Input layer with 3 input units (plus bias unit),
--   1 hidden layer with 3 hidden units,
--   Output layer with 1 output unit.
+::: {.column width="50%"}
+- Input layer with 3 input units (plus bias unit),
+- 1 hidden layer with 3 hidden units,
+- Output layer with 1 output unit.
 :::
 
-::: {.column width="60%"}
-<br>
+::: {.column width="50%"}
 
 ```{r, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/nn.jpg")
@@ -537,14 +542,12 @@ knitr::include_graphics("images/nn.jpg")
 
 ## A logistic regression ANN
 
-This ANN can be seen as a logistic regression model:
+- From input layer to layer 2: A non-linear transformation yields new set of complex features.
 
--   From input layer to layer 2: non-linear transformation --\> new set of complex features.
-
--   From layer 2 to output layer use a sigmoid activation function to produce the following output from the set of *complex features*.
+- From layer 2 to output layer: New features are transformed, using a sigmoid activation function.
 
 $$
-\mbox{The output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
+\mbox{The final output is: }h_{\theta}(x)=\frac{1}{1+e^{-\theta^\intercal x}}
 $$
 
 ## Logistic regression (1)
@@ -555,7 +558,7 @@ $$
 \log\frac{p(Y=1|x)}{1-p(Y=1|x)}=\theta^\intercal x
 $$
 
-Isolating $p(Y=1|x)$ and taking logs in both sides, we have:
+Isolating $p(Y=1|x)$ and taking logs in both sides:
 
 $$
 \frac{p(Y=1|x)}{1-p(Y=1|x)}=e^{\theta^\intercal x}
@@ -569,13 +572,16 @@ $$
 
 -   That is: *when the activation function of the output node is the sigmoid activation function, the output coincides with a logistic regression on complex features*
 
--   And, with $h_{\theta}(x)$, the output of the NN, we are estimating $p(Y=1|x)$.
+-   The output of the ANN. $h_{\theta}(x)$, estimates $p(Y=1|x)$.
 
-## An ANN has weights = *parameters*
+## ANN have weights aka *parameters*
 
--   Let $n_l$ denote the number of layers in our network, thus $n_l=3$ in our example.
--   Label layer $l$ as $L_l$, so layer $L_1$ is the input layer, and layer $L_{n_l}=L_3$ the output layer.
--   Our neural network has parameters: $\Theta=(\Theta^{(1)},\Theta^{(2)})$, where we will write $\theta^{(l)}_{ij}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$.
+- Let $n_l$ denote the number of layers in our network, thus $n_l=3$ in our example.
+- Layer $L_1$ is input layer, and layer $L_{n_l}=L_3$ the output layer.
+- Our ANN has parameters $\Theta=(\Theta^{(1)},\Theta^{(2)})$, where:
+  - $\theta^{(l)}_{ij}$ denotes weights associated with
+    - the connection between unit $j$ in layer $l$ and
+    - unit $i$ in layer $l+1$.
 
 ## Back to the example:
 
@@ -588,13 +594,13 @@ Note that bias units don't have inputs or connections going into them, since the
 
 ## The ANN is defined by its weights
 
--   We also let $s_l$ denote the number of nodes in layer $l$ (not counting the bias unit).
+- Let $s_l$ denote the number of nodes in layer $l$ (not counting the bias unit).
 
--   Now, write $a^{(l)}_i$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
+- Now, write $a^{(l)}_i$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
 
-    -   For $l=1$, we also use $a^{(1)}_i=x_i$ to denote the $i$-th input.
+  - For $l=1$, $a^{(1)}_i=x_i$ denotes $i$-th input.
 
--   Given a fixed setting of the parameters $\Theta$, our neural network defines a model $h_{\Theta}(x)$ that outputs a real number.
+- Given a fixed setting of the parameters $\Theta$, this ANN defines a model $h_{\Theta}(x)$ that outputs a real number.
 
 ## Combining everything to compute {.smaller}
 
@@ -610,22 +616,24 @@ Note that bias units don't have inputs or connections going into them, since the
 
 ## Compacting notation {.smaller}
 
--   Note that this easily lends itself to a more compact notation.
+- Note that this easily lends itself to a more compact notation.
 
--   Extending the activation function $f(\cdot)$ to apply to vectors in an element-wise fashion: $$
+- Activation functions $f(\cdot)$ apply to individual neurons, so it is admisible to write:
+$$
     f([z_1,z_2,z_3]) = [f(z_1), f(z_2),f(z_3)],
-    $$
+$$
 
-then we can write the previous equations more compactly as:
+- A more compact notation for previous equations:
 
-```{=tex}
-\begin{eqnarray}
+$$
+\begin{eqnarray*}
 z^{(2)}&=&\Theta^{(1)}x\nonumber\\
 a^{(2)}&=&f(z^{(2)})\nonumber\\
 z^{(3)}&=&\Theta^{(2)}a^{(2)}\nonumber\\
 h_{\Theta}(x)&=&a^{(3)}=f(z^{(3)})\nonumber
-\end{eqnarray}
-```
+\end{eqnarray*}
+$$
+
 ## Compacting notation (II)
 
 -   More generally, recalling that we also use $a^{(1)}=x$ to also denote the values from the input layer,
@@ -638,7 +646,10 @@ z^{(l+1)}&=&\Theta^{(l)}a^{(l)}\\
 a^{(l+1)}&=&f(z^{(l+1)})
 \end{eqnarray}
 ```
-## Matricial representation (I)
+
+## Matricial representation (I) {.smaller}
+
+- The output in layer $l+1$, from layer $l$ can be written as a *matrix product*
 
 $$
 z^{(l+1)}=
@@ -682,17 +693,31 @@ f(z_{s_{l+1}}^{(l)})
 \end{bmatrix}
 $$
 
+## Matricial representation (III) {.smaller}
+
+- For the simple ANN of the example we have:
+$$
+
+$$
+
+- And, for a general ANN with $l$ layers:
+$$
+
+$$
+
+- This is called  *forward propagation*.
+
 ## Forward propagation
 
 -   By organizing our parameters in matrices
 
 -   and using matrix-vector operations,
 
--   we can take advantage of fast linear algebra routines to
+-   we can take advantage of fast linear algebra routines, to
 
--   quickly perform calculations in our network.
+-   to quickly perform calculations in our network.
 
--   This process is called *forward propagation*.
+
 
 ## Multiple architectures for ANN
 

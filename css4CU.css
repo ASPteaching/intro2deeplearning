@@ -30,7 +30,7 @@ body {
 
 .remark-code, .remark-inline-code {
   font-family: 'Fira Code', serif;
-  font-size: 80%;
+  font-size: 95%;
 }
 
 .huge .remark-code { /*Change made here*/
@@ -83,7 +83,7 @@ body {
 .remark-slide-content > h1 {
   font-family: 'Fira Sans', serif;
   font-weight: normal;
-  font-size: 40px;
+  font-size: 30px;
   margin-top: -95px;
   margin-left: -00px;
   color: #FAFAFA;
